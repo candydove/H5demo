@@ -1,0 +1,188 @@
+// 商品编辑、新品发布  引用
+
+// 顶部状态栏
+.mui-bar{
+    background-color: #ffffff;
+    border-bottom: 1px solid #D5D5D5;
+    div{
+        display: inline-block;
+        height: 2.2rem;
+        line-height: 2.3rem;
+        font-size: 0.5rem;
+    }
+}
+// 顶部向左返回按钮
+.mui-bar-nav.mui-bar .mui-icon{
+    font-size: 1rem;
+    color: #2f2f2f;
+}
+// 顶部标题
+.mui-bar .mui-title{
+    color: #2f2f2f;
+    font-size: 0.85rem;
+    line-height: 2.4rem;
+}
+// 右侧文字
+.mui-bar .sideTxt{
+    font-size: 0.55rem;
+    height: 2.2rem;
+    float: right;
+    line-height: 2.2rem;
+}
+
+.mui-content{
+    background-color: #F8F8F8;
+}
+
+.numAndTime{
+    // height: 2.75rem;
+    width: 100%;
+    padding: 0.75rem 0.75rem;
+    background: #fff;
+    font-size: 0.45rem;
+    color: #2f2f2f;
+    border-bottom: 1px solid #F0F0F0;
+    div{
+        height: 0.5rem;
+        line-height: 0.5rem;
+        margin-top: 0.4rem;
+        span{
+            color: #262626;
+        }
+    }
+    div:nth-child(1){
+        margin-top: 0;
+    }
+
+}
+
+.shopIntroduction{
+    background-color: #FFFFFF;
+    .top{
+        height: 1.75rem;
+        line-height: 1.75rem;
+        font-size: 0.6rem;
+        color: #262626;
+        padding-left: 0.75rem;
+        border-bottom: 1px solid #F0F0F0;
+        span{
+            display: inline-block;
+            height: 100%;
+            border-bottom:2px solid #4768F3; 
+        }
+        a{
+            color: #2f2f2f;
+            float: right;
+            padding-right: 0.75rem;
+        }
+    }
+
+}
+
+
+.goodsInfo{
+    background-color: #FFFFFF;
+    // margin-bottom: 0.6rem;
+    ul.moveList{
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        border-bottom: 1px solid #E2E2E2;
+        li{
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            transition: transform 0.2s linear;
+            position: relative; 
+            .center{
+                // border-bottom: 1px solid #E2E2E2;
+                padding-top: 0.5rem;
+                padding-bottom: 0.5rem;
+                .singleCheckBox{
+                    float: left;
+                    width: 1.7rem;
+                    border:1px solid red;
+                    height: 3.4rem;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    span{
+                        display: block;
+                        width:90%;
+                        height: 1rem;
+                        line-height: 1rem;
+                        font-size: 0.5rem;
+                        text-align: center;
+                        color: #fff;
+                        background-color: #FF6868;
+                        border-radius: 0.5rem;
+                    }
+                }        
+                .logo{
+                    width: 4.5rem;
+                    height: 3.4rem;
+                    overflow: hidden;
+                    border: 1px solid #F0F0F0;
+                    border-radius: 3px;
+                    display: flex;
+                    float: left;
+                    margin-left: 0.75rem;
+                    img{    
+                        display: block;
+                        max-width: 4.5rem;
+                        max-height: 3.4rem;
+                    }
+                }
+                .txt{
+                    float: left;
+                    width: 9.5rem;
+                    font-size: 0.45rem;
+                    color: #2f2f2f;
+                    margin-left: 0.5rem;
+                    .name{
+                        height: 1.25rem;
+                        line-height: 0.625rem;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        display:-webkit-box; 
+                        -webkit-box-orient:vertical;
+                        -webkit-line-clamp:2; 
+                    }
+                    .index{
+                        border:1px solid #F9938E;
+                        display: inline-block;
+                        height: 0.75rem;
+                        line-height: 0.75rem;
+                        padding: 0 0.1rem;
+                        font-size: 0.35rem;
+                        border-radius: 1px;
+                        color: #F9938E;
+                        margin-top: 0.2rem;
+                    }
+                    .bot{
+                        height: 0.7rem;
+                        margin-top: 0.1rem;
+                        .price{
+                            margin-top: 0.1rem;
+                            line-height: 0.5rem;
+                            height: 0.5rem;
+                            float: left;
+                            font-size: 0.6rem;
+                            color: #ff6868;
+                        }
+                        .numBox{
+                            float: right;
+                            height: 0.65rem;
+                            font-size: 0.5rem;
+                            line-height: 0.65rem;
+                            color: #8c8c8c;
+                            margin-right: 1rem;
+                        }
+                    }
+                }
+            }  
+        }
+    }
+
+
+}

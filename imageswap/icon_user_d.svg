@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="84px" height="84px" viewBox="0 0 84 84" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>icon_user_d</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <circle id="path-1" cx="41" cy="41" r="25.7118644"></circle>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="【登陆】密码登录1" transform="translate(-118.000000, -104.000000)">
+            <g id="icon_user_d" transform="translate(119.000000, 105.000000)">
+                <g>
+                    <circle id="Oval" stroke-opacity="0.29724298" stroke="#8B4CF3" stroke-width="0.5" cx="41" cy="41" r="41.25"></circle>
+                    <circle id="Oval" stroke-opacity="0.699558424" stroke="#8B4CF3" stroke-width="0.5" cx="41" cy="41" r="33.6059322"></circle>
+                    <g id="Oval">
+                        <use fill="#8B4CF3" fill-rule="evenodd" xlink:href="#path-1"></use>
+                        <circle stroke="#8B4CF3" stroke-width="0.5" cx="41" cy="41" r="25.9618644"></circle>
+                    </g>
+                    <path d="M59.5422414,58.8125494 C58.4139279,51.5343633 53.0660613,45.6509356 46.0774394,43.7410639 C48.8675044,42.0307028 50.7288136,38.9530564 50.7288136,35.440678 C50.7288136,30.0676026 46.3730754,25.7118644 41,25.7118644 C35.6269246,25.7118644 31.2711864,30.0676026 31.2711864,35.440678 C31.2711864,38.9530564 33.1324956,42.0307028 35.9225606,43.7410639 C28.9339387,45.6509356 23.5860721,51.5343633 22.4577586,58.8125494 C27.1363197,63.6815502 33.7142759,66.7118644 41,66.7118644 C48.2857241,66.7118644 54.8636803,63.6815502 59.5422414,58.8125494 Z" id="Combined-Shape" fill="#FFFFFF"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

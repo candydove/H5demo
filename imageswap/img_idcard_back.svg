@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="127px" height="80px" viewBox="0 0 127 80" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>img_idcard_back</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="img_idcard_back">
+            <g transform="translate(1.000000, 1.000000)" id="img_idcard_front">
+                <g>
+                    <g id="maximize" stroke="#EBF5FD" stroke-width="1.96000004" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4.88188976,0 L1.95275591,0 C0.874278599,0 0,0.873044738 0,1.95 L0,4.875 M125,4.875 L125,1.95 C125,0.873044738 124.125721,0 123.047244,0 L120.11811,0 M120.11811,78 L123.047244,78 C124.125721,78 125,77.1269553 125,76.05 L125,73.125 M0,73.125 L0,76.05 C0,77.1269553 0.874278599,78 1.95275591,78 L4.88188976,78" id="Shape"></path>
+                    </g>
+                    <rect id="Rectangle-7" fill="#EBF5FD" x="2" y="1" width="121" height="75" rx="8"></rect>
+                    <rect id="Rectangle-13" fill="#3F3947" x="56" y="28" width="43" height="3" rx="1.5"></rect>
+                    <rect id="Rectangle-13" fill="#3F3947" x="49" y="59" width="43" height="3" rx="1.5"></rect>
+                    <rect id="Rectangle-13" fill="#3F3947" x="56" y="38" width="36" height="3" rx="1.5"></rect>
+                    <g id="Group-6" transform="translate(16.000000, 16.000000)">
+                        <path d="M7.9256106,30.4125089 C3.18425298,27.5800634 0,22.32933 0,16.32 C0,7.30671288 7.163444,0 16,0 C24.836556,0 32,7.30671288 32,16.32 C32,22.1532804 28.9995861,27.2717609 24.4870484,30.1573857 L26.4375145,32.7341754 C26.6726456,33.0382795 26.7268272,33.3241045 26.6000592,33.5916504 C26.4732911,33.8591964 26.2716781,33.9926211 25.99522,33.9919248 L6.83988897,33.9919248 C6.41120639,34.0315088 6.14481573,33.9255647 6.04071701,33.6740928 C5.93661828,33.4226208 6.03212679,33.109315 6.32724254,32.7341754 L7.9256106,30.4125089 Z" id="Combined-Shape" fill="#FFCB60"></path>
+                        <ellipse id="Oval-5" fill="#F54F46" cx="16" cy="16.32" rx="13.3333333" ry="13.6"></ellipse>
+                        <ellipse id="Oval-6" fill="#FFCB60" cx="16.3333333" cy="10.54" rx="3" ry="3.06"></ellipse>
+                        <ellipse id="Oval-6-Copy" fill="#FFCB60" cx="9.66666667" cy="13.94" rx="1.66666667" ry="1.7"></ellipse>
+                        <ellipse id="Oval-6-Copy-2" fill="#FFCB60" cx="23" cy="13.94" rx="1.66666667" ry="1.7"></ellipse>
+                        <ellipse id="Oval-6-Copy-3" fill="#FFCB60" cx="7" cy="18.02" rx="1.66666667" ry="1.7"></ellipse>
+                        <ellipse id="Oval-6-Copy-4" fill="#FFCB60" cx="25.6666667" cy="18.02" rx="1.66666667" ry="1.7"></ellipse>
+                        <rect id="Rectangle-9" fill="#FFCB60" x="11.3333333" y="22.44" width="10" height="2.72" rx="1.36"></rect>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

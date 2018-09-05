@@ -1,0 +1,50 @@
+header.mui-bar{
+    background: #fff;
+}
+.mui-input-group .mui-input-row label{
+    width: 31.25%;
+    padding-left: 0.75rem;
+    box-sizing:border-box;
+    color:#262626;
+}
+.mui-input-group .mui-input-row input{
+    width: 68%;
+}
+.next{
+    margin-left: 0.75rem;
+    margin-right: 0.75rem;
+    width: auto;
+    background-color: #ff9900;
+    height: 2.2rem;
+    border-radius: 3px;
+    text-align: center;
+    line-height: 2.2rem;
+    margin-top: 2rem;
+    font-size:0.6rem;
+    color:#ffffff;    
+}
+.mui-input-row .mui-input-clear~.mui-icon-clear, .mui-input-row .mui-input-password~.mui-icon-eye, .mui-input-row .mui-input-speech~.mui-icon-speech{
+    height: 2.5rem;
+    top: 0;
+}
+.tishi{
+    font-size:0.45rem;
+    color:#f54f46;
+    letter-spacing:0;
+    float: right;
+    height: 1.6rem;
+    line-height: 1.6rem;
+    margin-right: 0.75rem;
+}
+.tishi:active{
+    color:#f54f46;
+}
+.yzmInputBox>p{
+    background-color: #EFEFEF;
+    color: #8c8c8c;
+    color: 0.55rem;
+    padding-left: 0.75rem;
+    margin: 0;
+    height: 2.1rem;
+    line-height: 2.1rem;
+}

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+
+    <!--App自定义的css-->
+    <link rel="stylesheet" type="text/css" href="../css/main.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="component.css"/>
+	<script src="https://cdn.bootcss.com/vue/2.4.0/vue.min.js"></script>
+	<script src="http://ovu7sm9f2.bkt.clouddn.com/mui.min.js"></script>
+	<script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+	<!-- <script src="../js/exif.js"></script> -->
+	<script src="../js/config.js"></script>
+	<script src="../js/utils.js"></script>
+	<script src="../js/exif.js"></script>
+
+	<script src='md5.min.js' ></script>
+	<script src='payPassword.js'></script>
+	<script src="pics.js"></script>
+    <script src="newspics.js"></script>
+	
+	<script src='verifyCode.js'></script>
+	<script src='waiting.js'></script>
+	<script src='paySelect.js'></script>
+</head>
+<body>
+	<div id='body'>
+
+		<show-pic :upload="true" :delete-flag="true" :pic-urls="picUrls" :one-row="true" @upload-pic="uploaded" @delete-pic="deletePics"></show-pic>
+		<div @click="showpayPasswd">显示支付密码</div>
+		<div @click="showVerifyCode">显示输入验证码</div>
+		<div @click="showWaiting">显示等待</div>
+		<div @click="showPaySelect">显示支付方式选择</div>
+		<div @click="showDlg">显示带文字复制功能的对话框</div>
+		<pay-password :pay-passwd-show="payPasswdShow" @close="payPasswdClose" @get-pass="getPass"></pay-password>
+		<verify-code ref="verifyCode" :verify-code-show="verifyCodeShow" 
+			@close="verifyCodeClose" @get-sms-code="getSmsCode" 
+			@get-voice-code="getVoiceCode" @get-verify-code="getVerifyCode"></verify-code>
+		<waiting :waiting-show="bWaiting" :icon-class="iconClass" :title-text="waitingTitleText" 
+			:status-text="waitingStatusText"></waiting>
+		<pay-select :bshow="bShowPaySelect"
+			:telephone="telephone"
+			:pay-methods="payMethods"
+			:bchange-amt="bChangeAmt"
+			@ok="onPaySelectOk"
+			@cancel="onPaySelectCancel"
+			@amt-change="onAmtChange">
+		</pay-select>
+	</div>
+	<script>
+		var vm = new Vue({
+			el: '#body',
+			data: {
+		        picUrls: [],
+		        uploadUrls: [],
+		        lock:{},
+		        payPasswdShow:false,
+		        verifyCodeShow:false,
+		        bWaiting:false,
+		        iconClass:'ok',
+		        waitingTitleText:'',
+		        waitingStatusText:'',
+		        bShowPaySelect:false,
+		        telephone:'13533334444',
+		        bChangeAmt:true,
+		        payMethods:[
+		        {id:"0", payMethod:"余额支付", n_total_amt:200, n_fee_amt:0, text:"账户余额 (1900元)", n_yue:1900, fee_detail:[{text:"线下补借条，线上还款", n_fee_amt:0.5}]},
+		        {id:"JJD2017", payMethod:"工商银行 (尾号3456)", n_total_amt:200, n_fee_amt:1, text:"工商银行 (尾号3456)", fee_detail:[{text:"线下补借条，线上还款", n_fee_amt:0.5}, {text:"低于500手续费", n_fee_amt:0.5}]},
+		        ],
+			},
+			methods: {
+				showpayPasswd: function(){
+				    this.payPasswdShow = true
+				},
+				showVerifyCode: function(){
+				    this.verifyCodeShow = true
+				},
+				showWaiting: function(){
+					this.bWaiting = true
+				    this.waitingTitleText = '测试1';
+				    this.waitingStatusText = 'StatusText';
+				    window.setTimeout(this.closeWaiting, 2000); 
+				},
+				closeWaiting:function(){
+					this.bWaiting = false
+				},
+				showPaySelect: function(){
+					this.bShowPaySelect = true
+				},
+				showDlg: function(){
+					mui.alert('<div> 以下内容可以复制<br> <textarea readonly="readonly">12345678987654323456789</textarea> </div> ');
+				},
+				uploaded: function(json){
+
+				    this.picUrls.push(json.localId);
+				    this.uploadUrls.push(json.serverId);
+				},
+				deletePics:function(json){
+				
+					this.picUrls.splice(json.index,1);					
+					this.uploadUrls.splice(json.index,1);
+				},
+				payPasswdClose: function(json){
+				    this.payPasswdShow = false;
+				},
+				getPass: function(passwd){
+				    mui.alert(passwd);
+				     this.payPasswdShow = false;
+				},
+				verifyCodeClose: function(){
+				    this.verifyCodeShow = false;
+				},
+				getSmsCode: function(){
+				    mui.alert("getSmsCode");
+				},
+				getVoiceCode: function(){
+				    mui.alert("getVoiceCode");
+				},
+				getVerifyCode: function(passwd){
+				    mui.alert(passwd);
+				    this.verifyCodeShow = false;
+				},
+				onPaySelectOk: function(sel){
+				    mui.alert("选择"+sel);
+				    this.bShowPaySelect = false;
+				},
+				onPaySelectCancel: function(){
+				    this.bShowPaySelect = false;
+				},
+				onAmtChange: function(amt){
+				    mui.alert("金额"+amt);
+				},				
+			},
+			created: function () {
+				mui.init({
+					swipeBack: false
+				});
+				utils.get(config.LEASE_MERCHANT_URL+'/wx/signURL', {}, this.lock, function(json){
+					wechat.config(json.timestamp,  json.nonceStr, json.signature);
+				});
+			}
+		})
+
+
+
+	</script>
+	<!--<script type = "text/javascript">-->
+        <!--function getBase64Image(img) {-->
+            <!--var canvas = document.createElement("canvas");-->
+            <!--canvas.width = img.width;-->
+            <!--canvas.height = img.height;-->
+            <!--var ctx = canvas.getContext("2d");-->
+            <!--ctx.drawImage(img, 0, 0, img.width, img.height);-->
+            <!--var dataURL = canvas.toDataURL("image/png");-->
+            <!--return dataURL // return dataURL.replace("data:image/png;base64,", "");-->
+        <!--}-->
+        <!--function main() {-->
+            <!--var img = document.createElement('img');-->
+            <!--img.src = '../images/01.jpg';-->
+            <!--img.onload =function() {-->
+                <!--var data = getBase64Image(img);-->
+                <!--console.log(data);-->
+            <!--}-->
+            <!--document.body.appendChild(img);-->
+        <!--}-->
+        <!--main();-->
+	<!--</script>-->
+</body>
+</html>

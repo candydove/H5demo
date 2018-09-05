@@ -1,0 +1,76 @@
+.mui-bar {
+  background-color: #fff;
+}
+.mui-bar-nav.mui-bar .mui-icon {
+  font-size: 1rem;
+  color: #fff;
+}
+.mui-bar .mui-title {
+  color: #fff;
+  font-size: 0.85rem;
+  /* line-height: 2.4rem; */
+}
+.mui-content {
+  background-color: #f4f4f4;
+}
+.shopIntroduction {
+  background-color: #FFFFFF;
+}
+.shopIntroduction .top {
+  height: 1.75rem;
+  line-height: 1.75rem;
+  font-size: 0.6rem;
+  color: #262626;
+  padding-left: 0.75rem;
+  border-bottom: 1px solid #F0F0F0;
+}
+.shopIntroduction .top span {
+  display: inline-block;
+  height: 100%;
+}
+.shopIntroduction .top a {
+  color: #2f2f2f;
+  float: right;
+  padding-right: 0.75rem;
+}
+.introductionCont {
+  background-color: #ffffff;
+  padding: 0.75rem;
+}
+.introductionCont textarea {
+  margin: 0;
+  padding: 0;
+  float: left;
+  border: 1px solid #F0F0F0;
+  font-size: 0.6rem;
+  padding: 0.5rem 0.7rem;
+  height: 8.5rem;
+}
+.introductionCont textarea::-webkit-input-placeholder {
+  color: #aeaeae;
+  font-size: 0.6rem;
+}
+html,
+body,
+.mui-content {
+  width: 100%;
+  height: 100%;
+  background-color: #EFEFEF;
+}
+.bottomBtn {
+  width: 100%;
+  height: 2.2rem;
+  padding: 0 0.75rem;
+  line-height: 2.2rem;
+  text-align: center;
+  margin-top: 2rem;
+  bottom: 1.6rem;
+  left: 0;
+  background-color: #EFEFEF;
+}
+.bottomBtn .btn {
+  color: #fff;
+  font-size: 0.7rem;
+  background-color: #FF9900;
+  border-radius: 1.1rem;
+}

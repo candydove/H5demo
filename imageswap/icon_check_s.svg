@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="10px" height="10px" viewBox="0 0 10 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>icon_check_s</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icon_check_s">
+            <g>
+                <circle id="Oval" fill="#4768F3" cx="5" cy="5" r="5"></circle>
+                <polyline id="Shape" stroke="#FFFFFF" stroke-width="0.64" stroke-linecap="round" stroke-linejoin="round" points="8 3 3.875 7 2 5.18181818"></polyline>
+            </g>
+        </g>
+    </g>
+</svg>

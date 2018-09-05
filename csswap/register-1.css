@@ -1,0 +1,309 @@
+.mui-input-group .mui-input-row label.phoneNumberL {
+    background-image: url(../images/icon_mobile.svg);
+}
+
+.mui-input-group .mui-input-row label.passwordL {
+    background-image: url(../images/icon_lock.svg);
+}
+
+.mui-input-group .mui-input-row:after {
+    right: 5.2rem;
+}
+
+.mui-input-row label~input,
+.mui-input-row label~select,
+.mui-input-row label~textarea {
+    width: 48.5%;
+    float: left;
+}
+
+.mui-input-row .mui-input-clear~.mui-icon-clear,
+.mui-input-row .mui-input-password~.mui-icon-eye,
+.mui-input-row .mui-input-speech~.mui-icon-speech {
+    height: 2.5rem;
+    top: 0;
+    box-sizing: border-box;
+    padding-top: 0;
+    padding-right: 0;
+}
+
+.mui-input-row #yamIpt+.mui-icon-clear {
+    padding-right: 6rem;
+}
+
+.mui-input-group .mui-input-row .line {
+    right: 5.05rem;
+}
+
+.topTip {
+    margin: 0;
+    background: #f2f4ff;
+    box-shadow: 0 0 0 0 #e2e2e2;
+    height: 2rem;
+    line-height: 2rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    font-size: 0.45rem;
+}
+
+span.active {
+    color: #2f2f2f;
+}
+
+.mui-input-row .sendCode {
+    font-size: 0.6rem;
+    width: 4rem;
+    height: 1.15rem;
+    line-height: 1.15rem;
+    border: 1px solid;/* #D6D6D6*/
+    /*color: #C3C3C3;*/
+    position: absolute;
+    text-align: center;
+    right: 1rem;
+    margin-top: -0.575rem;
+    top: 50%;
+    border-radius: 0.575rem;
+}
+
+.mui-input-row .sendCode.active {
+    color: #fff;
+    background-color: #33D594;
+}
+
+.nextBtn {
+    width: 12rem;
+    height: 1.9rem;
+    line-height: 1.9rem;
+    background-color: #aeaeae;
+    border-radius: 0.95rem;
+    text-align: center;
+    font-size: 0.6rem;
+    color: rgba(255, 255, 255, 0.95);
+    margin: 0 auto;
+    /* margin-left: -6rem; */
+    /* margin-top: -0.95rem; */
+    /* position: absolute; */
+    /* left:50%; */
+    /* top: 77%; */
+    /* z-index: 10; */
+    margin-top: 45%;
+}
+
+.nextBtn.active {
+    background: #ff9900;
+}
+
+.singleCheckBox{
+                                        
+}
+.mui-input-group .mui-input-row label.phoneNumberL {
+    background-image: none;
+}
+
+.mui-input-group .mui-input-row label.passwordL {
+    background-image: none;
+}
+
+.mui-input-group .mui-input-row label {
+    color: #262626;
+    width: 29.75%;
+    box-sizing: border-box;
+    padding-left: 0.75rem;
+}
+
+.mui-input-row label~input,
+.mui-input-row label~select,
+.mui-input-row label~textarea {
+    width: 60%;
+}
+
+#yamIpt {
+    width: 35%;
+}
+
+.mui-input-group .mui-input-row .line {
+    right: 0.75rem;
+}
+
+.mui-bar {
+    background-color: #fff;
+}
+
+.mui-bar-nav.mui-bar .mui-icon {
+    font-size: 1rem;
+}
+
+.mui-bar .mui-title {
+    color: #171717;
+    font-size: 0.85rem;
+}
+
+.mui-bar-nav.mui-bar a {
+    color: #171717;
+}
+
+.recommend {
+    height: 2rem;
+    line-height: 2rem;
+    font-size: 0.45rem;
+    padding-left: 0.75rem;
+    background-color: #F8F8F8;
+}
+
+.recommend i {
+    display: inline-block;
+    width: 0.45rem;
+    height: 0.45rem;
+    background: url(../images/icon_arow_left_s.svg) no-repeat;
+    background-size: 100% 100%;
+    background-position: center center;
+    margin-left: 0.2rem;
+}
+
+.recommend.active i {
+    background: url(../images/icon_arow_down.svg) no-repeat;
+    background-size: 100% 100%;
+    background-position: center center;
+}
+
+.mui-content {
+    height: 100%;
+    background-color: #f4f4f4;
+}
+
+.tipBox {
+    /* border:1px solid red; */
+    font-size: 0.45rem;
+    height: 1rem;
+    line-height: 1rem;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    position: absolute;
+    width: 12rem;
+    margin-left: -6rem;
+    left: 50%;
+    margin-top: -0.5rem;
+    top: 84%;
+}
+
+.mui-checkbox.mui-left label,
+.mui-radio.mui-left label {
+    margin: 0;
+    padding: 0;
+    height: 1rem;
+    line-height: 1rem;
+    display: inline-block;
+    width: auto;
+    margin-left: 1rem;
+    font-size: 0.45rem;
+    color: #8c8c8c;
+}
+
+.mui-checkbox.mui-left label a {
+    color: #ff9900;
+}
+
+.mui-checkbox input[type=checkbox],
+.mui-radio input[type=radio] {
+    width: 0.9rem;
+    height: 0.9rem;
+    position: relative;
+    display: inline-block;
+    top: 0.05rem;
+}
+
+.mui-checkbox input[type=checkbox]:before,
+.mui-radio input[type=radio]:before {
+    width: 100%;
+    height: 100%;
+    font-size: 0.9rem;
+}
+
+.mui-input-row.mui-checkbox.mui-left {
+    width: 100%;
+    height: 100%;
+}
+
+.mui-checkbox input[type=checkbox]:checked:before,
+.mui-radio input[type=radio]:checked:before {
+    color: #ff9900;
+}
+
+.yzm-content {
+    background-color: rgba(1, 1, 1, 0.4);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.yzm-content>.box {
+    width: 14.5rem;
+    height: 7.6rem;
+    position: absolute;
+    margin-top: -3.8rem;
+    margin-left: -7.25rem;
+    left: 50%;
+    top: 50%;
+    border-radius: 0.3rem;
+    box-sizing: border-box;
+    padding-left: 1.35rem;
+    padding-right: 1.35rem;
+    background-color: #ffffff;
+}
+
+.yzm-content>.box>p {
+    font-size: 0.65rem;
+    color: #262626;
+    height: 13px;
+    line-height: 13px;
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.yzm-content>.box>.ipt {
+    width: 100%;
+    border: 1px solid #D6D6D6;
+    border-radius: 2px;
+}
+
+.yzm-content>.box>.ipt:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.yzm-content>.box>.ipt>input {
+    width: 7.8rem;
+    height: 1.75rem;
+    padding: 0;
+    margin: 0;
+    font-size: 0.6rem;
+    color: #aeaeae;
+    padding-left: 0.5rem;
+    float: left;
+    border: none;
+}
+
+.yzm-content>.box>.ipt>.yzm {
+    /* border: 1px solid blue; */
+    float: left;
+    display: block;
+    height: 1.75rem;
+    width: 3.8rem;
+}
+
+.yzm-content>.box>.okBtn {
+    width: 100%;
+    height: 2.2rem;
+    border-radius: 1.1rem;
+    background-color: #f54f46;
+    text-align: center;
+    line-height: 2.2rem;
+    color: #ffffff;
+    font-size: 0.6rem;
+    margin-top: 0.5rem;
+}

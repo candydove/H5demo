@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册第四步</title>
+
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/index.css">
+
+    <link rel="stylesheet" href="../../css/common-header.css" />
+    <link rel="stylesheet" href="../../css/common1.css" />
+    <link rel="stylesheet" href="../../components/component.css" />
+
+    <script src="../../js/include.js"></script>
+    <script src="../../js/common1.js"></script>
+    <script src="../../js/webim.config.js"></script>
+    <script src="../../js/strophe-1.2.8.min.js"></script>
+    <script src="../../js/websdk-1.4.13.js"></script>
+    <script src="../../js/websdk.shim.js"></script>
+    <script src="../../components/md5.min.js"></script>
+    <script src="../../components/setPayPass.js"></script>
+    <script src="../../js/exif.js"></script>
+    <style>
+        html,body{
+            width:100%;
+            background-color: #eeeeee;
+        }
+    </style>
+</head>
+<body>
+<div id="regist">
+<div class="pub-header">
+    <div class="pub-header-com">
+        <p>今借到 信用借还商家版</p>
+        <p class="pub-header-rig" @click="toLogin">登录</p>
+    </div>
+</div>
+<div class="regs-head">
+    <div class="regs-head-com">
+        <div class="regs-head-line"></div>
+        <ul>
+            <li class="pass">
+                <span><i></i></span>
+                <p>账户信息</p>
+            </li>
+            <li class="pass">
+                <span><i></i></span>
+                <p>证照信息</p>
+            </li>
+            <li class="pass">
+                <span><i></i></span>
+                <p>商铺信息</p>
+            </li>
+            <li class="active">
+                <span><i></i></span>
+                <p>信息确认</p>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="login-com regs_login">
+    <div class="login-toptit">
+        <i></i><span>证照信息</span>
+    </div>
+    <div class="login-botcom mat60">
+        <div class="login-group hei25">
+            <label>法定姓名/代理人姓名：</label>
+            <div class="rig-content" >{{name}}</div>
+        </div>
+        <div class="login-group hei25">
+            <label>身份证号：</label>
+            <div class="rig-content" >{{idNum}}</div>
+        </div>
+        <div class="login-group heiauto">
+            <label><i>*</i>法人身份证正反面</label>
+            <div class="ident-div">
+                <div class="ident-img"><img :src="iIdCardFront"/></div>
+                <div class="ident-img"><img :src="iIdCardBack"/></div>
+            </div>
+        </div>
+        <div class="login-group heiauto marbt20">
+            <label><i>*</i>营业执照</label>
+            <div class="ident-div">
+                <div class="ident-img"><img :src="businessPic"/> </div>
+            </div>
+        </div>
+        <div class="reg-line"></div>
+    </div>
+    <div class="login-toptit">
+        <i></i><span>商铺信息</span>
+    </div>
+    <div class="login-botcom mat60">
+        <div class="login-group heiauto marb80">
+            <label><i>*</i>店铺logo</label>
+            <div class="ident-div">
+                <div class="shop-img"><img :src="comLogo"/> </div>
+            </div>
+
+        </div>
+        <div class="reg-line"></div>
+    </div>
+    <div class="login-toptit">
+        <i></i><span>店铺基本信息</span>
+    </div>
+    <div class="login-botcom mat60">
+        <table>
+            <tr>
+                <td>店铺名称：</td>
+                <td >{{comName}}</td>
+                <td>所在地区：</td>
+                <td>{{comArea}}</td>
+            </tr>
+            <tr>
+                <td>客服电话：</td>
+                <td >{{servicePhone}}</td>
+                <td>详细地址：</td>
+                <td >{{address}}</td>
+            </tr>
+            <tr>
+                <td>主营类型：</td>
+                <td >{{comType}}</td>
+                <td>店铺介绍：</td>
+                <td >{{comMemo}}</td>
+            </tr>
+
+        </table>
+
+
+        <div class="form-btn-div mabt120">
+            <div class="form-btn mar80" @click="up">上一步</div>
+            <div class="form-btn active" @click="next">确认提交</div>
+        </div>
+    </div>
+</div>
+<!--修改成功弹窗-->
+<div v-show="rightShow" class="change-success active" style="display: block">
+    <div class="ch-suc-con">
+        <i class="duihao-icon"></i>
+        <span class="xiugai-tit">提交成功</span>
+    </div>
+</div>
+</div>
+</body>
+<script>
+    var vm = new Vue({
+        el: "#regist",
+        data:{
+            rightShow:false,
+            name: "",
+            idNum: "",
+            iIdCardFront: "",
+            iIdCardBack: "",
+            businessPic:"",
+            comLogo: "",
+            comName: "",//店铺名
+            comArea: "",//区域
+            address: "",//详细地址
+            comType: "",//主营类型
+            servicePhone: "",//服务电话
+            comMemo: "",//店铺描述
+            waitApplyData: {},
+            bsending: [{}, {}, {}, {}, {}, {}, {}],
+            lock: {},
+            cLevel1Code: "",
+            cLevel2Code: "",
+            cLevel3Code: "",
+        },
+        methods:{
+            toLogin:function () {
+                utils.go("../index/login.html")
+            },
+            up:function () {
+                utils.go("register-3.html");
+            },
+            next:function () {
+                var saveUrl = config.LEASE_MERCHANT_URL + "/com/apply";
+                /*
+                 utils.post(saveUrl, vm.waitApplyData, vm.bsending[0], function (res) {
+                 utils.go("register-3.html");
+                 vm.ifNext = false;
+                 });
+                 */
+
+                utils.postAndDealBySelf(saveUrl, vm.waitApplyData,{}, function (jsn) {
+                    if (jsn.code === 200) {
+                        vm.rightShow=true;
+                        setTimeout(function () {
+                            utils.go("../index/login.html");
+                        }, 2000)
+
+                        vm.ifNext = false;
+                        if (window.sessionStorage.cookieData) {
+                            window.sessionStorage.cookieData = null;
+                        }
+                    } else {
+                        if (!utils.isNull(jsn.message)) {
+                            Chef.alert({
+                                'title': '提醒',
+                                'content': jsn.message
+                            });
+                            return
+                        } else {
+                            Chef.alert({
+                                'title': '提醒',
+                                'content': '操作失败'
+                            });
+                            return
+                        }
+                        vm.ifNext = false;
+
+                        //                       o1.style.display = "none";
+                    }
+                });
+            }
+    },
+        created:function () {
+                var waitApplyData = {};
+                if (window.sessionStorage.personInfo) {
+                    waitApplyData = JSON.parse(window.sessionStorage.personInfo);
+                    console.log(waitApplyData)
+        }
+                var cTelephone = window.localStorage.storageTel;
+                var url = config.LEASE_MERCHANT_URL + "/com/againApply";
+                var params = {c_telephone: cTelephone};
+                utils.post(url, params,{}, function (json) {
+                    var comApply = json.model;
+                    for (var key in comApply) {
+                        if (key != 'cGeohash') {
+                            waitApplyData[key] = comApply[key];
+                        }
+                    }
+                    waitApplyData.iIdCardFront = json.iIdCardFront;
+                    waitApplyData.iIdCardBack = json.iIdCardBack;
+                    waitApplyData.agentIdCardFront = json.agentIdCardFront;
+                    waitApplyData.agentIdCardBack = json.agentIdCardBack;
+                    waitApplyData.bProx = false;
+                    if (json.agentIdCardFront || json.agentIdCardBack) {
+                        waitApplyData.bProx = true;
+                    }
+                    waitApplyData.cProxyPic = json.cProxyPic;
+                    waitApplyData.cLogo = json.cLogo;
+                    waitApplyData.cBusinessLicenseImg = json.cBusinessLicenseImg;
+                    waitApplyData.externalPic = json.externalPic;
+                    waitApplyData.insidePic = json.insidePic;
+                    window.sessionStorage.waitApplyData = JSON.stringify(waitApplyData);//json转字符串
+                    vm.waitApplyData = waitApplyData;//字符串转json,提交时用
+                    waitApplyData = JSON.parse(window.sessionStorage.waitApplyData)
+                    console.log(waitApplyData)
+                    vm.name=waitApplyData.cRefundUser;
+                        vm.idNum=waitApplyData.cLegalIdCardNo;
+                        vm.iIdCardFront=waitApplyData.iIdCardFront
+                        vm.iIdCardBack=waitApplyData.iIdCardBack
+                        vm.businessPic=waitApplyData.cBusinessLicenseImg
+                        vm.comLogo=waitApplyData.cLogo
+                        vm.comName=waitApplyData.cName//店铺名
+                        vm.comArea=waitApplyData.cLevel1Name+" "+waitApplyData.cLevel2Name+" "+waitApplyData.cLevel3Name//区域
+                        vm.address=waitApplyData.cLevel1Name+" "+waitApplyData.cLevel2Name+" "+waitApplyData.cLevel3Name+" "+waitApplyData.cAddr//区域//详细地址
+                        vm.comType=waitApplyData.cMainTypes//主营类型
+                        vm.servicePhone=waitApplyData.cTelephone//服务电话
+                        vm.comMemo=waitApplyData.cMemo//店铺描述
+                })
+    }
+    })
+</script>
+</html>

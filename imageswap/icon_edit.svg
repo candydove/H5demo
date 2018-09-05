@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="10px" height="10px" viewBox="0 0 10 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>icon_edit</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="icon_edit" stroke="#AEAEAE">
+            <g id="Shape">
+                <path d="M9,6.33 L9,9 C9,9.55228475 8.55228475,10 8,10 L1,10 C0.44771525,10 0,9.55228475 0,9 L0,2 C-1.11022302e-16,1.44771525 0.44771525,1 1,1 L3.67,1"></path>
+                <polygon points="8 0 10 2 5 7 3 7 3 5"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

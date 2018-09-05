@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/index.css">
+	<link rel="stylesheet" href="../../css/pagination.css">
+    
+	<script type='text/javascript' src='../../js/include.js' charset='utf-8'></script>
+    <script src="../../js/public.js"></script>
+    <script type="text/javascript" src="../../components/pagination.js"></script>
+	<script type="text/javascript" src="../../components/header.js"></script>
+</head>
+<body>
+<div id="orderDetail">
+	<div id="headerDiv">
+	    	<header-component title="今借到信用借还商家版" quitName="退出登陆"></header-component>
+	</div>
+	<div class="main">
+	    <div class="main-top">
+	        <a href="../order/order-main.html">订单管理</a><span>></span><a class="active" href="#">订单详情</a>
+	    </div>
+	    <!--整体内容开始-->
+	    <div class="main-com clearfix">
+	        <div class="main-left fl">
+	            <ul class="main-left-ul">
+	                <li><a href="../prod/publishProd.html"><i class="icon1"></i>发布新产品</a></li>
+	                <li><a href="../prod/wareHouse.html"><i class="icon2"></i>商品管理</a></li>
+	                <li class="active"><a href="../order/order-main.html"><i class="icon3"></i>订单管理</a></li>
+	                <li><a href="../prod/chatting.html"><i class="icon4"></i>接待中心</a></li>
+	            </ul>
+	        </div>
+	        <div class="main-rig-con fr">
+	            <div class="main-rig-top">
+	            	<!--订单取消-->
+	                <div class="close-tit" v-if="orderDetailData.n_state == cancelSate || orderDetailData.n_state == refundSuccessSate">
+	                    <p>
+	                        <img src="../../images/error.png"><span>当前订单状态：交易关闭</span>
+	                    </p>
+	                </div>
+	                <!--订单正常走-->
+	                <div class="regs-head-com-det" v-else-if="orderDetailData.b_refund == false">
+	                    <div class="regs-head-line"></div>
+	                    <!--待付款-->
+	                    <ul v-if="orderDetailData.n_state == noPayState">
+	                        <li class="active">
+	                            <span><i></i></span>
+	                            <p>待付款</p>
+	                        </li>
+	                        <li>
+	                            <span><i></i></span>
+	                            <p>待发货</p>
+	                        </li>
+	                        <li>
+	                            <span><i></i></span>
+	                            <p>待收货</p>
+	                        </li>
+	                        <li>
+	                            <span><i></i></span>
+	                            <p>待还货</p>
+	                        </li>
+	                        <li>
+	                            <span><i></i></span>
+	                            <p>交易完成</p>
+	                        </li>
+	                    </ul>
+	                    <!--待发货-->
+	                    <ul v-if="orderDetailData.n_state == noSendSate">
+	                        <li class="pass">
+	                            <span><i></i></span>
+	                            <p>已付款</p>
+	                        </li>
+	                        <li class="active">
+	                            <span><i></i></span>
+	                            <p>待发货</p>
+	                        </li>
+	                        <li>
+	                            <span><i></i></span>
+	                            <p>待收货</p>
+	                        </li>
+	                        <li>
+	                            <span><i></i></span>
+	                            <p>待还货</p>
+	                        </li>
+	                        <li>
+	                            <span><i></i></span>
+	                            <p>交易完成</p>
+	                        </li>
+	                    </ul>
+	                    <!--待收货-->
+	                    <ul v-if="orderDetailData.n_state == noReceiptSate">
+	                        <li class="pass">
+	                            <span><i></i></span>
+	                            <p>已付款</p>
+	                        </li>
+	                        <li class="pass">
+	                            <span><i></i></span>
+	                            <p>已发货</p>
+	                        </li>
+	                        <li class="active">
+	                            <span><i></i></span>
+	                            <p>待收货</p>
+	                        </li>
+	                        <li>
+	                            <span><i></i></span>
+	                            <p>待还货</p>
+	                        </li>
+	                        <li>
+	                            <span><i></i></span>
+	                            <p>交易完成</p>
+	                        </li>
+	                    </ul>
+	                    <!--待还货-->
+	                    <ul v-if="orderDetailData.n_state == noReturnState || orderDetailData.n_state == noRePayState">
+	                        <li class="pass">
+	                            <span><i></i></span>
+	                            <p>已付款</p>
+	                        </li>
+	                        <li class="pass">
+	                            <span><i></i></span>
+	                            <p>已发货</p>
+	                        </li>
+	                        <li class="pass">
+	                            <span><i></i></span>
+	                            <p>已收货</p>
+	                        </li>
+	                        <li class="active">
+	                            <span><i></i></span>
+	                            <p>待还货</p>
+	                        </li>
+	                        <li>
+	                            <span><i></i></span>
+	                            <p>交易完成</p>
+	                        </li>
+	                    </ul>
+	                    <!--交易完成-->
+	                    <ul v-if="orderDetailData.n_state == successSate">
+	                        <li class="pass">
+	                            <span><i></i></span>
+	                            <p>已付款</p>
+	                        </li>
+	                        <li class="pass">
+	                            <span><i></i></span>
+	                            <p>已发货</p>
+	                        </li>
+	                        <li class="pass">
+	                            <span><i></i></span>
+	                            <p>已收货</p>
+	                        </li>
+	                        <li class="pass">
+	                            <span><i></i></span>
+	                            <p>已还货</p>
+	                        </li>
+	                        <li class="pass">
+	                            <span><i></i></span>
+	                            <p>交易完成</p>
+	                        </li>
+	                    </ul>
+	                </div>
+	                <!--退货退款售后-->
+					<div class="regs-head-com-det widsmall" v-else-if="orderDetailData.b_refund == true">
+	                    <div class="regs-head-line widline"></div>
+	                    <!--退货退款（售后中）-->
+	                    <ul v-if="orderDetailData.n_state == noReceiptSate">
+	                        <li class="pass">
+	                            <span><i></i></span>
+	                            <p>已付款</p>
+	                        </li>
+	                        <li class="pass">
+	                            <span><i></i></span>
+	                            <p>已发货</p>
+	                        </li>
+	                        <li class="active">
+	                            <span><i></i></span>
+	                            <p>售后中</p>
+	                        </li>
+	                    </ul>
+	                    <!--售后-->
+	                    <ul v-if="orderDetailData.n_state == noReturnState">
+	                        <li class="pass">
+	                            <span><i></i></span>
+	                            <p>已付款</p>
+	                        </li>
+	                        <li class="pass">
+	                            <span><i></i></span>
+	                            <p>已发货</p>
+	                        </li>
+	                        <li class="pass">
+	                            <span><i></i></span>
+	                            <p>已收货</p>
+	                        </li>
+	                        <li class="active">
+	                            <span><i></i></span>
+	                            <p>售后中</p>
+	                        </li>
+	                        <li>
+	                            <span><i></i></span>
+	                            <p>售后完成</p>
+	                        </li>
+	                    </ul>
+	                </div>
+	            </div>
+	
+	            <div class="main-rig-bottom">
+	                <div class="list-tab">
+	                    <div :class="showTabOne" @click="genZong()">订单跟踪</div>
+	                    <div :class="showTabTwo" @click="address()">收货地址</div>
+	                </div>
+	                <div class="tab-content">
+	                    <div class="tab-con-table" :style="genZongShow">
+	                        <table>
+	                            <tr>
+	                                <th>时间</th>
+	                                <th>状态</th>
+	                            </tr>
+	                            <tbody v-for="record in recordList">
+	                                <tr>
+	                                    <td>
+	                                    	<span>{{new Date(parseInt(record.t_crt_tm)).Format("yyyy-MM-dd")}}</span>
+                    						<span>{{new Date(parseInt(record.t_crt_tm)).Format("hh:mm")}}</span>
+	                                    </td>
+	                                    <td>
+	                                    	<div>
+						                        {{record.c_record_content}}
+						                    </div>
+						                    <div v-if="!utils.isNull(record.c_remark)">
+						                        {{record.c_remark}}
+						                    </div>
+	                                    </td>
+	                                </tr>
+	                            </tbody>
+	                        </table>
+	                    </div>
+	                    <div :style="addressShow">
+	                        <div class="address" v-if="orderDetailData.n_get_method==2">
+			                    <p>姓名：{{orderDetailData.c_borrow_name}}</p>
+			                    <p>电话：{{orderDetailData.c_borrow_telephone}}</p>
+			                    <p>地址：{{orderDetailData.c_borrow_level1_name}} {{orderDetailData.c_borrow_level2_name}} {{orderDetailData.c_borrow_level3_name}} {{orderDetailData.c_borrow_addr}}</p>
+			                    <p>运送方式： {{c_get_method}}</p>
+			                    <p>物流公司名称：{{orderDetailData.c_express_name}}</p>
+			                    <p>运单号：{{orderDetailData.c_express_no}}</p>
+			                </div>
+			                <div class="address" v-else="orderDetailData.n_get_method==1 || orderDetailData.n_get_method==0">
+			                    <p>姓名：{{orderDetailData.c_borrow_name}}</p>
+			                    <p>电话：{{orderDetailData.c_borrow_telephone}}</p>
+			                    <p>运送方式： {{c_get_method}}</p>
+			                </div>
+	                    </div>
+	                </div>
+	                
+	            </div>
+	            <div class="main-rig-bottom-det">
+	                <div class="order-det">
+	                    <p class="det-title"><i></i><span>订单信息</span></p>
+	                    <p class="li">订单编号: <span>{{orderDetailData.id}}</span></p>
+	                    <ul>
+	                        <li>下单时间：<span>{{t_crt_tm}}</span></li>
+	                        <li>签收时间：<span>{{t_express_sign_tm}}</span></li>
+	                        <li>租期开始：<span>{{t_receipt_tm}}</span></li>
+	                        <li>租期结束：<span>{{t_pre_return_tm}}</span></li>
+	                        <li>归还时间：<span>{{orderDetailData.id}}</span></li>
+	                    </ul>
+	                </div>
+	                <div class="tab-con-table">
+	                    <table>
+	                        <tr>
+	                            <th style="width: 180px">商品</th>
+	                            <th>租金</th>
+	                            <th>数量</th>
+	                            <th>租期</th>
+	                            <th>押金</th>
+	                            <th>平台服务费</th>
+	                            <th>交易手续费</th>
+	                            <th>预计收益</th>
+	                            <th>实际收益</th>
+	                        </tr>
+	                        <template v-for="pro in orderDetailData.l_com.l_product">
+		                        <tr>
+		                            <td>
+		                                <img class="list-tab-img-small " :src="config.qiniuUrl + pro.c_logo">
+		                                <span class="list-tab-tit">{{pro.c_name}}</span>
+		                            </td>
+		                            <td>¥{{pro.n_rent_amt}}／天</td>
+		                            <td>{{pro.n_cnt}}</td>
+		                            <td>{{pro.n_lease_day}}天</td>
+		                            <td>¥{{parseFloat(orderDetailData.n_deposit_amt).toFixed(2)}}</td>
+		                            <td>¥{{platformAmt}}</td>
+		                            <td>¥{{payTradeAmt}}</td>
+		                            <td>¥{{orderDetailData.n_expect_amt}}</td>
+		                            <td>¥{{n_real_amt}}</td>
+		                        </tr>
+	                        </template>
+	                    </table>
+	                </div>
+	            </div>
+	            <!--右侧结束-->
+	        </div>
+	
+	        <!--整体内容结束-->
+	    </div>
+	</div>
+</div>
+</body>
+<script type="text/javascript">
+	    var vm = new Vue({
+	    	el: '#orderDetail',
+	    	data:{
+				t_crt_tm:'',//创建时间
+				t_pre_return_tm:'',//预计还货日期
+				t_receipt_tm: '',//收货日期
+				t_express_sign_tm:'',//签收日期
+				t_fact_return_tm:'',//实际还货时间
+				t_end_tm:'',//关闭时间
+				t_crt_tm_text:'',//支付倒计时
+				new_n_rent_amt: 0, //修改后的租金
+				new_n_express_amt: 0, //修改后的运费
+				c_get_method: '',//配送方式
+				lock: {},
+				orderDetailData: {
+					l_com:{
+						c_com_name:'',
+					}
+				},
+				
+				/*订单各种状态*/
+				noPayState: 0,//待付款
+				noSendSate:2,//待发货
+				noReceiptSate: 3,//待收货
+				noReturnState: 4,//待还货
+				noRePayState: 5,//回款中
+				successSate: 6,//交易成功
+				cancelSate: 7,//交易取消
+				refundSuccessSate: 8,//8.交易取消(退款退货)
+				isModifyFee: false,//是否修改费用
+				
+				//订单正常流程
+				borrow_no_pay: 0,//等待借物方付款
+				return_lend_to_receive: 8,//8:等待出借方收货（还货中）
+				lend_to_deliver: 2,//2:等待出借方发货
+				//退货
+				refund_initial: 0,//等待出借方确认
+				refund_lend_to_receive: 2,//2:等待出借方收货
+				
+				current_user_id:'',
+				
+				//订单跟踪
+				c_express_code:'',//物流公司简称
+				c_express_no:'',//物流号
+				orderId:'',
+				expressDataList:[],//物流信息
+				recordList:[],//订单操作记录
+				genZongShow:'',//显示订单跟踪
+				addressShow:'display:none',//显示收货地址
+				showTabOne:'list-tab-li active',
+				showTabTwo:'list-tab-li',
+				//交易手续费
+				payTradeAmt:'',
+				//平台服务费
+				platformAmt:'',
+				n_real_amt:''//实际收益
+				
+	    	},
+	    	methods:{
+	    		genZong:function(){
+	    			this.genZongShow='';
+	    			this.addressShow='display:none';
+	    			this.showTabOne='list-tab-li active';
+	    			this.showTabTwo='list-tab-li';
+	    		},
+	    		address:function(){
+	    			this.genZongShow='display:none';
+	    			this.addressShow='';
+	    			this.showTabOne='list-tab-li';
+	    			this.showTabTwo='list-tab-li active';
+	    		}
+				
+			},
+	    	created: function() {
+	    		//订单跟踪
+	    		if(utils.isNull(window.sessionStorage.orderId)){
+						utils.back();
+					}else{
+						this.c_express_code = window.sessionStorage.c_express_code;
+						this.c_express_no = window.sessionStorage.c_express_no;
+						this.orderId = window.sessionStorage.orderId;
+								
+			    		var url= config.LEASE_URL + "/express/getOrderTracesByKd100";
+						var data={
+							id:this.orderId,
+							c_express_code:this.c_express_code,
+							c_express_no:this.c_express_no
+						};
+						var that = this;
+						utils.post(url,data,{},function(res){
+							if(!utils.isNull(res.data)){
+								that.expressDataList = res.data;
+							}
+							if(!utils.isNull(res.records)){
+								that.recordList = res.records;
+							}
+						});
+					}
+				//初始化订单数据
+	    		var id = utils.getArg("id");
+				if(utils.isNull(id)){
+					utils.back();
+					return;
+				}
+				if(!utils.isNull(window.localStorage.com)){
+					var com = JSON.parse(window.localStorage.com);
+					if(!utils.isNull(com) && utils.isNull(com.id)){
+						this.current_user_id = com.id
+					}
+				}
+				this.id = id;
+				var that = this;
+				utils.getAndDealBySelf(config.LEASE_MERCHANT_URL + '/order/getSubOrderDetail',{id:id}, {}, function(jsn){
+					if(jsn != '' && jsn.code == 200){
+						var json = jsn.object;
+						console.log(json)
+						that.orderDetailData = json;
+						if(json.n_get_method == 0){
+							that.c_get_method = '到店自取';
+						}else if(json.n_get_method == 1){
+							that.c_get_method = '到店自取';
+						}else if(json.n_get_method == 2){
+							that.c_get_method = '快递';
+						}
+						if(!utils.isNull(json.c_borrow_name) && json.c_borrow_name.length > 9){
+							that.orderDetailData.c_borrow_name = json.c_borrow_name.substring(0,8);
+						}
+						if(!utils.isNull(json.c_lend_name) && json.c_lend_name.length > 9){
+							that.orderDetailData.c_lend_name = json.c_lend_name.substring(0,8);
+						}
+						//计算交易手续费
+						if(json.n_state == 6){//交易完成
+							that.payTradeAmt = json.n_payTrade_amt;
+						}else{
+							that.payTradeAmt = '--';
+						}
+						//计算平台服务费
+						if(json.n_state == 6){//交易完成
+							if(json.n_sub_state == 9){//已售卖5%
+								that.platformAmt = json.n_rent_amt*0.05;
+							}else{//租赁收取4%
+								that.platformAmt = json.n_rent_amt*0.04;
+							}
+						}else{
+							that.platformAmt = "--"
+						}
+						//实际收益
+						if(json.n_state == 6){//交易完成
+							if(json.n_sub_state == 9){//已售卖5%
+								//租金-平台服务费（平台服务费=租金*5%）-交易手续费+运费
+								that.n_real_amt = json.n_rent_amt*0.95-json.n_payTrade_amt+json.n_express_amt;
+							}else{//等于预计收益
+								that.n_real_amt = json.n_expect_amt;
+							}
+						}else{
+							that.n_real_amt = "--";
+						}
+						//下单日期格式化
+						if(json.t_crt_tm >0){
+							var dt = new Date(json.t_crt_tm);
+							var y = dt.getFullYear()
+							var m = dt.getMonth() + 1 < 10 ? "0" + (dt.getMonth() + 1) : dt.getMonth() + 1;
+							var d = dt.getDate() < 10 ? "0" + dt.getDate() : dt.getDate();
+							var h = dt.getHours()< 10 ? "0" + dt.getHours() : dt.getHours();
+							var f = dt.getMinutes()< 10 ? "0" +dt.getMinutes() : dt.getMinutes();
+							that.t_crt_tm = y+'-'+m+'-'+d+' '+h+':'+f;
+						}else{
+							that.t_crt_tm = '--';
+						}
+						//租期开始日期格式化
+						if(json.t_receipt_tm >0){
+							var dt = new Date(json.t_receipt_tm);
+							var y = dt.getFullYear()
+							var m = dt.getMonth() + 1 < 10 ? "0" + (dt.getMonth() + 1) : dt.getMonth() + 1;
+							var d = dt.getDate() < 10 ? "0" + dt.getDate() : dt.getDate();
+							that.t_receipt_tm = y+'-'+m+'-'+d;
+						}else{
+							that.t_receipt_tm = '--';
+						}
+						//还货日期格式化
+						if(json.t_pre_return_tm >0){
+							var dt = new Date(json.t_pre_return_tm);
+							var y = dt.getFullYear()
+							var m = dt.getMonth() + 1 < 10 ? "0" + (dt.getMonth() + 1) : dt.getMonth() + 1;
+							var d = dt.getDate() < 10 ? "0" + dt.getDate() : dt.getDate();
+							that.t_pre_return_tm = y+'-'+m+'-'+d;
+						}else{
+							that.t_pre_return_tm ='--'
+						}
+						//签收日期格式化
+						if(json.t_express_sign_tm != null && json.t_express_sign_tm >0){
+							var dt = new Date(json.t_express_sign_tm);
+							var y = dt.getFullYear()
+							var m = dt.getMonth() + 1 < 10 ? "0" + (dt.getMonth() + 1) : dt.getMonth() + 1;
+							var d = dt.getDate() < 10 ? "0" + dt.getDate() : dt.getDate();
+							that.t_express_sign_tm = y+'-'+m+'-'+d;
+						}else{
+							that.t_express_sign_tm ='--'
+						}
+						//实际还货日期格式化
+						if(json.t_fact_return_tm != null && json.t_fact_return_tm>0){
+							var dt = new Date(json.t_express_sign_tm);
+							var y = dt.getFullYear()
+							var m = dt.getMonth() + 1 < 10 ? "0" + (dt.getMonth() + 1) : dt.getMonth() + 1;
+							var d = dt.getDate() < 10 ? "0" + dt.getDate() : dt.getDate();
+							that.t_fact_return_tm = y+'-'+m+'-'+d;
+						}
+						//倒计时剩余支付时间
+						var now = new Date();
+	    				var nowTime = now.getTime();
+	    				if(json.t_crt_tm != '' && json.n_state == 0  && (json.t_crt_tm +86400000) > nowTime){
+	    					var countDownTime = json.t_crt_tm + 86400000 - nowTime;
+	    					var start = parseInt(countDownTime/1000); 
+	    					if(start < 86400){//24小时支付有效
+	    						var cycleFn = window.setInterval(function(){
+			    					start -= 1;
+			    					if (start <= 0) {
+			    						clearInterval(cycleFn);
+			    						that.t_crt_tm_text = '已超过支付时间';
+			    			        }else{
+			    			        	var day1=Math.floor(start/(60*60*24)); 
+			    			        	var hour=Math.floor((start-day1*24*60*60)/3600); 
+			    			        	var minute=Math.floor((start-day1*24*60*60-hour*3600)/60); 
+			    			        	that.t_crt_tm_text = day1+'天'+hour+'小时'+minute+"分";
+			    			        }
+			    				},1000);
+	    					}else{
+	    						that.t_crt_tm_text = '已超过支付时间';
+	    					}
+	    				}else{
+	    					that.t_crt_tm_text = '已超过支付时间';
+	    				}
+					}else{
+						alert('查询订单出现错误');
+						utils.back();
+					}
+				});
+				console.log(this.orderDetailData.l_com.l_product);
+			}
+	    });
+    </script>
+</html>

@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册第三步</title>
+
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/index.css">
+
+    <link rel="stylesheet" href="../../css/common-header.css" />
+    <link rel="stylesheet" href="../../css/common1.css" />
+    <link rel="stylesheet" href="../../components/component.css" />
+
+    <script src="../../js/include.js"></script>
+    <script src="../../js/common1.js"></script>
+    <script src="../../js/webim.config.js"></script>
+    <script src="../../js/strophe-1.2.8.min.js"></script>
+    <script src="../../js/websdk-1.4.13.js"></script>
+    <script src="../../js/websdk.shim.js"></script>
+    <script src="../../components/md5.min.js"></script>
+    <script src="../../components/setPayPass.js"></script>
+    <script src="../../js/city.data-3.js"></script>
+    <script src="../../js/exif.js"></script>
+    <style>
+        html,body{
+            width:100%;
+            background-color: #eeeeee;
+        }
+    </style>
+</head>
+<body>
+<div v-cloak id="regist">
+<div class="pub-header">
+    <div class="pub-header-com">
+        <p>今借到 信用借还商家版</p>
+        <p class="pub-header-rig" @click="toLogin()">登录</p>
+    </div>
+</div>
+<div class="regs-head">
+    <div class="regs-head-com">
+        <div class="regs-head-line"></div>
+        <ul>
+            <li class="pass">
+                <span><i></i></span>
+                <p>账户信息</p>
+            </li>
+            <li class="pass">
+                <span><i></i></span>
+                <p>证照信息</p>
+            </li>
+            <li class="active">
+                <span><i></i></span>
+                <p>商铺信息</p>
+            </li>
+            <li>
+                <span><i></i></span>
+                <p>信息确认</p>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="login-com regs_login">
+    <div class="login-toptit">
+        <i></i><span>商铺信息</span>
+    </div>
+    <div class="login-botcom mat60">
+        <div class="login-group heiauto">
+            <label><i>*</i>店铺logo</label>
+            <div class="ident-div" @click="upload('uploadLogo')">
+                <!--<div class="ident"><img src="../../images/ident-add.png"></div>-->
+                <input id="uploadLogo" @change="uploadLogo($event)" type="file" accept="image/*" style="display:none">
+                <!--<div class="main logo">-->
+                    <!--<div class="imgs">-->
+
+                        <div class="ident" v-show="showAdd">
+                            <img src="../../images/ident-add.png" class="plus">
+                        </div>
+                        <div class="hint disinble" v-show="showAdd">
+                            * 请上传店铺logo
+                        </div>
+                        <div class="shop-img" v-show="showPic">
+                            <img v-if="comLogo" :src="comLogo">
+                        </div>
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="hint disinble">-->
+                    <!--* 请上传店铺logo-->
+                <!--</div>-->
+                <!--<div class="shop-img"><img src="../../images/logo.png"> </div>-->
+            </div>
+            <div class="reg-hint">
+                <p>提示：</p>
+                <p>1、图片尺寸：正方形，图片大小必须800x800。</p>
+                <p>2、图片格式为JPG，图片大小需大于38k且小于300k</p>
+            </div>
+            <div class="reg-line"></div>
+        </div>
+    </div>
+
+    <div class="login-toptit">
+        <i></i><span>店铺基本信息</span>
+    </div>
+    <div class="login-botcom mat60">
+        <div class="login-group">
+            <label><i>*</i>店铺名称</label>
+            <input v-model="comName" type="text" class="group-input3" v-on:blur="inputBlur(0)">
+            <div class="tick" v-show="rightShow[0]"></div>
+            <div class="hint disinble" v-show="errorShow[0]">
+                * 店铺名
+            </div>
+        </div>
+        <div class="login-group">
+            <label><i>*</i>所在地区</label>
+            <select v-model="cLevel1Code"
+                    placeholder="请选择省份"
+                    v-on:change="getProv($event)">
+                <option selected value="">请选择</option>   
+                <option v-for="item in provs"
+                        :label="item.label"
+                        :value="item.value"></option>
+            </select>
+
+            <select size="small" style="width: 100px"
+                    v-if="selectProv!=''"
+                    v-model="cLevel2Code"
+                    placeholder="请选择城市"
+                    v-on:change="getCity($event)">
+                <option v-for="item in citys"
+                        :label="item.label"
+                        :value="item.value">
+                </option>
+            </select>
+            <select size="small" style="width: 100px"
+                    v-if="selectCity!=''"
+                    v-model="cLevel3Code"
+                    placeholder="请选择区域"
+                    v-on:change="getArea($event)">
+                <option v-for="item in areas"
+                        :label="item.label"
+                        :value="item.value">
+                </option>
+            </select>
+
+            <!--<input type="text" class="group-input3">-->
+        </div>
+        <div class="login-group">
+            <label><i>*</i>详细地址</label>
+            <input v-model="address" type="text" class="group-input3" v-on:blur="inputBlur(2)">
+            <div class="tick" v-show="rightShow[2]"></div>
+            <div class="hint disinble" v-show="errorShow[2]">
+                * 详细地址没写
+            </div>
+        </div>
+        
+        <!--<div class="login-group">
+            <label><i>*</i>主营类型</label>
+            <select v-model="comType"
+                    placeholder="请选择类型"
+                    v-on:change="getMainType($event)" >
+                <option value="手机数码">手机数码</option>
+                <option value="服饰">服饰</option>
+                <option value="儿童玩具">儿童玩具</option>
+                <option value="电脑办公">电脑办公</option>
+                <option value="家用电器">家用电器</option>
+                <option value="建材">建材</option>
+                <option value="婚庆">婚庆</option>
+                <option value="酒店住宿">酒店住宿</option>
+                <option value="美容理疗">美容理疗</option>
+                <option value="餐饮美食">餐饮美食</option>
+                <option value="运动健身">运动健身</option>
+                <option value="汽车交通">汽车交通</option>
+                <option value="汽车交通">美妆</option>
+            </select>
+            <div class="tick" v-show="rightShow[3]"></div>
+            <div class="hint disinble" v-show="errorShow[3]">
+                * 请选择主营类型
+            </div>
+        </div>-->
+        
+        <div class="login-group">
+            <label><i>*</i>主营类型</label>
+            <!--<input type="text" class="group-input2">-->
+            <select class="group-input2" v-model="comType" @change="getMainType($event)">
+            	<option selected value="">请选择</option>
+                <option class="serch_list_box" v-for="tp in mainTypeList" v-bind:value="tp.value">{{tp.text}}</option>
+            </select>
+            <div class="tick" v-show="rightShow[3]"></div>
+            <div class="hint disinble" v-show="errorShow[3]">
+                * 请选择主营类型
+            </div>
+        </div>
+        
+        
+        <div class="login-group">
+            <label><i>*</i>客服电话</label>
+            <input v-model="servicePhone" type="text" class="group-input3" v-on:blur="inputBlur(4)">
+            <div class="tick" v-show="rightShow[4]"></div>
+            <div class="hint disinble" v-show="errorShow[4]">
+                * 客服电话
+            </div>
+        </div>
+        <div class="login-group heiauto">
+            <label>店铺介绍</label>
+            <textarea v-model="comMemo" class="area-input" v-on:blur="inputBlur(5)"></textarea>
+            <span class="area-font" ></span>
+            <div class="tick" v-show="rightShow[5]"></div>
+            <div class="hint disinble" v-show="errorShow[5]">
+                * 介绍一下呗
+            </div>
+        </div>
+
+
+        <div class="form-btn-div mabt120">
+            <div class="form-btn mar80" @click="up">上一步</div>
+            <div class="form-btn active" @click="next">下一步</div>
+            <!--<div class="form-btn mal80" @click="skip">跳过</div>-->
+        </div>
+
+
+    </div>
+</div>
+</div>
+</body>
+<script>
+    var vm = new Vue({
+        el: "#regist",
+        data: {
+            showAdd:true,
+            showPic:false,
+            bProx:false,
+            comLogo: "",
+            comName: "",//店铺名
+            comArea: "",//区域
+            cLevel1Code: "",
+            cLevel2Code: "",
+            cLevel3Code: "",
+            address: "",//详细地址
+            lee: "0",
+            hee: "0",
+            comType: "",//主营类型
+            servicePhone: "",//服务电话
+            comMemo: "",//店铺描述
+            externalPic: [],
+            insidePic: [],
+            ifNext: false,
+            waitApplyData: {},
+            bsending: [{}, {}, {}, {}, {}, {}, {}],
+            lock: {},
+            provs:[] ,
+            citys: [],
+            areas:[],
+            selectProv: '',
+            selectCity: '',
+            selectArea:'',
+            errorShow: [false, false, false, false, false],
+            rightShow: [false, false, false, false, false],
+            mainTypeList:[]
+        },
+        methods: {
+            toLogin:function () {
+                utils.go("../index/login.html")
+            },
+            upload:function (uploadId) {
+                document.getElementById(uploadId).click();
+                vm.showAdd = false;
+                vm.showPic = true;
+            },
+            init: function () {
+                var token = window.sessionStorage.token;
+                if (utils.isNull(token)) {
+                    utils.replace('../index/login.html');
+                } else {
+                    //this.getMainTypeData();
+                    this.againApply();
+                }
+            },
+            skip: function () {
+                Cpop.confirm({
+                    'content':'跳过',
+                    'title':'提示',
+                    firm:'取消',
+                    firm2:'确认',
+                    firmFn:function(flag) {
+                        if(flag == 0) {
+                            window.location.reload();
+                        }else{
+                            utils.go('../prod/wareHouse.html');//
+                        }
+                    }
+                })
+            },
+            againApply: function () {
+                var waitApplyData = {};
+                if (window.sessionStorage.waitApplyData) {
+                    waitApplyData = JSON.parse(window.sessionStorage.waitApplyData);
+                }
+                var cTelephone = window.localStorage.storageTel;
+                var url = config.LEASE_MERCHANT_URL + "/com/againApply";
+                var params = {c_telephone: cTelephone};
+                utils.post(url, params, {}, function (json) {
+                    console.log(json)
+                    console.log(json.model)
+                    var comApply = json.model;
+                    for (var key in comApply) {
+                        if (key != 'cGeohash') {
+                            waitApplyData[key] = comApply[key];
+                        }
+                    }
+                    waitApplyData.iIdCardFront = json.iIdCardFront;
+                    waitApplyData.iIdCardBack = json.iIdCardBack;
+                    waitApplyData.agentIdCardFront = json.agentIdCardFront;
+                    waitApplyData.agentIdCardBack = json.agentIdCardBack;
+                    if (json.agentIdCardFront || json.agentIdCardBack) {
+                        waitApplyData.bProx = true;
+                    }
+                    waitApplyData.cLevel1Code=json.model.cLevel1Code,
+                    waitApplyData.cLevel2Code=json.model.cLevel2Code,
+                    waitApplyData.cLevel3Code=json.model.cLevel3Code,
+
+                    waitApplyData.cProxyPic = json.cProxyPic;
+                    waitApplyData.cLogo = json.cLogo;
+                    //上一步显示图片
+                    if(json.cLogo!=null){
+                        vm.showAdd=false,
+                            vm.showPic=true
+                    }
+                    //上一步显示区域，先显示后得到省市区
+                    if(json.model.cLevel3Code){
+                        vm.selectProv=json.model.cLevel1Name ,
+                            vm.selectCity=json.model.cLevel2Name,
+                            vm.selectArea=json.model.cLevel3Name,
+                            vm.cLevel1Code=json.model.cLevel1Code,
+                            vm.cLevel2Code=json.model.cLevel2Code,
+                            vm.cLevel3Code=json.model.cLevel3Code
+                        vm.getProv(json.model.cLevel1Code);
+                        vm.getCity(json.model.cLevel2Code);
+                        vm.getArea(json.model.cLevel3Code);
+                    }
+                    waitApplyData.cBusinessLicenseImg = json.cBusinessLicenseImg;
+                    waitApplyData.externalPic = json.externalPic;
+                    waitApplyData.insidePic = json.insidePic;
+                    waitApplyData.comArea = json.comArea;
+                    console.log(waitApplyData.bProx)
+                    window.sessionStorage.waitApplyData = JSON.stringify(waitApplyData);
+                    vm.waitApplyData = JSON.parse(window.sessionStorage.waitApplyData);
+                    waitApplyData = JSON.parse(window.sessionStorage.waitApplyData);
+                    if (!utils.isNull(window.sessionStorage.cookieData)) {
+                        waitApplyData = JSON.parse(window.sessionStorage.cookieData);
+                    }
+                    //初始化赋值
+                    if (waitApplyData.cLogo) {
+                        vm.comLogo = waitApplyData.cLogo;
+                    }
+                    if (waitApplyData.cName) {
+                        vm.comName = waitApplyData.cName;
+                    }
+                    if (waitApplyData.cAddr) {
+                        vm.address = waitApplyData.cAddr;
+                    }
+                    if (waitApplyData.comArea) {
+                        vm.comArea = waitApplyData.comArea;
+                    }
+                    if (waitApplyData.cLevel1Code) {
+                        vm.cLevel1Code = waitApplyData.cLevel1Code;
+                    }
+                    if (waitApplyData.cLevel2Code) {
+                        vm.cLevel2Code = waitApplyData.cLevel2Code;
+                    }
+                    if (waitApplyData.cLevel3Code) {
+                        vm.cLevel3Code = waitApplyData.cLevel3Code;
+                    }
+                    if (waitApplyData.nLongitude) {
+                        vm.lee = waitApplyData.nLongitude;
+                    }
+                    if (waitApplyData.nLatitude) {
+                        vm.hee = waitApplyData.nLatitude;
+                    }
+                    if (waitApplyData.cMainTypes) {
+                        vm.comType = waitApplyData.cMainTypes;
+                    }
+                    if (waitApplyData.cServicePhone) {
+                        vm.servicePhone = waitApplyData.cServicePhone;
+                    }
+                    if (waitApplyData.cMemo) {
+                        vm.comMemo = waitApplyData.cMemo;
+                    }
+                    if (waitApplyData.externalPic && waitApplyData.externalPic.length > 0) {
+                        vm.externalPic = waitApplyData.externalPic;
+                    }
+                    if (waitApplyData.insidePic && waitApplyData.insidePic.length > 0) {
+                        vm.insidePic = waitApplyData.insidePic;
+                    }
+                });
+            },
+            getCookieData: function () {
+                //--保存临时数据-------------
+                var cookieMap = {};
+                if (!utils.isNull(window.sessionStorage.cookieData)) {
+                    cookieMap = JSON.parse(window.sessionStorage.cookieData);
+                }
+                cookieMap.cLogo = vm.comLogo;
+                cookieMap.cName = vm.comName;
+                cookieMap.comArea = vm.comArea;
+                cookieMap.cLevel1Code = vm.cLevel1Code;
+                cookieMap.cLevel2Code = vm.cLevel2Code;
+                cookieMap.cLevel3Code = vm.cLevel3Code;
+                cookieMap.cAddr = vm.address;
+                cookieMap.nLongitude = vm.lee;
+                cookieMap.nLatitude = vm.hee;
+                cookieMap.cMainTypes = vm.comType;
+                cookieMap.cServicePhone = vm.servicePhone;
+                cookieMap.cMemo = vm.comMemo;
+                cookieMap.externalPic = vm.externalPic;
+                cookieMap.insidePic = vm.insidePic;
+                window.sessionStorage.cookieData = JSON.stringify(cookieMap);
+                //------------------------
+            },
+
+            upData: function () {
+                vm.waitApplyData.cLogo = vm.comLogo;
+                vm.waitApplyData.cName = vm.comName;
+                vm.waitApplyData.comArea = vm.selectProv+" "+vm.selectCity+" "+vm.selectArea;
+                vm.waitApplyData.cLevel1Code = vm.cLevel1Code;
+                vm.waitApplyData.cLevel2Code = vm.cLevel2Code;
+                vm.waitApplyData.cLevel3Code = vm.cLevel3Code;
+//上一步显示区域
+                vm.waitApplyData.selectProv=vm.selectProv;
+                vm.waitApplyData.selectCity=vm.selectCity
+                vm.waitApplyData.selectArea=vm.selectArea
+
+                vm.waitApplyData.cAddr = vm.address;
+                vm.waitApplyData.nLongitude = vm.lee;
+                vm.waitApplyData.nLatitude = vm.hee;
+                vm.waitApplyData.cMainTypes = vm.comType;
+                vm.waitApplyData.cServicePhone = vm.servicePhone;
+                vm.waitApplyData.cMemo = vm.comMemo;
+                vm.waitApplyData.externalPic = vm.externalPic;
+                vm.waitApplyData.insidePic = vm.insidePic;
+                vm.waitApplyData.nState = 0;
+                vm.waitApplyData.bProx = false;
+            },
+            uploadLogo: function (event) {
+                var files = event.currentTarget.files;
+                if (files.length === 0) {
+                    return;
+                }
+                this.compress(files[0], 0, 1);
+            },
+            compress: function (file, n, type) {
+                var that = this;
+                var selector = document.createElement('img');
+                var Orientation = 1;
+                EXIF.getData(file, function () {
+                    Orientation = EXIF.getTag(this, 'Orientation');
+                });
+                if (!n) {
+                    var n = 1;
+                }
+                ;
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    var image = selector;
+                    image.onload = function () {
+                        var data = utils.compress_rectangle(Orientation, this, 1280);
+                        var data_s = utils.compress_rectangle(Orientation, this, 430);
+                        //callback(data, data_s, n);
+                        if (type === 1) {
+                            that.comLogo = data;
+                        }
+                        else if (type === 2) {
+                            if (that.externalPic.length < 6) {
+                                that.externalPic.push(data);
+                            }
+                        }
+                        else if (type === 3) {
+                            if (that.insidePic.length < 6) {
+                                that.insidePic.push(data);
+                            }
+                        }
+
+                    };
+                    image.src = e.target.result
+                    // image.attr('src', e.target.result);
+                };
+                reader.readAsDataURL(file);
+            },
+            inputBlur: function (n) {
+                switch (n) {
+                    case 0:
+                        //姓名不为空
+                        if (vm.comName == '') {
+
+                                this.$set(this.rightShow, n, false)
+                                this.$set(this.errorShow, n, true)
+                            }
+                            else{
+                                this.$set(this.rightShow, n, true)
+                                this.$set(this.errorShow, n, false)
+                        }
+                        break
+                    case 1:
+                        if (!vm.comArea) {
+
+                            this.$set(this.rightShow, n, false)
+                            this.$set(this.errorShow, n, true)
+                        }
+                        else{
+                            this.$set(this.rightShow, n, true)
+                            this.$set(this.errorShow, n, false)
+                        }
+                        break
+                    case 2:
+                        if (!vm.address) {
+
+                            this.$set(this.rightShow, n, false)
+                            this.$set(this.errorShow, n, true)
+                        }
+                        else{
+                            this.$set(this.rightShow, n, true)
+                            this.$set(this.errorShow, n, false)
+                        }
+                        break
+                    case 3:
+                        if (!vm.mainType) {
+
+                            this.$set(this.rightShow, n, false)
+                            this.$set(this.errorShow, n, true)
+                        }
+                        else{
+                            this.$set(this.rightShow, n, true)
+                            this.$set(this.errorShow, n, false)
+                    }
+                        break
+                    case 4:
+                        if (!vm.servicePhone) {
+
+                            this.$set(this.rightShow, n, false)
+                            this.$set(this.errorShow, n, true)
+                        }
+                        else{
+                            this.$set(this.rightShow, n, true)
+                            this.$set(this.errorShow, n, false)
+                    }
+                        break
+                    case 5:
+                        if (!vm.comMemo) {
+
+                            this.$set(this.rightShow, n, false)
+                            this.$set(this.errorShow, n, true)
+                        }
+                        else{
+                            this.$set(this.rightShow, n, true)
+                            this.$set(this.errorShow, n, false)
+                    }
+
+
+                }
+            } ,
+            /*二级联动选择地区*/
+            getProv: function (prov) {
+                var tempCity=[];
+                this.citys=[];
+                this.selectCity='';
+                var allProv=this.provs;//所有的省
+                for (var index in allProv){//p是索引值
+                    var prov = vm.cLevel1Code;
+                    var city = allProv[index].children;
+//                    console.log("选中的省份"+prov)
+                    if (prov == allProv[index].value){//省相同 把省里的text和value遍历添加到allcity
+                        vm.selectProv=allProv[index].label;
+                        for (var index2 in city){//山东省所有的市
+//                            console.log(city[index2].children)
+                            tempCity.push({label: city[index2].text, value: city[index2].value,children:city[index2].children})//label=text
+                        }
+//                      console.log(tempCity)
+                        this.citys=  tempCity;
+                    }
+                }
+            },
+            getCity: function (city) {
+                var tempArea=[];
+                this.areas=[];
+                this.selectArea='';
+                var allCity=this.citys;//所有的省
+                for (var index in allCity){//p是索引值
+                    var city = vm.cLevel2Code;
+                    var areas = allCity[index].children;
+                    if (city == allCity[index].value){//省相同 把省里的text和value遍历添加到allcity
+                        vm.selectCity=allCity[index].label;
+                        for (var index2 in areas){//山东省所有的市
+
+                            tempArea.push({label: areas[index2].text, value: areas[index2].value})//label=text
+                        }
+                        console.log(tempArea)
+                        this.areas= tempArea;
+                    }
+                }
+            },
+            getArea:function (area) {
+                var area = vm.cLevel3Code;
+                var allArea = this.areas;
+                for (var index in allArea){//p是索引值
+                    if (area == allArea[index].value){//省相同 把省里的text和value遍历添加到allcity
+                        vm.selectArea=allArea[index].label;
+                    }
+                }
+            },
+            getMainType:function () {
+                console.log(vm.comType)
+            },
+            up:function () {
+                utils.go("register-2.html");
+            },
+            next: function () {
+
+        if (vm.comName == '') {
+            Chef.alert({
+                'title': '提醒',
+                'content': '请输入店铺名'
+            });
+            return
+        }
+        if (!vm.selectCity) {
+            Chef.alert({
+                'title': '提醒',
+                'content': '请选择区域'
+            });
+            return
+        }
+        if (!vm.address) {
+            Chef.alert({
+                'title': '提醒',
+                'content': '请输入详细地址'
+            });
+            return
+        }
+        if (!vm.comType) {
+            Chef.alert({
+                'title': '提醒',
+                'content': '请选择主营类型'
+            });
+            return
+        }
+        if (!vm.servicePhone) {
+            Chef.alert({
+                'title': '提醒',
+                'content': '请填写客服电话'
+            });
+            return
+        }
+        if (!vm.comMemo) {
+            Chef.alert({
+                'title': '提醒',
+                'content': '请填写店铺描述'
+            });
+            return
+        }
+        if (!vm.comLogo) {
+            Chef.alert({
+                'title': '提醒',
+                'content': '请上传Logo'
+            });
+            return
+        }
+                var token = window.sessionStorage.token;
+                if(utils.isNull(token)){
+                    utils.replace('../index/login.html');
+                    return;
+                }
+                vm.ifNext = true;
+//
+//                var o1 = document.getElementById("hbg");
+//                o1.style.width = document.getElementById("content").scrollWidth+"px";
+//                o1.style.height = document.getElementById("content").scrollHeight+"px";
+//                o1.style.display = "block";
+
+                vm.upData();
+                console.log(vm.waitApplyData)
+                window.sessionStorage.waitApplyData=JSON.stringify(vm.waitApplyData);
+                var saveUrl = config.LEASE_MERCHANT_URL + "/com/apply";
+
+                utils.postAndDealBySelf(saveUrl,vm.waitApplyData,{},function(res){
+                    if (res.code == 200){
+                        console.log("提交成功")
+                        var url = config.LEASE_MERCHANT_URL + "/My/info";
+                        utils.postAndDealBySelf(url,{},{},function(res){
+                            if(res.code == 200){
+
+                                if(window.sessionStorage.cookieData){
+                                    window.sessionStorage.cookieData = null;
+                                }
+
+                                window.sessionStorage.personInfo = JSON.stringify(res.object);
+                                utils.go("../comApply/register-4.html");
+                            }else{
+                                if(!utils.isNull(res.message)){
+                                    Chef.alert({
+                                        'title': '提醒',
+                                        'content': res.message
+                                    });
+                                }else{
+                                    Chef.alert({
+                                        'title': '提醒',
+                                        'content': '操作失败'
+                                    });
+                                }
+                                vm.ifNext = false;
+                                //o1.style.display = "none";
+                            }
+
+                        });
+                    }else{
+                        if(!utils.isNull(res.message)){
+                            Chef.alert({
+                                'title': '提醒',
+                                'content': res.message
+                            });
+                        }else{
+                            Chef.alert({
+                                'title': '提醒',
+                                'content': '操作失败'
+                            });
+                        }
+                        vm.ifNext = false;
+//                        o1.style.display = "none";
+                    }
+
+                });
+
+            },
+
+        },//method
+        created:function () {
+            var tempProv=[];
+            this.provs=[];
+            for (var p in cityData3){//p是索引值
+                tempProv.push({label: cityData3[p].text, value: cityData3[p].value, children:cityData3[p].children})
+            }
+            this.provs=tempProv;
+            
+            /*商铺主营类型初始化*/
+            var parames = {"c_prop_type_pre":config.mainTypeID};
+            var url = config.LEASE_MERCHANT_URL + '/My/getSystemTypeById';
+				utils.postAndDealBySelf(url,parames,{}, function(json){
+					console.log("11111111"+json.object[0].text)
+					if(json.code === 200  && !utils.isNull(json.object)) {
+						console.log("222222"+json.object);
+						vm.mainTypeList = json.object;
+					} else {
+						Chef.alert({
+				            'content':res.message,
+				            'title':'提醒'
+			       		});
+						return;
+					}
+				});
+            
+            var ss = window.sessionStorage.waitApplyData;//字符串
+            var token = window.sessionStorage.token;
+            if(utils.isNull(token)){
+                utils.replace('../comApply/register.html');
+            }else{
+                this.againApply();
+           }
+
+        }
+        })
+</script>
+</html>

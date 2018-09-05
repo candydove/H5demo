@@ -1,0 +1,44 @@
+.mui-toast-container.mui-active {
+    top: 40% !important;
+    width: 9.4rem !important;
+    box-sizing: border-box !important;
+    bottom: auto !important;
+}  
+.mui-toast-container.mui-active .mui-toast-message {
+    font-size: 0.6rem !important;
+    color:#ffffff !important;
+    background:rgba(48,48,48,0.70) !important;
+    padding: 0.75rem 2rem 0.75rem 2rem !important;
+}
+.mui-toast-container.mui-active .mui-toast-message::before{
+    content:"" !important;
+    display: block !important;
+    width: 1.8rem !important;
+    height:1.8rem !important;
+    margin: 0 auto 0.6rem auto !important;
+    background:url(../images/icon_check_new.svg) no-repeat !important;
+    background-size: 100% 100% !important;
+} 
+
+
+.mui-toast-container {
+    top: 40% !important;
+    width: 9.4rem !important;
+    box-sizing: border-box !important;    
+    bottom: auto !important;
+}  
+.mui-toast-container .mui-toast-message {
+    font-size: 0.6rem !important;
+    color:#ffffff !important;
+    background:rgba(48,48,48,0.70) !important;
+    padding: 0.75rem 2rem 0.75rem 2rem !important;
+}
+.mui-toast-container .mui-toast-message::before{
+    content:"" !important;
+    display: block !important;
+    width: 1.8rem !important;
+    height:1.8rem !important;
+    margin: 0 auto 0.6rem auto !important;
+    background:url(../images/icon_check_new.svg) no-repeat !important;
+    background-size: 100% 100% !important;
+} 

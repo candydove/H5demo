@@ -1,0 +1,31 @@
+/*弹出城市级联*/
+/*.mui-poppicker-header{
+	font-size: 0.7rem;
+	padding: 0.3rem;
+}
+.mui-poppicker-header .mui-btn{
+	font-size: 0.6rem;
+    padding: 0.25rem 0.5rem;
+}
+.mui-poppicker-body{
+	height: 10rem;
+}
+.mui-pciker-list, .mui-pciker-rule{
+	height: 1.8rem;
+    line-height: 1.8rem;
+    margin-top: -0.9rem;
+}
+.mui-pciker-list li{
+	font-size: 0.6rem;
+	padding: 0 0.4rem;
+}
+body{
+	font-size: 0.85rem;
+	line-height: 1.05rem;
+}
+.mui-poppicker{
+	    -webkit-transform: translateY(15rem); 
+}
+.mui-poppicker.mui-active{
+	    -webkit-transform: translateY(0px);
+}*/

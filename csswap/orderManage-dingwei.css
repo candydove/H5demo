@@ -1,0 +1,121 @@
+.mui-bar {
+  background-color: #fff;
+  border-bottom: 1px solid #fff;
+}
+.mui-bar-nav.mui-bar .mui-icon {
+  font-size: 1rem;
+  color: #171717
+}
+.mui-bar .mui-title {
+  color: #171717;
+  font-size: 0.85rem;
+  /* line-height: 2.4rem; */
+}
+.mui-bar .sideTxt {
+  font-size: 0.55rem;
+  height: 1.877333rem;
+  float: right;
+  line-height: 1.877333rem;
+  color: #fff;
+}
+.mui-content {
+  background-color: #f4f4f4;
+}
+.searchBox {
+  height: 2.5rem;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.5rem 0.75rem;
+  background-color: #fff;
+}
+.searchBox .cont {
+  border: 1px solid #F0F0F0;
+  border-radius: 1rem;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+.searchBox .cont input {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 0.5rem;
+  border: none;
+  padding-left: 1.4rem;
+  background: url(../images/icon_search.svg) no-repeat;
+  background-size: 0.6rem 0.55rem;
+  background-position: 0.5rem 0.44rem;
+}
+.searchBox .cont input::-webkit-input-placeholder {
+  color: #aeaeae;
+}
+.mapBox {
+  height: 13.75rem;
+}
+.dataListBox {
+  height: 200px;
+  overflow-y: scroll;
+}
+.dataListBox .one {
+  border-bottom: 1px solid #EDEDED;
+  width: 100%;
+  height: 2.75rem;
+  background-color: #fff;
+  padding-left: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.dataListBox .one .topTxt {
+  font-size: 0.6rem;
+  color: #262626;
+}
+.dataListBox .one .bottomTxt {
+  font-size: 0.5rem;
+  color: #aeaeae;
+  margin-top: 0.25rem;
+}
+.bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background: #ffffff;
+  width: 100%;
+  z-index: 1;
+}
+
+.bottom.bottom_fixed {
+  right: 0;
+  margin-top: 0;
+  margin-bottom: 0!important;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  -moz-box-pack: center;
+  justify-content: center;
+  background-color: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: flex;
+}
+.bottom_button {
+  height: 48px;
+  line-height: 48px;
+  text-align: center;
+  background: #ff9900;
+  color: #ffffff;
+  font-size: 15px;
+}
+.bottom_fixed .bottom_button {
+  width: -moz-calc(100% - 20px);
+  width: -webkit-calc(100% - 20px);
+  width: calc(100% - 20px);
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  position: relative;
+  padding: 0;
+  margin: 0;
+ }

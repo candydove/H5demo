@@ -1,0 +1,261 @@
+.mui-bar {
+  background-color: #fff;
+}
+.mui-bar-nav.mui-bar .mui-icon {
+  font-size: 1rem;
+  color: #171717;
+}
+.mui-bar .mui-title {
+  color: #171717;
+  font-size: 0.85rem;
+  /* line-height: 2.4rem; */
+}
+.mui-content {
+  background-color: #f4f4f4;
+}
+.userInfo {
+  padding-top: 0.5rem;
+  padding-left: 1rem;
+  margin-top: 0.3rem;
+  /* margin-bottom: 0.5rem; */
+  padding-bottom: 1rem;
+  background-color: #FFFFFF;
+  border-bottom: 1px solid #EDEDED;
+}
+.userInfo .logo {
+  float: left;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 0.45rem;
+}
+.userInfo .logo img {
+  float: left;
+  width: 100%;
+  height: 100%;
+}
+.userInfo .txt {
+  float: left;
+  width: 10rem;
+}
+.userInfo .txt .main {
+  height: 2rem;
+  border-bottom: 1px solid #F0F0F0;
+  position: relative;
+}
+.userInfo .txt .main p {
+  margin: 0;
+  padding: 0;
+}
+.userInfo .txt .main .name {
+  font-size: 0.7rem;
+  color: #2f2f2f;
+  height: 0.7rem;
+  line-height: 0.7rem;
+  margin-top: 0.6rem;
+  margin-bottom: 0.4rem;
+}
+.userInfo .txt .main .phone {
+  font-size: 0.6rem;
+  color: #262626;
+  height: 0.6rem;
+  line-height: 0.6rem;
+}
+.userInfo .txt .main span {
+  display: inline-block;
+  right: 0;
+  position: absolute;
+  width: 3.6rem;
+  height: 1rem;
+  background-color: #33D594;
+  font-size: 0.5rem;
+  color: #fff;
+  line-height: 1rem;
+  text-align: center;
+  border-radius: 0.5rem;
+  margin-top: -0.5rem;
+  top: 40%;
+}
+
+.userInfo .txt .debtLimit {
+  border-top: 1px solid #E2E2E2;
+  border-bottom: 1px solid #E2E2E2;
+  font-size: 0.5rem;
+  color: #8c8c8c;
+}
+.userInfo .txt .debtLimit p{
+  margin: 0;
+  height: 0.75rem;
+  line-height: 0.75rem;
+}
+.userInfo .txt .debtLimit p:after{
+  content: "";
+  display: table;
+  clear: both;
+}
+.userInfo .txt .debtLimit p span:nth-child(1){
+  float: left;
+}
+.userInfo .txt .debtLimit p span:nth-child(2) {
+  float: right;
+  font-size: 0.45rem;
+  color: #ff6868;
+}
+
+.userInfo .txt .details .toggleBtn {
+  font-size: 0.5rem;
+  color: #8c8c8c;
+  height: 0.5rem;
+  line-height: 0.5rem;
+}
+.userInfo .txt .details .toggleBtn span {
+  color: #878787;
+}
+.userInfo .txt .details .toggleBtn i {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  background: url(../images/icon_arow_down.svg) no-repeat;
+  background-size: 0.3rem 0.15rem;
+  background-position: center bottom;
+}
+.userInfo .txt .details .toggleBtn.active i {
+  background: url(../images/icon_arow_up.svg) no-repeat;
+  background-size: 0.3rem 0.15rem;
+  background-position: center bottom;
+}
+.userInfo .txt .details .table {
+  border: 1px solid #F0F0F0;
+  border-radius: 3px;
+  margin-top: 0.5rem;
+}
+.userInfo .txt .details .table div {
+  text-align: center;
+  font-size: 0.5rem;
+  color: #2f2f2f;
+}
+.userInfo .txt .details .table div span {
+  display: inline-block;
+}
+.userInfo .txt .details .table div span:nth-child(1) {
+  width: 29%;
+}
+.userInfo .txt .details .table div span:nth-child(2) {
+  width: 29%;
+}
+.userInfo .txt .details .table div span:nth-child(3) {
+  width: 36%;
+}
+.userInfo .txt .details .table .title {
+  font-size: 0.45rem;
+  color: #2f2f2f;
+}
+.goodsInfo {
+  background-color: #FFFFFF;
+  padding-bottom: 2.9rem;
+}
+.goodsInfo .top {
+  height: 1.75rem;
+  line-height: 1.75rem;
+  font-size: 0.6rem;
+  color: #262626;
+  padding-left: 0.75rem;
+  border-bottom: 1px solid #F0F0F0;
+}
+.goodsInfo .top span {
+  display: inline-block;
+  height: 100%;
+  border-bottom: 2px solid #ff9900;
+}
+.goodsInfo .center {
+  border-bottom: 1px solid #F0F0F0;
+  margin-left: 0.75rem;
+  margin-right: 0.75rem;
+  padding-top: 0.9rem;
+  padding-bottom: 0.8rem;
+}
+.goodsInfo .center .logo {
+  width: 4.5rem;
+  height: 3.4rem;
+  overflow: hidden;
+  border: 1px solid #F0F0F0;
+  border-radius: 3px;
+  display: flex;
+  float: left;
+}
+.goodsInfo .center .logo img {
+  display: block;
+  max-width: 4.5rem;
+  max-height: 3.4rem;
+}
+.goodsInfo .center .txt {
+  float: right;
+  width: 8.8rem;
+  font-size: 0.45rem;
+  color: #2f2f2f;
+}
+.goodsInfo .center .txt .name {
+  height: 1.2rem;
+  line-height: 0.6rem;
+  margin-bottom: 0.75rem;
+}
+.goodsInfo .center .txt .stock,
+.goodsInfo .center .txt .price,
+.goodsInfo .center .txt .index,
+.goodsInfo .center .txt .num {
+  line-height: 0.8rem;
+}
+.goodsInfo .center .txt .index span,
+.goodsInfo .center .txt .num span {
+  color: #7A92F6;
+}
+.goodsInfo .bottom {
+  text-align: right;
+  height: 1.8rem;
+  line-height: 1.8rem;
+  padding-right: 0.75rem;
+  font-size: 0.45rem;
+  color: #2f2f2f;
+}
+.goodsInfo .bottom span {
+  color: #ff6868;
+}
+.bottomBtn {
+  background-color: #F8F8F8;
+  text-align: center;
+  /* position: fixed; */
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 0.5rem calc((100% - 13rem) / 3);
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+}
+.bottomBtn div {
+  height: 1.9rem;
+  line-height: 1.9rem;
+  text-align: center;
+  width: 6.5rem;
+  display: inline-block;
+  color: #fff;
+  border-radius: 3px;
+}
+.bottomBtn .no {
+  font-size: 0.55rem;
+  background-color: #AEAEAE;
+}
+.bottomBtn .ok {
+  font-size: 0.7rem;
+  background-color: #ff9900;
+}
+
+
+
+
+.goodsInfo .center .txt .names {
+  line-height: 0.6rem;
+  margin-top: 0.3rem;
+  color: #8c8c8c;
+}

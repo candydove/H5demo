@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <!--<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
+    <!--测试媒体查询-->
+    <link rel="stylesheet" href="../csspc/common.css">
+    <link rel="stylesheet" href="../csspc/index.css">
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+
+
+</head>
+<body>
+    <div class="pub-header">
+        <div class="pub-header-com">
+            <p>今借到 信用借还商家版</p>
+            <p class="pub-header-rig">退出登陆</p>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-top">
+            <a href="#">首页</a><span>></span><a class="active" href="#">发布新商品</a>
+        </div>
+        <div class="main-com clearfix">
+            <div class="main-left fl">
+                <ul class="main-left-ul">
+                    <li class="active"><a href="#"><i class="icon1"></i>发布新产品</a></li>
+                    <li><a href="#"><i class="icon2"></i>商品管理</a></li>
+                </ul>
+            </div>
+            <div class="main-rig fr">
+                <div class="form-group-div">
+                    <div class="form-group wid100">
+                        <label><span>*</span>商品标题</label>
+                        <input type="text" class="group-input1">
+                    </div>
+                    <div class="hint magl88">
+                        <i class="hint-icon"></i>必填选项不能为空
+                    </div>
+                </div>
+                <div class="form-group-div">
+                    <div class="form-group">
+                        <label><span>*</span>商品图片<span class="col999">（最多可上传9张）</span></label>
+                        <div class="hint disinble">
+                            <i class="hint-icon"></i>必填选项不能为空
+                        </div>
+                    </div>
+                    <div class="form-upload">
+                        <div class="upload-img" id="upload-img">
+                             <div class="upload-img-li">
+                                 <div class="posb-mainimg">主图</div>
+                                 <img src="../imagespc/add-icon.png">
+                             </div>
+                            <!--<div class="upload-img-li">-->
+                                <!--<img src="../imagespc/add-icon.png">-->
+                            <!--</div>-->
+                            <!--<div class="upload-img-li">-->
+                                <!--<img src="../imagespc/add-icon.png">-->
+                            <!--</div>-->
+                            <!--<div class="upload-img-li">-->
+                                <!--<img src="../imagespc/add-icon.png">-->
+                            <!--</div>-->
+                            <!--<div class="upload-img-li">-->
+                                <!--<img src="../imagespc/add-icon.png">-->
+                            <!--</div>-->
+                            <!--<div class="upload-img-li">-->
+                                <!--<img src="../imagespc/add-icon.png">-->
+                            <!--</div>-->
+                            <!--<div class="upload-img-li">-->
+                                <!--<img src="../imagespc/add-icon.png">-->
+                            <!--</div>-->
+                            <!--<div class="upload-img-li">-->
+                                <!--<div class="posb-delimg">主图</div>-->
+                                <!--<img src="../imagespc/add-icon.png">-->
+                            <!--</div>-->
+                        </div>
+                        <div class="upload-font" id="upload-font">
+                            <p class="tit">图片要求</p>
+                            <p>1、必须为白底图</p>
+                            <p>2、图片尺寸：正方形，图片大小必须800x800。</p>
+                            <p>3、图片格式为JPG，图片大小需大于38k且小于300k</p>
+                            <p>4、最好将素材抠图、边缘处理干净。</p>
+                            <p>5、图片中不可以有模特，必须是平铺或者挂拍，不可出现衣架、商品吊牌等。</p>
+                            <p>6、商品需要正面展现，不可侧面或背面展现。</p>
+                            <p>7、图片美观度高，品质感强，商品展现尽量平整。</p>
+                            <p>8、构图明快简洁，商品主体突出，要居中放置。</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group-div">
+                    <div class="form-group vermid">
+                        <label><span>*</span>商品内容描述</label>
+                        <textarea  class="group-text">
+                        </textarea>
+                    </div>
+                    <div class="hint magl98">
+                        <i class="hint-icon"></i>必填选项不能为空
+                    </div>
+                </div>
+
+                <div class="form-group-list">
+                    <div class="form-group-list-div fl wid520">
+                        <div class="form-group-list-div-li">
+                            <label><span>*</span>分类</label>
+                            <input type="text" class="group-input2">
+                            <div class="hint display1">
+                                <i class="hint-icon"></i>必填选项不能为空
+                            </div>
+                        </div>
+                        <div class="form-group-list-div-li">
+                            <label><span>*</span>押金（建议定为商品市价）</label>
+                            <input type="text" class="group-input2">
+                            <div class="hint display1">
+                                <i class="hint-icon"></i>必填选项不能为空
+                            </div>
+                        </div>
+                        <div class="form-group-list-div-li hei25">
+                            <label><span>*</span>支持配送方式</label>
+                            <span class="radio-span"><i class="active"></i>快递</span>
+                            <span class="radio-span marl18"><i></i>到店自取</span>
+                            <!--<input type="radio" name="way">快递-->
+                            <!--<input type="radio" name="way">到店自取-->
+                            <div class="hint display1">
+                                <i class="hint-icon"></i>必填选项不能为空
+                            </div>
+                        </div>
+                        <div class="form-group-list-div-li">
+                            <label><span>*</span>租金（元/天)</label>
+                            <input type="text" class="group-input2">
+                            <div class="hint display1">
+                                <i class="hint-icon"></i>必填选项不能为空
+                            </div>
+                        </div>
+                        <div class="form-group-list-div-li">
+                            <label><span>*</span>库存（件)</label>
+                            <input type="text" class="group-input2">
+                            <div class="hint display1">
+                                <i class="hint-icon"></i>必填选项不能为空
+                            </div>
+                        </div>
+                        <div class="form-group-list-div-li hei25">
+                            <span class="radio-span"><i class="active"></i>全新</span>
+                            <span class="radio-span marl106"><i></i>可售卖</span>
+                            <!--<input type="radio" name="kind">全新-->
+                            <!--<input type="radio" name="kind">可售卖-->
+                        </div>
+                    </div>
+                    <div class="form-group-list-div fl">
+                        <div class="form-group-list-div-li">
+                            <label><span>*</span>可接受最长租期（月）</label>
+                            <input type="text" class="group-input2">
+                            <div class="hint display2">
+                                <i class="hint-icon"></i>必填选项不能为空
+                            </div>
+                        </div>
+                        <div class="form-group-list-div-li">
+                            <label><span>*</span>可接受最短租期（天）</label>
+                            <input type="text" class="group-input2">
+                            <div class="hint display2">
+                                <i class="hint-icon"></i>必填选项不能为空
+                            </div>
+                        </div>
+                        <div class="form-group-list-div-li">
+                            <label><span>*</span>快递运费（0元即包邮）</label>
+                            <input type="text" class="group-input2">
+                            <div class="hint display2">
+                                <i class="hint-icon"></i>必填选项不能为空
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-btn-div">
+                    <div class="form-btn active">发布</div>
+                    <div class="form-btn">保存到整理中</div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+<script>
+  function $(id){
+    return document.getElementById(id)
+  }
+  function getHeight() {
+    if ($("upload-img").offsetHeight>=$("upload-font").offsetHeight){
+      $("upload-font").style.height=$("upload-img").offsetHeight + "px";
+    }
+    else{
+      $("upload-img").style.height=$("upload-font").offsetHeight + "px";
+    }
+  }
+  window.onload = function() {
+    getHeight();
+  }
+</script>
+</body>
+</html>

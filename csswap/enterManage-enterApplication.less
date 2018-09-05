@@ -1,0 +1,174 @@
+
+
+
+// 顶部状态栏
+.mui-bar{
+    background-color: #4768f3;
+}
+// 顶部向左返回按钮
+.mui-bar-nav.mui-bar .mui-icon{
+    font-size: 1rem;
+    color: #fff;
+}
+// 顶部标题
+.mui-bar .mui-title{
+    color: #fff;
+    font-size: 0.85rem;
+    line-height: 2.4rem;
+}
+.mui-content{
+    background-color: #F8F8F8;
+}
+
+
+.topInfo{
+    background-color: #FFFFFF;
+    .top{
+        height: 1.75rem;
+        line-height: 1.75rem;
+        font-size: 0.6rem;
+        color: #262626;
+        padding-left: 0.75rem;
+        border-bottom: 1px solid #F0F0F0;
+        span{
+            display: inline-block;
+            height: 100%;
+            border-bottom:2px solid #4768F3; 
+        }
+        a{
+            color: #2f2f2f;
+            float: right;
+            // padding-right: 0.75rem;
+            border:1px solid red;
+            width: 1.75rem;
+            height: 1.75rem;
+            width: 1.75rem;
+            height: 1.75rem; 
+            background-size: 0.5rem 0.25rem;
+            background:url(../images/icon_arow_down.svg); 
+        }
+        a.active{
+            background: url(../images/icon_arow_up.svg) no-repeat;
+            background-position: center center; 
+            background-size: 0.5rem 0.25rem;     
+        }
+    }
+
+}
+
+
+ul{
+    margin: 0;
+    padding: 0;
+}
+li{
+    list-style-type: none;
+}
+
+ul.list{
+    li{
+        p.time{
+            height: 0.9rem;
+            line-height: 0.9rem;
+            text-align: center;
+            font-size: 0.35rem;
+            background-color: #F8F8F8;
+            color: #B8B8B8;
+            margin: 0;
+        }
+
+        .main{
+            background-color: #fff;
+            height: 5.25rem;
+            box-sizing: border-box;
+            width: 100%;
+            padding: 0.75rem 0 0.75rem 1rem;
+            position: relative;
+            .logo{
+                width: 3.75rem;
+                height: 3.75rem;
+                border-radius:50%;
+                overflow: hidden;
+                position: absolute;
+                img{
+                    float: left;
+                    width: 100%;
+                }
+            }
+            .txt{
+                // padding-left: 3.75rem;
+                padding-left: 4.2rem;
+                padding-right: 5rem;
+                height: 3.75rem;
+                .name{
+                    font-size: 0.7rem;
+                    color: #2f2f2f;
+                    height: 0.7rem;
+                    line-height: 0.7rem;
+                    i{
+                        display: inline-block;
+                        // border:1px solid red;
+                        width: 1.5rem;
+                        height: 0.7rem;
+                        background:url(../images/2017-10-11_130412.png) no-repeat;
+                        background-size: 1.2rem 0.5rem;
+                        background-position: center 0.2rem;
+                    }
+                }
+                .phone{
+                    font-size: 0.6rem;
+                    color: #262626;
+                    height: 0.6rem;
+                    line-height: 0.6rem;
+                    margin-top: 0.5rem;
+                    margin-bottom: 0.6rem;
+                }
+                .creditBtn{
+                    width: 3.6rem;
+                    height: 1rem;
+                    line-height: 1rem;
+                    text-align: center;
+                    background-color: #33D594;
+                    border-radius:0.5rem;
+                    font-size: 0.45rem;
+                    color: #FFFFFF;
+                }
+
+            }
+            .btns{
+                width: 5rem;
+                height: 3.75rem;
+                margin-top: -1.875rem;
+                position: absolute;
+                right: 0;
+                top: 50%;
+                padding: 0.3rem 0;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: center;
+                border-left: 1px solid #D6D6D6;
+                div{
+                    width: 1.8rem;
+                    height: 1rem;
+                    line-height: 1rem;
+                    text-align:center;
+                    font-size: 0.45rem;
+                    border-radius: 0.5rem;
+                    text-align: center;
+                    color: #fff;
+                }
+
+                .ok{
+                    background-color: #FF6868;
+                }
+                .no{
+                    background-color: #AEAEAE;
+                }                
+            }
+
+        }
+    }
+}
+
+

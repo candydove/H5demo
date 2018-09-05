@@ -1,0 +1,361 @@
+html {
+  height: 100%;
+}
+body {
+  height: 100%;
+  background-color: #EFEFEF;
+}
+.mui-bar {
+  background-color: #fff;
+}
+.mui-bar-nav.mui-bar .mui-icon {
+  font-size: 1rem;
+  color: #2F2F2F;
+}
+.mui-bar .mui-title {
+  color: #2F2F2F;
+  font-size: 0.85rem;
+  /* line-height: 2.4rem; */
+}
+.mui-content {
+  background-color: #f4f4f4;
+}
+.mui-bar-nav ~ .mui-content {
+  padding-bottom: 2.5rem;
+}
+header .searchBtn {
+  display: block;
+  width: 0.6rem;
+  height: 0.6rem;
+  background: url(../images/searchBtn.png) no-repeat;
+  background-position: 0 0;
+  background-size: 100% 100%;
+  position: absolute;
+  top: 50%;
+  right: 0.6rem;
+  margin-top: -0.3rem;
+}
+header span {
+  color: #ffffff;
+  font-size: 0.6rem;
+  position: absolute;
+  display: inline-block;
+  height: 0.6rem;
+  line-height: 0.6rem;
+  margin-top: -0.3rem;
+  right: 1.4rem;
+  top: 50%;
+}
+.topBox {
+  height: 4.7rem;
+  background-color: #ff9900;
+  color: #ffffff;
+  text-align: center;
+  padding-top: 1.2rem;
+}
+.topBox .sum {
+  font-size: 1.5rem;
+  font-weight: normal;
+  height: 1.5rem;
+  line-height: 1.5rem;
+}
+.topBox .tip {
+  font-size: 0.55rem;
+  color: #dddddd;
+  height: 0.55rem;
+  line-height: 0.55rem;
+  margin-top: 0.6rem;
+}
+.centerBtn {
+  height: 2.5rem;
+  width: 100%;
+  position: relative;
+  margin-bottom: 0.55rem;
+  background: #ffffff;
+  margin-top: 0.5rem;
+}
+.centerBtn:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.centerBtn:before {
+  content: "";
+  display: block;
+  width: 1px;
+  height: 1.3rem;
+  background-color: #D7D7D7;
+  position: absolute;
+  margin-left: -0.05rem;
+  margin-top: -0.65rem;
+  top: 50%;
+  left: 50%;
+}
+.centerBtn > div {
+  width: 50%;
+  height: 100%;
+  float: left;
+  text-align: center;
+}
+.centerBtn > div span {
+  display: block;
+}
+.centerBtn > div span:nth-child(1) {
+  font-size: 0.7rem;
+  color: #777777;
+  height: 0.7rem;
+  line-height: 0.7rem;
+  margin-top: 0.45rem;
+  position: relative;
+}
+.centerBtn > div span:nth-child(1):before {
+  display: block;
+  width: 0.5rem;
+  height: 0.6rem;
+  content: "";
+  background-size: 100% 100%;
+  position: absolute;
+  left: 25%;
+  top: 0;
+}
+.centerBtn > div span:nth-child(2) {
+  font-size: 0.5rem;
+  color: #8c8c8c;
+  height: 0.5rem;
+  line-height: 0.5rem;
+  margin-top: 0.1rem;
+}
+.tabBox {
+  background-color: #ffffff;
+}
+.tabBox .tabBtn {
+  margin: 0;
+  padding: 0;
+  font-size: 0.65rem;
+  border-bottom: 1px solid #EDEDED;
+  color: #262626;
+  position: sticky;
+  top: 2.2rem;
+  background-color: #ffffff;
+  height: 2.2rem;
+  line-height: 2.2rem;
+  z-index: 10;
+  display: flex;
+}
+.tabBox .tabBtn a {
+  width: 50%;
+  float: left;
+  text-align: center;
+  position: relative;
+  color: #262626;
+}
+.tabBox .tabBtn a i {
+  width: 0.3rem;
+  height: 0.3rem;
+  background-color: #FF9900;
+  border-radius: 0.15rem;
+  position: absolute;
+  right: 15%;
+  top: 0.5rem;
+}
+.tabBox .tabBtn a.active {
+  /* color: #f54f46; */
+  position: relative;
+}
+.tabBox .tabBtn a.active:after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: #ff9900;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+.tabBox .tabContent .content ul.list {
+  margin: 0;
+  padding: 0;
+  padding-top: 0.2rem;
+  background-color: #F8F8F8;
+}
+.tabBox .tabContent .content ul.list li {
+  background-color: #FFFFFF;
+  height: 3.1rem;
+  width: 100%;
+  border-bottom: 1px solid #EDEDED;
+  margin-top: 0.2rem;
+  position: relative;
+  /* 隐藏的滑动按钮 */
+}
+.tabBox .tabContent .content ul.list li .main {
+  padding-left: 0.75rem;
+  height: 100%;
+  padding-top: 0.3rem;
+  position: absolute;
+  z-index: 10;
+  background-color: #fff;
+}
+.tabBox .tabContent .content ul.list li .main .name {
+  font-size: 0.6rem;
+  color: #2f2f2f;
+  height: 0.6rem;
+  line-height: 0.6rem;
+}
+.tabBox .tabContent .content ul.list li .main .name i {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.6rem;
+  background: url(../images/icon_report.svg) no-repeat;
+  background-size: 100%;
+  background-position: center bottom;
+}
+.tabBox .tabContent .content ul.list li .main .desc {
+  margin-top: 0.3rem;
+}
+.tabBox .tabContent .content ul.list li .main .desc p {
+  font-size: 0.45rem;
+  color: #2f2f2f;
+  /* border:1px solid red; */
+  width: 60%;
+  float: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  height: 0.7rem;
+  line-height: 0.7rem;
+  margin: 0;
+}
+.tabBox .tabContent .content ul.list li .main .desc span {
+  float: right;
+  width: 40%;
+  height: 0.7rem;
+  line-height: 0.7rem;
+  font-size: 0.45rem;
+  text-align: center;
+  color: #FF9900;
+}
+.tabBox .tabContent .content ul.list li .main .bot {
+  height: 0.35rem;
+  line-height: 0.35rem;
+  font-size: 0.35rem;
+  margin-top: 0.3rem;
+  color: #BABABA;
+}
+.tabBox .tabContent .content ul.list li .btns {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 7rem;
+  z-index: 5;
+}
+.tabBox .tabContent .content ul.list li .btns > div {
+  width: 50%;
+  height: 100%;
+  float: left;
+  line-height: 3.1rem;
+  text-align: center;
+  font-size: 0.5rem;
+}
+.tabBox .tabContent .content ul.list li .btns > div.no {
+  line-height: 0.65rem;
+  padding-top: 0.9rem;
+  color: #545454;
+  background-color: #E2E2E2;
+}
+.tabBox .tabContent .content ul.list li .btns > div.ok {
+  color: #fff;
+  background-color: #FF9900;
+}
+.tabBox .tabContent .content ul.list li:first-child {
+  margin-top: 0;
+}
+.tabBox .tabContent .content.content2 ul.list li {
+  position: relative;
+}
+.tabBox .tabContent .content.content2 ul.list li .main {
+  padding-right: 4.5rem;
+  width: 100%;
+}
+.tabBox .tabContent .content.content2 ul.list li .tip {
+  width: 3.6rem;
+  height: 1rem;
+  line-height: 1rem;
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  z-index: 10;
+  text-align: center;
+  color: #2f2f2f;
+  font-size: 0.45rem;
+  color: #fff;
+  border-radius: 0.5rem;
+  margin-top: -0.5rem;
+}
+.tabBox .tabContent .content.content2 ul.list li .tip.look {
+  background-color: #ff9900;
+}
+.tabBox .tabContent .content.content2 ul.list li .tip.refuse {
+  background-color: #AEAEAE;
+}
+.tabBox .tabContent .content.content4 .searchBox {
+  height: 2.5rem;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.5rem 0.75rem;
+}
+.tabBox .tabContent .content.content4 .searchBox .cont {
+  border: 1px solid #F0F0F0;
+  border-radius: 1rem;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+.tabBox .tabContent .content.content4 .searchBox .cont input {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 0.5rem;
+  border: none;
+  padding-left: 1.4rem;
+  background: url(../images/2017-10-11_111014.png) no-repeat;
+  background-size: 0.6rem 0.55rem;
+  background-position: 0.5rem 0.37rem;
+}
+.tabBox .tabContent .content.content4 .searchBox .cont input::-webkit-input-placeholder {
+  color: #aeaeae;
+}
+.tabBox .tabContent .content.content4 ul.list li {
+  position: relative;
+}
+.tabBox .tabContent .content.content4 ul.list li .main {
+  padding-right: 4.5rem;
+  width: 100%;
+}
+.tabBox .tabContent .content.content4 ul.list li .tip {
+  width: 3.6rem;
+  height: 3rem;
+  line-height: 3rem;
+  position: absolute;
+  right: 0.5rem;
+  top: 0;
+  z-index: 10;
+  text-align: center;
+  color: #2f2f2f;
+  font-size: 0.6rem;
+}
+li {
+  list-style-type: none;
+}
+.mui-checkbox input[type=checkbox]:before,
+.mui-radio input[type=radio]:before {
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  font-size: 1rem;
+}
+.mui-checkbox input[type=checkbox]:checked:before,
+.mui-radio input[type=radio]:checked:before {
+  color: #F54F46;
+}

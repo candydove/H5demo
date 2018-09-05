@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="8px" viewBox="0 0 16 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>icon_arow_down</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="icon_arow_down" stroke="#4768F3">
+            <g id="ic_down">
+                <g transform="translate(8.000000, 4.000000) rotate(-90.000000) translate(-8.000000, -4.000000) translate(4.000000, -4.000000)">
+                    <g id="ic_back">
+                        <g id="back" transform="translate(0.000000, -0.000000)">
+                            <path d="M8,0 L0,8" id="Line"></path>
+                            <path d="M0,8 L8,16" id="Line"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

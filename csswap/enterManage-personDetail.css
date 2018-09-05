@@ -1,0 +1,218 @@
+.mui-bar {
+  background-color: #fff;
+}
+.mui-bar-nav.mui-bar .mui-icon {
+  font-size: 1rem;
+  color: #171717;
+}
+.mui-bar .mui-title {
+  color: #171717;
+  font-size: 0.85rem;
+  line-height: 2.4rem;
+}
+.mui-content {
+  background-color: #f4f4f4;
+}
+.userInfo {
+  padding-top: 0.5rem;
+  padding-left: 1rem;
+  margin-top: 0.3rem;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  background-color: #FFFFFF;
+  border-bottom: 1px solid #EDEDED;
+}
+.userInfo .logo {
+  float: left;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 0.45rem;
+}
+.userInfo .logo img {
+  float: left;
+  width: 100%;
+  height: 100%;
+}
+.userInfo .txt {
+  float: left;
+  width: 10rem;
+}
+.userInfo .txt .main {
+  height: 2rem;
+  border-bottom: 1px solid #F0F0F0;
+  position: relative;
+}
+.userInfo .txt .main p {
+  margin: 0;
+  padding: 0;
+}
+.userInfo .txt .main .name {
+  font-size: 0.7rem;
+  color: #2f2f2f;
+  height: 0.7rem;
+  line-height: 0.7rem;
+  margin-top: 0.6rem;
+  margin-bottom: 0.4rem;
+}
+.userInfo .txt .main .name i {
+  display: inline-block;
+  width: 1.2rem;
+  height: 0.7rem;
+  background: url(../images/2017-10-11_130412.png) no-repeat;
+  background-size: 1.2rem 0.5rem;
+  background-position: 0 0.2rem;
+}
+.userInfo .txt .main .phone {
+  font-size: 0.6rem;
+  color: #262626;
+  height: 0.6rem;
+  line-height: 0.6rem;
+}
+.userInfo .txt .main span {
+  display: inline-block;
+  right: 0;
+  position: absolute;
+  width: 3.6rem;
+  height: 1rem;
+  background-color: #33D594;
+  font-size: 0.5rem;
+  color: #fff;
+  line-height: 1.1rem;
+  text-align: center;
+  border-radius: 0.5rem;
+  margin-top: -0.5rem;
+  top: 40%;
+}
+.userInfo .txt .addBox {
+  margin-top: 0.4rem;
+  font-size: 0.35rem;
+  color: #2f2f2f;
+}
+.userInfo .txt .addBox .clearfix {
+  height: 0.8rem;
+  line-height: 0.8rem;
+  width: 7rem;
+}
+.userInfo .txt .addBox .clearfix:nth-child(2) .floatR,
+.userInfo .txt .addBox .clearfix:nth-child(3) .floatR {
+  color: #FF8F8F;
+}
+.topInfo {
+  background-color: #FFFFFF;
+}
+.topInfo .top {
+  height: 1.75rem;
+  line-height: 1.75rem;
+  font-size: 0.6rem;
+  color: #262626;
+  padding-left: 0.75rem;
+  border-bottom: 1px solid #F0F0F0;
+}
+.topInfo .top span {
+  display: inline-block;
+  height: 100%;
+  border-bottom: 2px solid #ff9900;
+}
+.topInfo .top a {
+  color: #2f2f2f;
+  float: right;
+  width: 1.75rem;
+  height: 1.75rem;
+  background-size: 0.5rem 0.25rem !important;
+  background: url(../images/icon_arow_down.svg) no-repeat;
+  background-position: center center;
+}
+.topInfo .top a.active {
+  transform: rotate(180deg);
+}
+.goodsInfo {
+  background-color: #FFFFFF;
+  margin-bottom: 0.5rem;
+}
+.goodsInfo .top {
+  height: 1.75rem;
+  line-height: 1.75rem;
+  font-size: 0.6rem;
+  color: #262626;
+  padding-left: 0.75rem;
+  border-bottom: 1px solid #F0F0F0;
+}
+.goodsInfo .top span {
+  display: inline-block;
+  height: 100%;
+  border-bottom: 2px solid #ff9900;
+}
+.goodsInfo .center {
+  border-bottom: 1px solid #F0F0F0;
+  margin-left: 0.75rem;
+  margin-right: 0.75rem;
+  padding-top: 0.9rem;
+  padding-bottom: 0.8rem;
+}
+.goodsInfo .center .logo {
+  width: 4.5rem;
+  height: 3.4rem;
+  overflow: hidden;
+  border: 1px solid #F0F0F0;
+  border-radius: 3px;
+  display: flex;
+  float: left;
+}
+.goodsInfo .center .logo img {
+  display: block;
+  max-width: 4.5rem;
+  max-height: 3.4rem;
+}
+.goodsInfo .center .txt {
+  float: right;
+  width: 8.8rem;
+  font-size: 0.45rem;
+  color: #2f2f2f;
+}
+.goodsInfo .center .txt .name {
+  height: 1.3rem;
+  line-height: 0.65rem;
+  margin-bottom: 0.75rem;
+  width: 80%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.goodsInfo .center .txt .stock,
+.goodsInfo .center .txt .price,
+.goodsInfo .center .txt .index,
+.goodsInfo .center .txt .num {
+  line-height: 0.8rem;
+}
+.goodsInfo .center .txt .price span {
+  color: #FF9292;
+}
+.goodsInfo .bottom {
+  text-align: right;
+  height: 1.8rem;
+  line-height: 1.8rem;
+  padding-right: 0.75rem;
+  font-size: 0.45rem;
+  color: #2f2f2f;
+}
+.goodsInfo .bottom span {
+  color: #ff6868;
+}
+.recordInfo .rOne {
+  width: 100%;
+  height: 1.6rem;
+  line-height: 1.6rem;
+  text-align: center;
+  color: #2f2f2f;
+  display: flex;
+  font-size: 0.45rem;
+  background-color: #fff;
+  border-bottom: 1px solid #F0F0F0;
+}
+.recordInfo .rOne div {
+  width: 50%;
+}

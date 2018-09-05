@@ -1,0 +1,551 @@
+.mui-bar {
+  background-color: #fff;
+}
+.mui-bar-nav.mui-bar .mui-icon {
+  font-size: 1rem;
+  color: #171717;
+}
+.mui-bar .mui-title {
+  color: #171717;
+  font-size: 0.85rem;
+}
+.mui-content {
+  background-color: #f4f4f4;
+  padding-bottom: 3rem;
+}
+.topTip {
+  width: 100%;
+  height: 2.1rem;
+  line-height: 2.1rem;
+  background: linear-gradient(0deg, #fb877c 0%, #f54f46 100%);
+  color: #fff;
+}
+.topTip i {
+  width: 0.75rem;
+  height: 2.1rem;
+  background: url(../images/icon_time2.svg) no-repeat;
+  background-size: 0.6rem 0.6rem;
+  background-position: center 0.7rem;
+  margin: 0 0.25rem 0 0.75rem;
+  float: left;
+}
+.topTip .left {
+  float: left;
+  font-size: 0.6rem;
+}
+.topTip .right {
+  float: right;
+  font-size: 0.5rem;
+  margin-right: 0.6rem;
+}
+.topTip .jujue i {
+  background: url(../images/icon_succes2.svg) no-repeat;
+  background-size: 0.6rem 0.6rem;
+  background-position: center 0.7rem;
+  margin: 0 0.25rem 0 0.75rem;
+  float: left;
+}
+.topTip .success i {
+  background: url(../images/icon_succes2.svg) no-repeat;
+  background-size: 0.6rem 0.6rem;
+  background-position: center 0.7rem;
+  margin: 0 0.25rem 0 0.75rem;
+  float: left;
+}
+.topTip .waiting i {
+  background: url(../images/icon_waitgoods.svg) no-repeat;
+  background-size: 0.7rem 0.6rem;
+  background-position: center 0.7rem;
+  margin: 0 0.25rem 0 0.75rem;
+  float: left;
+}
+.topTitle {
+  height: 1.75rem;
+  width: 100%;
+  line-height: 1.75rem;
+  font-size: 0.45rem;
+  color: #2f2f2f;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 0.75rem;
+  border-bottom: 1px solid #F0F0F0;
+  background: #fff;
+}
+.jujueliyou {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #fff;
+  font-size: 0.45rem;
+  line-height: 0.8rem;
+}
+.goodsInfo.many ul.moveList {
+  background-color: #fff;
+  overflow-x: auto;
+}
+.goodsInfo.many ul.moveList::-webkit-scrollbar {
+  display: none;
+}
+.goodsInfo.many ul.moveList::after {
+  display: none;
+}
+.goodsInfo.many ul.moveList li {
+  width: auto;
+  white-space: nowrap;
+  background-color: #fff;
+  font-size: 0;
+  height: 6.5rem;
+  margin-top: 0.5rem;
+}
+.goodsInfo.many ul.moveList li .oneBox {
+  font-size: 0;
+  width: 4.5rem;
+  display: inline-block;
+  margin-left: 1.5rem;
+}
+.goodsInfo.many ul.moveList li .oneBox .logo {
+  width: 100%;
+  height: 3.4rem;
+  float: left;
+}
+.goodsInfo.many ul.moveList li .oneBox .logo img {
+  width: 100%;
+  height: 100%;
+}
+.goodsInfo.many ul.moveList li .oneBox .cTxt {
+  float: left;
+  width: 100%;
+  font-size: 0.5rem;
+  height: 1.5rem;
+  line-height: 0.75rem;
+  white-space: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  margin-top: 0.25rem;
+  color: #2f2f2f;
+}
+.goodsInfo.many ul.moveList li .oneBox .bottomPrice {
+  float: left;
+  font-size: 0.6rem;
+  height: 0.65rem;
+  line-height: 0.65rem;
+  margin-top: 0.25rem;
+  color: #262626;
+  font-weight: bold;
+}
+.goodsInfo.many ul.moveList li .oneBox:first-child {
+  margin-left: 1rem;
+}
+.goodsInfo.many ul.moveList li .oneBox:last-child {
+  position: relative;
+}
+.goodsInfo.many ul.moveList li .oneBox:last-child::after {
+  content: "";
+  display: block;
+  width: 1px;
+  height: 1px;
+  bottom: 0;
+  position: absolute;
+  right: -1rem;
+}
+
+.addressBtn {
+  width: 100%;
+  height: 4.4rem;
+  background-color: #fff;
+  background-image: url(../images/line_121.svg);
+  background-repeat: repeat-x;
+  background-position: bottom left;
+  margin-bottom: 0.5rem;
+}
+.addressBtn .localIcon {
+  float: left;
+  width: 2rem;
+  height: 100%;
+  background: url(../images/icon_map_p.svg) no-repeat;
+  background-size: 0.6rem 0.7rem;
+  background-position: center 0.5rem;
+}
+.addressBtn .txt {
+  font-size: 0.45rem;
+}
+.addressBtn .txt > div {
+  padding-top: 0.5rem;
+}
+.addressBtn .txt > div span {
+  display: block;
+  height: 0.6rem;
+  line-height: 0.6rem;
+  margin-bottom: 0.3rem;
+}
+.addressBtn .txt .left {
+  float: left;
+  width: 20%;
+}
+.addressBtn .txt .right {
+  float: left;
+  width: 58%;
+}
+.addressBtn .txt .right span:last-child {
+  width: 100%;
+  height: 1.4rem;
+  line-height: 0.72rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.addressBtn .txt .rigIcon {
+  width: 8%;
+  height: 4.4rem;
+  float: right;
+  background: url(../images/rightBtn.svg) no-repeat;
+  background-size: 0.35rem 0.65rem;
+  background-position: center center;
+}
+.goodsInfo {
+  background-color: #FFFFFF;
+}
+.goodsInfo .title {
+  width: 100%;
+  height: 1.6rem;
+  border-bottom: 1px solid #E8E8E8;
+}
+/*.goodsInfo .title .singleCheckBox {
+  float: left;
+  width: 1.7rem;
+  height: 1.6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}*/
+.goodsInfo .title .txt {
+  float: left;
+  height: 1.6rem;
+  line-height: 1.6rem;
+  font-size: 0.6rem;
+  color: #2f2f2f;
+  margin-left: 0.75rem;
+}
+.goodsInfo .title .tag {
+  float: left;
+  width: 0.75rem;
+  height: 1.6rem;
+  margin-left: 0.35rem;
+  margin-right: 0.35rem;
+  display: flex;
+}
+.goodsInfo .title .tag img {
+  width: 100%;
+}
+.goodsInfo .title .right {
+  float: left;
+  width: 0.35rem;
+  height: 1.6rem;
+  background: url(../images/r.svg) no-repeat;
+  background-size: 0.35rem 0.65rem;
+  background-position: left 0.45rem;
+}
+.goodsInfo .title .contactBtn {
+  height: 1.6rem;
+  font-size: 0.45rem;
+  color: #2f2f2f;
+  float: right;
+  line-height: 1.6rem;
+  margin-right: 0.75rem;
+}
+.goodsInfo .title .contactBtn i {
+  width: 0.6rem;
+  height: 1.6rem;
+  float: left;
+  background: url(../images/icon_phone_p.svg) no-repeat;
+  background-size: 0.6rem 0.65rem;
+  background-position: center;
+  margin-right: 0.25rem;
+  margin-top: -0.05rem;
+}
+.goodsInfo .title .contactBtn span {
+  float: left;
+}
+.goodsInfo ul.moveList {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border-bottom: 1px solid #E2E2E2;
+}
+.goodsInfo ul.moveList li {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  transition: transform 0.2s linear;
+  position: relative;
+}
+.goodsInfo ul.moveList li .center {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+/*.goodsInfo ul.moveList li .center .singleCheckBox {
+  float: left;
+  width: 1.7rem;
+  border: 1px solid red;
+  height: 3.4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.goodsInfo ul.moveList li .center .singleCheckBox span {
+  display: block;
+  width: 90%;
+  height: 1rem;
+  line-height: 1rem;
+  font-size: 0.5rem;
+  text-align: center;
+  color: #fff;
+  background-color: #FF6868;
+  border-radius: 0.5rem;
+}*/
+.goodsInfo ul.moveList li .center .logo {
+  width: 4.5rem;
+  height: 3.4rem;
+  overflow: hidden;
+  /*border: 1px solid #F0F0F0;*/
+  border-radius: 3px;
+  display: flex;
+  float: left;
+  margin-left: 0.75rem;
+}
+.goodsInfo ul.moveList li .center .logo img {
+  display: block;
+  max-width: 4.5rem;
+  max-height: 3.4rem;
+}
+.goodsInfo ul.moveList li .center .txt {
+  float: left;
+  width: 9.5rem;
+  font-size: 0.45rem;
+  color: #2f2f2f;
+  margin-left: 0.5rem;
+}
+.goodsInfo ul.moveList li .center .txt .name {
+  height: 1.25rem;
+  line-height: 0.625rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.goodsInfo ul.moveList li .center .txt .index {
+  border: 1px solid #F9938E;
+  display: inline-block;
+  height: 0.75rem;
+  line-height: 0.75rem;
+  padding: 0 0.1rem;
+  font-size: 0.35rem;
+  border-radius: 1px;
+  color: #F9938E;
+  margin-top: 0.2rem;
+}
+.goodsInfo ul.moveList li .center .txt .bot {
+  height: 0.7rem;
+  margin-top: 0.1rem;
+}
+.goodsInfo ul.moveList li .center .txt .bot .price {
+  margin-top: 0.1rem;
+  line-height: 0.5rem;
+  height: 0.5rem;
+  float: left;
+  font-size: 0.6rem;
+  color: #ff6868;
+}
+.goodsInfo ul.moveList li .center .txt .bot .numBox {
+  float: right;
+  height: 0.65rem;
+  font-size: 0.5rem;
+  line-height: 0.65rem;
+  color: #8c8c8c;
+  margin-right: 1rem;
+}
+.goodsInfo ul.moveList li .tuikuan {
+  height: 2.5rem;
+  padding: 0 0.75rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  border-top: 1px solid #E2E2E2;
+  border-bottom: 1px solid #E2E2E2;
+}
+.goodsInfo ul.moveList li .tuikuan .btn {
+  width: 3.5rem;
+  height: 1rem;
+  line-height: 1rem;
+  text-align: center;
+  border: 1px solid #F8827C;
+  font-size: 0.45rem;
+  color: #F8827C;
+  border-radius: 0.5rem;
+}
+.goodsInfo ul.moveList li .hiddenBox {
+  position: absolute;
+  width: 3.5rem;
+  height: 100%;
+  left: 100%;
+  top: 0;
+  font-size: 0.55rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #FF9900;
+  color: #fff;
+}
+.shouldPay {
+  height: 2rem;
+  width: 100%;
+  line-height: 2rem;
+  font-size: 0.45rem;
+  color: #2f2f2f;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 0.75rem;
+  border-bottom: 1px solid #F0F0F0;
+  background: #fff;
+}
+.botAllBox {
+  font-size: 0.6rem;
+  height: 1.6rem;
+  line-height: 1.6rem;
+  background: #fff;
+}
+.botAllBox > div {
+  float: right;
+}
+.botAllBox .xiaoji {
+  margin-right: 0.75rem;
+}
+.botAllBox .xiaoji span {
+  color: #ff6868;
+}
+.numAndTime {
+  width: 100%;
+  padding: 0.75rem 0.75rem;
+  background: #fff;
+  font-size: 0.45rem;
+  color: #2f2f2f;
+}
+.numAndTime div {
+  height: 0.5rem;
+  line-height: 0.5rem;
+  margin-top: 0.4rem;
+}
+.numAndTime div span {
+  color: #262626;
+}
+.numAndTime div:nth-child(1) {
+  margin-top: 0;
+}
+.numAndTime div.desc {
+  height: auto;
+  line-height: 0.8rem;
+  display: table;
+}
+.numAndTime div.desc span:first-child {
+  display: table-cell;
+  white-space: nowrap;
+}
+.numAndTime div.desc span:last-child {
+  display: table-cell;
+  padding-left: 0.15rem;
+}
+.none {
+  width: 100%;
+  height: 0.5rem;
+  background-color: #EFEFEF;
+}
+.mui-bar .sideTxt {
+  font-size: 0.55rem;
+  height: 2.2rem;
+  float: right;
+  line-height: 2.2rem;
+  color: #fff;
+  position: absolute;
+  top: 0;
+  right: 1rem;
+}
+.bottomTBtns {
+  width: 100%;
+  height: 2.5rem;
+  background-color: #fff;
+  text-align: right;
+  line-height: 3rem;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  padding-right: 1rem;
+  font-size: 0;
+}
+.bottomTBtns > div {
+  display: inline-block;
+  width: 3.9rem;
+  height: 1rem;
+  text-align: center;
+  line-height: 1rem;
+  font-size: 0.45rem;
+  border-radius: 0.5rem;
+}
+.bottomTBtns .ss {
+  color: #FF9900;
+  border: 1px solid #FF9900;
+  margin-right: 0.5rem;
+}
+.bottomTBtns .sq {
+  color: #FF9900;
+  border: 1px solid #FF9900;
+}
+.bottomTBtns .shouhuo {
+  color: #FF9900;
+  border: 1px solid #FF9900;
+  margin-right: 0.5rem;
+}
+.bottomTBtns .mszhifu {
+  color: #fff;
+  background: #FF9900;
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+body {
+  position: relative;
+}
+.botHiddenBox {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 999;
+  background-color: rgba(1, 1, 1, 0.15);
+}
+.botHiddenBox .img {
+  width: 12.5rem;
+  height: 4.4rem;
+  position: absolute;
+  margin-left: -6.26rem;
+  left: 50%;
+  top: 39%;
+  background: url(../images/pop_ticket_1.svg) no-repeat;
+  background-size: 12.5rem 4.4rem;
+  position: relative;
+}
+.botHiddenBox .img span {
+  font-size: 0.7rem;
+  color: #262626;
+  line-height: 1rem;
+  position: absolute;
+  left: 4rem;
+  top: 1rem;
+}

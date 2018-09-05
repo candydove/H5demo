@@ -1,0 +1,173 @@
+.mui-bar {
+  background-color: #ffffff;
+  border-bottom: 1px solid #D5D5D5;
+}
+.mui-bar div {
+  display: inline-block;
+  height: 2.2rem;
+  line-height: 2.3rem;
+  font-size: 0.5rem;
+}
+.mui-bar-nav.mui-bar .mui-icon {
+  font-size: 1rem;
+  color: #2f2f2f;
+}
+.mui-bar .mui-title {
+  color: #2f2f2f;
+  font-size: 0.85rem;
+  line-height: 2.4rem;
+}
+.mui-bar .sideTxt {
+  font-size: 0.55rem;
+  height: 2.2rem;
+  float: right;
+  line-height: 2.2rem;
+}
+.mui-content {
+  background-color: #f4f4f4;
+}
+.numAndTime {
+  width: 100%;
+  padding: 0.75rem 0.75rem;
+  background: #fff;
+  font-size: 0.45rem;
+  color: #2f2f2f;
+  border-bottom: 1px solid #F0F0F0;
+}
+.numAndTime div {
+  height: 0.5rem;
+  line-height: 0.5rem;
+  margin-top: 0.4rem;
+}
+.numAndTime div span {
+  color: #262626;
+}
+.numAndTime div:nth-child(1) {
+  margin-top: 0;
+}
+.shopIntroduction {
+  background-color: #FFFFFF;
+}
+.shopIntroduction .top {
+  height: 1.75rem;
+  line-height: 1.75rem;
+  font-size: 0.6rem;
+  color: #262626;
+  padding-left: 0.75rem;
+  border-bottom: 1px solid #F0F0F0;
+}
+.shopIntroduction .top span {
+  display: inline-block;
+  height: 100%;
+  border-bottom: 2px solid #ff9900;
+}
+.shopIntroduction .top a {
+  color: #2f2f2f;
+  float: right;
+  padding-right: 0.75rem;
+}
+.goodsInfo {
+  background-color: #FFFFFF;
+}
+.goodsInfo ul.moveList {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border-bottom: 1px solid #E2E2E2;
+}
+.goodsInfo ul.moveList li {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  transition: transform 0.2s linear;
+  position: relative;
+}
+.goodsInfo ul.moveList li .center {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+/*.goodsInfo ul.moveList li .center .singleCheckBox {
+  float: left;
+  width: 1.7rem;
+  border: 1px solid red;
+  height: 3.4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.goodsInfo ul.moveList li .center .singleCheckBox span {
+  display: block;
+  width: 90%;
+  height: 1rem;
+  line-height: 1rem;
+  font-size: 0.5rem;
+  text-align: center;
+  color: #fff;
+  background-color: #FF6868;
+  border-radius: 0.5rem;
+}*/
+.goodsInfo ul.moveList li .center .logo {
+  width: 4.5rem;
+  height: 3.4rem;
+  overflow: hidden;
+  /*border: 1px solid #F0F0F0;*/
+  border-radius: 3px;
+  display: flex;
+  float: left;
+  margin-left: 0.75rem;
+}
+.goodsInfo ul.moveList li .center .logo img {
+  display: block;
+  max-width: 4.5rem;
+  max-height: 3.4rem;
+}
+.goodsInfo ul.moveList li .center .txt {
+  float: left;
+  width: 9.5rem;
+  font-size: 0.45rem;
+  color: #2f2f2f;
+  margin-left: 0.5rem;
+}
+.goodsInfo ul.moveList li .center .txt .name {
+  height: 1.25rem;
+  line-height: 0.625rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.goodsInfo ul.moveList li .center .txt .index {
+  border: 1px solid #F9938E;
+  display: inline-block;
+  height: 0.75rem;
+  line-height: 0.75rem;
+  padding: 0 0.1rem;
+  font-size: 0.5rem;
+  border-radius: 1px;
+  color: #F9938E;
+  margin-top: 0.2rem;
+}
+.goodsInfo ul.moveList li .center .txt .bot {
+  height: 0.7rem;
+  margin-top: 0.1rem;
+}
+.goodsInfo ul.moveList li .center .txt .bot .price {
+  margin-top: 0.1rem;
+  line-height: 0.5rem;
+  height: 0.5rem;
+  float: left;
+  font-size: 0.6rem;
+  color: #ff6868;
+}
+.goodsInfo ul.moveList li .center .txt .bot .numBox {
+  float: right;
+  height: 0.65rem;
+  font-size: 0.5rem;
+  line-height: 0.65rem;
+  color: #8c8c8c;
+  margin-right: 1rem;
+}
+.mui-input-group.mart30{
+	margin-bottom: 3rem;
+}

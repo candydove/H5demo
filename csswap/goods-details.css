@@ -1,0 +1,275 @@
+body {
+  background-color: #efefef;
+}
+.mui-content > div,
+.mui-content > ul {
+  background-color: #fff;
+}
+.mui-bar.mui-bar-nav {
+  background-color: #efefef;
+}
+.mui-bar.mui-bar-nav h1 {
+  font-size: 0;
+}
+.mui-bar.mui-bar-nav h1 a.one {
+  display: inline-block;
+  font-size: 0.7rem;
+  color: #030303;
+  margin: 0 0.75rem;
+  box-sizing: border-box;
+  height: 100%;
+}
+.mui-bar.mui-bar-nav h1 a.one.active {
+  border-bottom: 2px solid #F54F46;
+}
+.mui-slider {
+  height: 12.4rem;
+}
+.mui-slider .mui-slider-group{
+	height: 12.4rem;
+}
+.infoBox {
+  width: 100%;
+  padding: 0.5rem 0.75rem 0.5rem;
+  margin: 0.25rem 0;
+}
+.infoBox .desc {
+  font-family: PingFangSC-Regular;
+  height: 1.5rem;
+  line-height: 0.75rem;
+  font-size: 0.6rem;
+  color: #2f2f2f;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.infoBox .price {
+  font-family: PingFangSC-Regular;
+  border-bottom: 1px solid #EBEBEB;
+  width: 100%;
+  height: 1.9rem;
+  line-height: 1.9rem;
+  font-size: 0.8rem;
+  color: #262626;
+}
+.infoBox .price .rmb {
+  font-size: 0.5rem;
+}
+.infoBox .bottom {
+  height: 0.8rem;
+  margin-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+.infoBox .bottom:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.infoBox .bottom .leftBtns {
+  float: left;
+  font-size: 0;
+  height: 100%;
+}
+.infoBox .bottom .leftBtns > span {
+  display: inline-block;
+  border: 1px solid #FAA4A0;
+  font-size: 0.5rem;
+  height: 0.8rem;
+  line-height: 0.8rem;
+  margin-left: 0.2rem;
+  color: #FAA4A0;
+}
+.infoBox .bottom .leftBtns > span:first-child {
+  margin-left: 0;
+}
+.infoBox .bottom .rightTxt {
+  float: right;
+  color: #2f2f2f;
+  height: 0.8rem;
+  line-height: 0.8rem;
+  font-size: 0;
+}
+.infoBox .bottom .rightTxt > span {
+  font-size: 0.45rem;
+  display: inline-block;
+}
+.infoBox .bottom .rightTxt > span:first-child {
+  padding-right: 0.5rem;
+}
+.logoBox {
+  padding: 0.75rem;
+}
+.logoBox::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.logoBox .logo {
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 50%;
+  overflow: hidden;
+  float: left;
+}
+.logoBox .logo img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+.logoBox .txt {
+  height: 1.8rem;
+  width: calc(86.5%);
+  float: left;
+  padding-left: 0.2rem;
+}
+.logoBox .txt .top {
+  font-size: 0;
+  color: #2f2f2f;
+  height: 1rem;
+  line-height: 1rem;
+}
+.logoBox .txt .top .name {
+  font-size: 0.7rem;
+}
+.logoBox .txt .top .renzheng {
+  display: inline-block;
+  width: 1.45rem;
+  height: 0.6rem;
+  background: url(../images/icon_accept.svg) no-repeat;
+  background-size: 100% 100%;
+  vertical-align: top;
+  margin-top: 0.1rem;
+}
+.logoBox .txt .top .local {
+  display: inline-block;
+  width: 0.75rem;
+  height: 0.45rem;
+  background: url(../images/icon_tap_blue2.svg) no-repeat;
+  background-size: 100% 100%;
+  vertical-align: top;
+  margin-top: 0.2rem;
+}
+.logoBox .txt .top .net {
+  display: inline-block;
+  width: 0.75rem;
+  height: 0.45rem;
+  background: url(../images/icon_tap_blue.svg) no-repeat;
+  background-size: 100% 100%;
+  vertical-align: top;
+  margin-top: 0.2rem;
+}
+.logoBox .txt .top .distance {
+  font-size: 0.35rem;
+  color: #d2d2d2;
+  display: inline-block;
+  vertical-align: top;
+}
+.logoBox .txt .top > div {
+  border: 1px solid #F77972;
+  width: 1.58rem;
+  height: 1rem;
+  vertical-align: top;
+  margin-top: 0rem;
+  border-radius: 0.5rem;
+  color: #F77972;
+  font-size: 0.45rem;
+  text-align: center;
+  float: right;
+}
+.logoBox .txt .top .enter {
+  margin-right: 0.2rem;
+}
+.logoBox .txt .bottom {
+  font-size: 0.45rem;
+  height: 0.45rem;
+  line-height: 0.45rem;
+  color: #8c8c8c;
+  margin-top: 0.2rem;
+}
+.logoBox .txt .bottom span {
+  display: inline-block;
+}
+.logoBox .txt .bottom .allSum {
+  margin-left: 0.6rem;
+}
+.logoBox .txt .bottom .person {
+  float: right;
+}
+.shopIntroduction {
+  background-color: #FFFFFF;
+  border-bottom: 1px solid #F0F0F0;
+  margin-top: 0.25rem;
+}
+.shopIntroduction .top {
+  height: 1.75rem;
+  line-height: 1.75rem;
+  font-size: 0.6rem;
+  color: #262626;
+  padding-left: 0.75rem;
+  border-bottom: 1px solid #F0F0F0;
+}
+.shopIntroduction .top span {
+  display: inline-block;
+  height: 100%;
+  border-bottom: 2px solid #F54F46;
+}
+.shopIntroduction .top a {
+  color: #B8B8B8;
+  float: right;
+  padding-right: 0.75rem;
+  font-size: 0.45rem;
+}
+.goodsDetailsBox {
+  padding: 0.75rem;
+  font-size: 0.6rem;
+  line-height: 0.85rem;
+  color: #787878;
+}
+.userList {
+  margin: 0;
+  padding: 0;
+}
+.userList li {
+  height: 1.75rem;
+  line-height: 1.75rem;
+  padding: 0 0.75rem;
+  font-size: 0.5rem;
+  color: #262626;
+  display: flex;
+}
+.userList li span {
+  width: 50%;
+  text-align: center;
+}
+.userList li span:first-child {
+  text-align: left;
+}
+.userList li span:last-child {
+  text-align: right;
+}
+.userList li:first-child {
+  color: #8c8c8c;
+  border-bottom: 1px solid #E8E8E8;
+}
+.bottomBtn {
+  width: 100%;
+  height: 2.5rem;
+  text-align: center;
+  line-height: 2.5rem;
+  margin-top: 0.5rem;
+}
+.bottomBtn > div {
+  width: 50%;
+  float: left;
+  font-size: 0.6rem;
+}
+.bottomBtn .jiaru {
+  color: #000000;
+  background-color: #fff;
+}
+.bottomBtn .goumai {
+  color: #fff;
+  background-color: #F54F46;
+}

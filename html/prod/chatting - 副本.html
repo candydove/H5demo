@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>发布商品</title>
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/index.css">
+    <link rel="stylesheet" type="text/css" href="../../components/component.css" />
+    <script type='text/javascript' src='../../js/public.js' charset='utf-8'></script>
+    <script type='text/javascript' src='../../js/include.js?ver=1' charset='utf-8'></script>
+    <script type='text/javascript' src='../../js/exif.js' charset='utf-8'></script>
+    <script src="../../components/pics3.js"></script>
+    <script type="text/javascript" src="../../components/header.js"></script>
+
+<style>
+.tip_alert{
+    display: inline-block;
+    vertical-align: sub;
+    margin-left: 1px;
+    width:14px;
+    height:14px;
+    background: url(../../images/icon_warn.svg) 50% no-repeat;
+    -moz-background-size: 14px;
+    background-size: 14px;
+}
+.form-btn-div .unpublish {
+    width: 140px;
+    height: 40px;
+    margin-right: 2px;
+    line-height: 40px;
+    background-color: #888888;
+    border-radius: 4px;
+    border: solid 1px #888888;
+    float: left;
+    text-align: center;
+    color: #ffffff;
+    font-size: 18px;
+}
+
+</style>
+</head>
+<body>
+    <div id="headerDiv">
+    	<header-component title="今借到信用借还商家版" quitName="退出登陆"></header-component>
+    </div>
+    <div class="main">
+        <div class="main-top">
+            <a href="../prod/wareHouse.html">首页</a><span>></span><a class="active" href="#">发布新商品</a>
+        </div>
+        <div class="main-com clearfix">
+            <div class="main-left fl">
+                <ul class="main-left-ul">
+                    <li class="active"><a href="../prod/publishProd.html"><i class="icon1"></i>发布新产品</a></li>
+                    <li><a href="../prod/wareHouse.html"><i class="icon2"></i>商品管理</a></li>
+                </ul>
+            </div>
+            <div class="main-rig-con fr" id="publishDiv">
+                <div class="chat-top">
+                    <div class="chat-top_com">
+                        <div class="img"><img src="../../images/logo.png"></div>
+                        <div class="name">商家名字</div>
+                    </div>
+                </div>
+                <div class="chat-con">
+                    <div class="chat-left fl">
+                        <div class="chat-search">
+                            <input type="text"/>
+                            <div class="chatserch_icon"><img src="../../images/serch-icon.png"> </div>
+                        </div>
+                        <div class="chat_list">
+                            <ul>
+                                <li class="active">租客1</li>
+                                <li>租客2</li>
+                                <li>租客3</li>
+                                <li>租客4</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="chat-rig fr">
+                        <div class="chat-rigtop">
+                            <div class="chat_img"><img src="../../images/serch-head.png"></div>
+                            <div class="chat_name">独爱江山</div>
+                        </div>
+                        <div class="chat_comm">
+                            <div class="chat_comm_comm">
+                                <div class="chatting_line">
+                                    <div class="chattting_top">内啥小店 <span>2018-4-3 10:00:00</span></div>
+                                    <div class="chattting_div">
+                                        <div class="chatting-div-left">
+                                            <img src="../../images/table-img.png">
+                                        </div>
+                                        <div class="chatting-div-rig">
+                                            <div class="chatting-div-rig-font">
+                                                <p>英国LSA手工吹制水晶
+                                                    玻璃珍珠彩虹光泽玻璃
+                                                    从广东省机场高速</p></div>
+                                            <div class="chatting-div-rig-p">价格：￥8900.00</div>
+                                            <div class="chatting-div-rig-p">运费：卖家承担</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="chatting_line">
+                                    <div class="chattting_top">内啥小店 <span>2018-4-3 10:00:00</span></div>
+                                    <div class="chattting_bot">你买不买</div>
+                                </div>
+                                <div class="chatting_line rig">
+                                    <div class="chattting_top">内啥小店 <span>2018-4-3 10:00:00</span></div>
+                                    <div class="chattting_bot">你买不买</div>
+                                </div>
+                                <div class="chatting_line">
+                                    <div class="chattting_top">内啥小店 <span>2018-4-3 10:00:00</span></div>
+                                    <div class="chattting_bot">你买不买</div>
+                                </div>
+                                <div class="chatting_line rig">
+                                    <div class="chattting_top">内啥小店 <span>2018-4-3 10:00:00</span></div>
+                                    <div class="chattting_bot">你买不买</div>
+                                </div>
+
+
+                            </div>
+                            <div class="chat_comm_chating">
+                                <textarea class="spaeak_xy" style="resize: none;"></textarea>
+                                <div class="send_btn">发送</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+    <script type="text/javascript">
+
+      var conn = {},
+        //环信-初始化-创建连接
+        conn = new WebIM.connection({
+          isMultiLoginSessions: WebIM.config.isMultiLoginSessions,
+          https: typeof WebIM.config.https === 'boolean' ? WebIM.config.https : location.protocol === 'https:',
+          url: WebIM.config.xmppURL,
+          isAutoLogin: true,
+          heartBeatWait: WebIM.config.heartBeatWait,
+          autoReconnectNumMax: WebIM.config.autoReconnectNumMax,
+          autoReconnectInterval: WebIM.config.autoReconnectInterval
+        });
+
+      // listern，添加回调函数
+      conn.listen({
+        onOpened: function (message) {          //连接成功回调，连接成功后才可以发送消息
+          //如果isAutoLogin设置为false，那么必须手动设置上线，否则无法收消息
+          // 手动上线指的是调用conn.setPresence(); 在本例中，conn初始化时已将isAutoLogin设置为true
+          // 所以无需调用conn.setPresence();
+          console.log("%c [opened] 连接已成功建立", "color: green")
+        },
+        onClosed: function ( message ) {},//连接关闭回调
+        onTextMessage: function (message) {//收到文本消息
+          // 在此接收和处理消息，根据message.type区分消息来源，私聊或群组或聊天室
+          console.log(message);
+          console.log(message.type);
+          console.log('Text');
+          //调用子页面方法
+          //alert(document.frames)
+          //callBackZi();
+          childFunc(message);
+          //child.window.childFunc(message);
+        },
+        onPictureMessage: function ( message ) {
+          console.log("Location of Picture is ", message.url);
+        }, //收到图片消息
+        //收到表情消息 略
+        //收到命令消息 略
+        //收到音频消息 略
+        //收到位置消息 略
+        //收到文件消息 略
+        //收到视频消息 略
+        //处理“广播”或“发布-订阅”消息，如联系人订阅请求、处理群组、聊天室被踢解散等消息 略
+        //处理群组邀请 略
+        onRoster: function ( message ) {},         //处理好友申请
+        onOnline: function () {//本机网络连接成功
+          console.log('onLine');
+        },
+        onOffline: function () {//本机网络掉线
+          console.log('offline');
+        },
+        onError: function (message) {//失败回调
+          console.log('Error');
+          console.log(message);
+          if (message && message.type == 1) {
+            console.warn('连接建立失败！请确认您的登录账号是否和appKey匹配。')
+          }
+        },
+        onBlacklistUpdate: function (list) {       //黑名单变动
+          // 查询黑名单，将好友拉黑，将好友从黑名单移除都会回调这个函数，list则是黑名单现有的所有好友信息
+          console.log(list);
+        },
+        onReceivedMessage: function(message){
+          console.log('onReceivedMessage>>>>'+message)
+        },    //收到消息送达客户端回执
+        onDeliveredMessage: function(message){
+          console.log('onDeliveredMessage>>>>'+message)
+        },   //收到消息送达服务器回执
+        onReadMessage: function(message){
+          console.log('onReadMessage>>>>'+message)
+        },        //收到消息已读回执
+        onCreateGroup: function(message){
+          console.log('onCreateGroup>>>>'+message)
+        },        //创建群组成功回执（需调用createGroupNew）
+        onMutedMessage: function(message){
+          console.log('onMutedMessage>>>>'+message)
+        }
+      });
+      //根据用户名/密码/昵称注册环信 Web IM:
+      function register (username,password,nickname, callBack){
+        var option = {
+          username: username,
+          password: password,
+          nickname: nickname,
+          appKey: WebIM.config.appkey,
+          success: function () {
+            login(username,password);
+            console.log('regist success!');
+          },
+          error: function () {
+            login(username,password);
+            console.log('regist error');
+          },
+          apiUrl: WebIM.config.apiURL
+        };
+        conn.signup(option);
+      };
+
+      //登陆（本系统采用）
+      function login(username,password) {
+        var options = {
+          apiUrl: WebIM.config.apiURL,
+          user: username,
+          pwd: password,
+          appKey: WebIM.config.appkey
+        };
+        conn.open(options);
+      };
+
+      //使用用户名/密码登录，获取并存储token。本例演示将Token存入cookie。略
+      //使用token登录 略
+
+      // 退出
+      function logout() {
+        //conn.close();
+        conn.close('logout');
+        conn.errorType = WebIM.statusCode.WEBIM_CONNCTION_CLIENT_LOGOUT;
+      };
+
+      //私聊发送文本消息，发送表情同发送文本消息，只是会在对方客户端将表情文本进行解析成图片
+      function sendPrivateText(mseg,toUser, callBack){
+        var id = conn.getUniqueId();
+        var msg = new WebIM.message('txt', id);// 生成本地消息id
+        msg.set({
+          msg: mseg,    // 消息内容
+          to: toUser,  // 接收消息对象（用户id）
+          roomType: false,
+          success: function (id, serverMsgId) {
+            console.log("send private text Success");
+            if(callBack != null){
+              callBack(true);
+            }
+          },
+          fail: function(e){
+            console.log("Send private text error");
+          },
+        });
+        msg.body.chatType = 'singleChat';
+        conn.send(msg.body);
+      };
+      //发送文本消息（群组） 略
+      //发送文本消息（聊天室）略
+
+      //私聊发送图片消息
+      function sendPrivateImg(username){
+        var id = conn.getUniqueId();                   // 生成本地消息id
+        var msg = new WebIM.message('img', id);        // 创建图片消息
+        var input = document.getElementById('image');  // 选择图片的input
+        var file = WebIM.utils.getFileUrl(input);      // 将图片转化为二进制文件
+        var allowType = {
+          'jpg': true,
+          'gif': true,
+          'png': true,
+          'bmp': true
+        };
+        if (file.filetype.toLowerCase() in allowType) {
+          var option = {
+            apiUrl: WebIM.config.apiURL,
+            file: file,
+            to: username,                       // 接收消息对象
+            roomType: false,
+            chatType: 'singleChat',
+            onFileUploadError: function () {      // 消息上传失败
+              console.log('onFileUploadError');
+            },
+            onFileUploadComplete: function () {   // 消息上传成功
+              console.log('onFileUploadComplete');
+            },
+            success: function () {                // 消息发送成功
+              console.log('Success');
+            },
+            flashUpload: WebIM.flashUpload
+          };
+          msg.set(option);
+          conn.send(msg.body);
+        }
+      }
+
+      var chatDiv = new Vue({
+        el: '#chatDiv',
+        data: {
+          dataList:[],
+          currentUserId:'',//'201708111532189576',//
+          imgSrc:'../../images/default_icon.svg',
+          imContent:'',
+          touser:'',
+          userId:'',
+          isRead:0,//消息未读0，已读1 要监听实时处理
+          userChead:'',//目标聊天人头像
+          picUrls: [],
+          chead:'',//自己头像
+          cName:'',//目标人头像
+          name:'',//自己名称
+          b_com:'',//目前用户是否是商户
+        },
+        methods:{
+          goToProd:function(id){
+            if(utils.isNull(id)){
+              return;
+            }
+            var url = config.LEASE_URL + '/prod/getValidProdById';
+            var params = {id:id};
+            utils.postAndDealBySelf(url, params, {}, function(jsn) {
+              if (jsn.code === 200) {
+                  /*if(!utils.isNull(jsn.object) &&  !utils.isNull(jsn.object.data) && jsn.object.data.n_status == 1){
+                   utils.go('prodDetailScan.html?id='+id);
+                   }*/
+                utils.go('prodDetailScan.html?id='+id);
+              }else{
+                if(!utils.isNull(jsn.message)){
+                  mui.toast(jsn.message);
+                }else{
+                  mui.toast('商品无效');
+                }
+              }
+            });
+          },
+          //发送文本消息
+          sendMsg:function(){
+            if(utils.isNull(this.imContent) || utils.isNull(this.currentUserId)){
+              mui.toast('输入内容');
+              return;
+            }
+            console.log(chatting_com.offsetTop);
+            var url = config.LEASE_URL + '/im/saveIm';
+            var content = {c_head:'',n_rent_amt:'',c_content:this.imContent,isProd:0};
+            var jsonStr = JSON.stringify(content);
+            var params = {msg:jsonStr,type:0,userId:this.userId,isRead:this.isRead,b_com:this.b_com,currentUserId:this.currentUserId};
+            utils.postAndDealBySelf(url, params, {}, function(jsn) {
+              if (jsn.code === 200) {//保存成功
+                //调用父页面 发送消息
+                sendPrivateText(jsonStr,md5(chatDiv.userId),null);//userId:201709121650099801
+                sunccessFun(true,content);
+                msgScrollTop();
+                console.log('>>聊天发送成功')
+              }else{
+                mui.toast('发送失败');
+              }
+            });
+          },
+          //发送图片消息
+          uploaded:function(obj){
+            if(this.currentUserId != ''){
+              sendPrivateImg(md5(this.currentUserId));
+            }
+          }
+        },
+        created: function () {
+          mui.init({
+            swipeBack: false
+          });
+          var com = window.localStorage.com;
+          if(utils.isNull(com)){
+            utils.back();
+            return;
+          }
+          var dat = JSON.parse(com);
+          //商户ID为空
+          if(utils.isNull(dat) || utils.isNull(dat.id)){
+            utils.back();
+            return;
+          }
+          this.currentUserId = dat.id;
+
+
+          var userId = utils.getArg("userId");
+          var b_com = utils.getArg("b_com");
+          if(!utils.isNull(utils.getArg("userChead"))){
+            this.userChead =  utils.getArg("userChead");
+          }
+
+          if(!utils.isNull(utils.getArg("cName"))){
+            this.cName =  utils.getArg("cName");
+          }
+          if(utils.isNull(userId) || utils.isNull(b_com)){
+            utils.back();
+          }
+          this.b_com = b_com;
+          this.userId = userId;
+          if(!utils.isNull(dat.cLogo)){
+            this.chead = dat.cLogo;
+          }
+          if(!utils.isNull(dat.cName)){
+            this.name = dat.cName;
+          }
+          //获取历史消息
+          var url = config.LEASE_URL + '/im/getImHistoryPage';
+          var params = {userId:userId,startNum:0,pageSize:1,currentUserId:this.currentUserId};
+          utils.get(url, params, {}, function(jsn) {
+            if(!utils.isNull(jsn)){
+              chatDiv.dataList = jsn;
+            }
+          });
+          register(md5(this.currentUserId),md5(this.currentUserId+'xyjh'),md5(this.currentUserId),null);
+          //清0 对应聊天用户未读数量
+          utils.post(config.LEASE_URL + '/im/updateImListUnReadCntZero', {userId:userId,currentUserId:this.currentUserId}, {}, function(jsn) {
+            console.log('消息已阅读');
+          });
+        },
+        mounted:function(){
+          setTimeout(function() {
+            chatFunc();
+          }, 500);
+
+        }
+      });
+      //发送消息成功回调
+      function sunccessFun(e,content){
+        if(e == true){
+          var dta = {fromorto:chatDiv.currentUserId,type:0,msg:content};
+          chatDiv.dataList.push(dta);
+          msgScrollTop();
+          chatDiv.imContent = '';
+        }
+      }
+      //收到消息回调
+      function childFunc(e){
+        if(!utils.isNull(e) && !utils.isNull(e.data)){
+          var content = JSON.parse(e.data);
+          var dta = {fromorto:e.from,type:0,msg:content};
+          chatDiv.dataList.push(dta);
+          msgScrollTop();
+          if(!utils.isNull(this.currentUserId)){
+            //清0 对应聊天用户未读数量
+            utils.post(config.LEASE_URL + '/im/updateImListUnReadCntZero', {userId:e.from,currentUserId:this.currentUserId}, {}, function(jsn) {
+              console.log('消息已阅读');
+            });
+          }
+        }
+      }
+      function msgScrollTop(){
+        //var div = document.getElementById('msg_list');
+        //div.scrollTop = div.scrollHeight;
+        //var container = document.querySelector('#msg_list');//this.$el.querySelector("#msg_list");
+        //console.log(container);
+        //container.scrollTop = container.scrollHeight;
+        //alert('getScrollTop::'+getScrollTop()+"::getClientHeight::"+getClientHeight()+"::getScrollHeight::"+getScrollHeight())
+          /*
+           if(document.documentElement && document.documentElement.scrollTop) {
+           document.documentElement.scrollTop = getScrollHeight()-getClientHeight()+100;
+           } else if(document.body) {
+           document.body.scrollTop = getScrollHeight()-getClientHeight()+100;
+           }*/
+        document.body.scrollTop = getScrollHeight()-getClientHeight()+100;
+        //document.getElementById('msg_list').scrollTop = document.getElementById('msg_list').scrollHeight;
+      }
+      //获取滚动条当前的位置
+      function getScrollTop() {
+        var scrollTop = 0;
+        if(document.documentElement && document.documentElement.scrollTop) {
+          scrollTop = document.documentElement.scrollTop;
+        } else if(document.body) {
+          scrollTop = document.body.scrollTop;
+        }
+        return scrollTop;
+      }
+
+      //获取当前可视范围的高度
+      function getClientHeight() {
+        var clientHeight = 0;
+        if(document.body.clientHeight && document.documentElement.clientHeight) {
+          clientHeight = Math.min(document.body.clientHeight, document.documentElement.clientHeight);
+        } else {
+          clientHeight = Math.max(document.body.clientHeight, document.documentElement.clientHeight);
+        }
+        return clientHeight;
+      }
+
+      //获取文档完整的高度
+      function getScrollHeight() {
+        return Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+      }
+      function chatFunc(){
+        if(document.documentElement && document.documentElement.scrollTop) {
+          document.documentElement.scrollTop = getScrollHeight()-getClientHeight();
+        } else if(document.body) {
+          document.body.scrollTop = getScrollHeight()-getClientHeight();
+        }
+      }
+
+      //转换日期函数
+      function treatDateForm(dataStr){
+        if(!utils.isNull(dataStr)){
+          var data = dataStr.replace(/-/g,"/");
+          var dt = new Date(data);
+          var dtNow = new Date();
+          var y = dt.getFullYear()
+          var m = dt.getMonth() + 1 < 10 ? "0" + (dt.getMonth() + 1) : dt.getMonth() + 1;
+          var d = dt.getDate() < 10 ? "0" + dt.getDate() : dt.getDate();
+          var h = dt.getHours()< 10 ? "0" + dt.getHours() : dt.getHours();
+          var f = dt.getMinutes()< 10 ? "0" +dt.getMinutes() : dt.getMinutes();
+          if(dt.getFullYear() == dtNow.getFullYear() && dt.getMonth() == dtNow.getMonth() && dt.getDate() == dtNow.getDate()){//当天
+            return h+':'+f;
+          }else{
+            return m+'-'+d+' '+h+':'+f;
+          }
+        }else{
+          return '刚刚';
+        }
+      }
+    </script>
+</body>
+</html>

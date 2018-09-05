@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+            <title>扩展测试</title>
+            <style type="text/css">
+                
+                .thumb {
+                    display: inline-block;
+                    width: 200px;
+                    height: 200px;
+                    margin: 5px;
+                    border: 3px solid #c99;
+                    background-position: center center;
+                    background-size: cover;
+                }
+            
+            .btn {
+                float: left;
+                clear: both;
+                margin-top: 40px;
+                height: 65px;
+                font-size: 135%;
+                font-weight: 900
+            }
+            </style>
+    </head>
+    <body>
+        <div>
+            
+            <button class="btn" onclick="back()" style="margin-top:100px">返回</button>
+            <div class="btn">
+                <input id="input" type='file' accept="image/*" onchange="readUrl(this)"/>
+                <input id="input2" type='file' accept="image/*" capture="camera" onchange="readUrl(this)"/>
+                <input id="input3" type='file' accept="video/*" capture="camera"/>
+                <img id="img" class="thumb" src="#" alt="显示您上传的商品图片"/>
+            </div>
+            
+            
+        </div>
+        <script type="text/javascript">
+            var resultDiv = document.getElementById("result");
+            
+            function back() {
+                if(navigator.userAgent.toLowerCase().indexOf('iphone') > -1){
+                    window.webkit.messageHandlers.finishAndCallBack.postMessage("alert('haha');");
+                }else {
+                    basePlugin.finishAndCallBack("alert('haha');");
+                }
+            }
+        
+        function readUrl(input) {
+            if (input.files && input.files[0]) {
+                
+                var reader = new FileReader();
+                
+                reader.onload = function (e) {
+                    var img = document.getElementById("img");
+                    img.src = e.target.result;
+                }
+                
+                reader.readAsDataURL(input.files[0]);
+                
+            }
+        }
+        
+            </script>
+    </body>
+</html>

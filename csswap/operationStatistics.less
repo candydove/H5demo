@@ -1,0 +1,339 @@
+// 顶部状态栏
+.mui-bar{
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #D5D5D5;
+}
+// 顶部向左返回按钮
+.mui-bar-nav.mui-bar .mui-icon{
+    font-size: 1rem;
+    color: #2F2F2F;
+}
+// 顶部标题
+.mui-bar .mui-title{
+    color: #2F2F2F;
+    font-size: 0.85rem;
+    // line-height: 2.4rem;
+}
+.mui-content{
+    background-color: #F8F8F8;
+}
+
+
+// 上边logo加文字
+
+ul{
+    margin: 0;
+    padding: 0;
+}
+li{
+    list-style-type: none;
+}
+
+ul.list{
+    border-bottom: 1px solid #D5D5D5;
+    li{
+        .main{
+            background-color: #fff;
+            height: 3.25rem;
+            box-sizing: border-box;
+            width: 100%;
+            padding: 0.7rem 0 0.7rem 0.9rem;
+            position: relative;
+            .logo{
+                width: 1.85rem;
+                height: 1.85rem;
+                border-radius:50%;
+                overflow: hidden;
+                position: absolute;
+                img{
+                    float: left;
+                    width: 100%;
+                    height: 100%;
+                }
+                .noImg{
+                    float: left;
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 50%;
+                    background: url(../images/2017-10-12_131000.png) no-repeat;
+                    background-size: 100%;
+                    background-position: 0 0;
+                }
+            }
+            .txt{
+                padding-left: 2.1rem;
+                height: 1.85rem;
+                .name{
+                    font-size: 0.7rem;
+                    color: #2f2f2f;
+                    height: 0.7rem;
+                    line-height: 0.7rem;
+                    // margin-top: 0.8rem;
+                    i{
+                        display: inline-block;
+                        // border:1px solid red;
+                        width: 1.5rem;
+                        height: 0.7rem;
+                        // 这个背景图是黄色的，还有灰色的可能
+                        background:url(../images/2017-10-11_130412.png) no-repeat;
+                        background-size: 1.2rem 0.5rem;
+                        background-position: center 0.2rem;
+                    }
+                }
+                .phone{
+                    font-size: 0.5rem;
+                    color:#8c8c8c;
+                    height: 0.6rem;
+                    line-height: 0.6rem;
+                    margin-top: 0.4rem;
+                    margin-bottom: 0.6rem;
+                }
+
+            }
+
+
+        }
+    }
+}
+
+
+.centerBtn{
+    height: 2.5rem;
+    width: 100%;
+    position: relative;
+    // margin-bottom: 0.55rem;
+    background:#ffffff;
+    // margin-top: 0.5rem;
+}
+.centerBtn:after{
+    content: "";
+    display: table;
+    clear: both;
+}
+.centerBtn:before{
+    content:"";
+    display: block;
+    width: 1px;
+    height: 1.3rem;
+    background-color: #D7D7D7;
+    position: absolute;
+    margin-left: -0.05rem;
+    margin-top: -0.65rem;
+    top: 50%;
+    left: 50%;
+}
+.centerBtn>div{
+    width: 50%;
+    height: 100%;
+    float: left;
+    text-align: center;
+}
+.centerBtn>div span{
+    display: block;
+}
+.centerBtn>div span:nth-child(1){
+    font-size: 0.7rem;
+    color:#2f2f2f;
+    height: 0.7rem;
+    line-height: 0.7rem;
+    margin-top: 0.45rem;
+    position: relative;
+}
+.centerBtn>div span:nth-child(1):before{
+
+    display: block;
+    width: 0.5rem;
+    height: 0.6rem;
+    content: "";
+    // background:url(../images/icon_report.svg) no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    left: 25%;
+    top:0;
+
+}
+.centerBtn>div span:nth-child(2){
+    font-size: 0.5rem;
+    color: #8c8c8c;
+    height: 0.5rem;
+    line-height: 0.5rem;
+    margin-top: 0.2rem;
+}
+.centerBtn.line{
+    border-bottom:1px solid #F8F8F8;
+}
+
+
+
+// 左侧文字带蓝色下划线
+
+.shopIntroduction{
+    background-color: #FFFFFF;
+    .top{
+        height: 1.75rem;
+        line-height: 1.75rem;
+        font-size: 0.6rem;
+        color: #262626;
+        padding-left: 0.75rem;
+        border-bottom: 1px solid #F0F0F0;
+        span{
+            display: inline-block;
+            height: 100%;
+            border-bottom:2px solid #4768F3; 
+        }
+    }
+}
+
+.noneBox{
+    width: 100%;
+    height: 0.5rem;
+    background-color: #F8F8F8;
+}
+
+// 饼状图
+.chartBox{
+    .noDataBox{
+        width: 100%;
+        height: 11.4rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #FFFFFF;
+        display: none;
+        .img{
+            width: 2.2rem;
+            height: 2.2rem;
+            background: url(../images/icon_nodata.svg) no-repeat;
+            background-size: 100% 100%;
+        }
+        .txt{
+            font-size: 0.45rem;
+            color: #8c8c8c;
+            margin-top: 0.6rem;
+        }
+    }
+    .data{
+        position: relative;
+        .txt{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            .title{
+                font-size: 0.6rem;
+                color: #2f2f2f;
+                height: 0.6rem;
+                line-height: 0.6rem;
+            }
+            .desc{
+                font-size: 1rem;
+                color: #2f2f2f;
+                height: 1rem;
+                line-height: 1rem;
+                margin-top: 0.25rem;
+            }
+        }
+    }
+
+    .labelBox{
+        width: 100%;
+        background-color: #fff;
+        &:after{
+            content: "";
+            display: table;
+            clear: both;
+        }
+        .oneBox{
+            width: 50%;
+            height: 2.5rem;
+            float: left;
+            display: flex;
+            justify-content: center;
+            .txt{
+                width: auto;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-start;
+                .name{
+                    font-size: 0.5rem;
+                    display: inline-block;   
+                    height: 0.5rem;
+                    line-height: 0.5rem; 
+                    position: relative;
+                    margin-bottom: 0.2rem;
+                    color: #8c8c8c;
+                    i{
+                        display: block;
+                        width: 0.4rem;
+                        height: 0.4rem;
+                        position: absolute;
+                        margin-top: -0.2rem;
+                        top: 50%;
+                        left: -0.6rem;
+                        border-radius: 50%;
+                    }
+                }
+                .num{
+                    font-size: 0.6rem;
+                    height: 0.6rem;
+                    line-height: 0.6rem;
+                    color: #262626;
+                }
+            }
+        }
+    }
+}
+
+// 上数字下描述，三栏
+.threeNumBox{
+    width: 100%;
+    height: 2.5rem;
+    display: flex;
+    background-color: #ffffff;
+    .txt{
+        width: 50%;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+        span{
+            display: block;
+        }
+        span:nth-child(1){
+            font-size: 0.7rem;
+            color: #2f2f2f;
+            height: 0.7rem;
+            line-height: 0.7rem;
+        }
+        span:nth-child(2){  
+            font-size: 0.5rem;
+            color: #8c8c8c;
+            height: 0.5rem;
+            line-height: 0.5rem;
+            margin-top: 0.2rem;
+        }
+        &:after{
+            content: "";
+            display: block;
+            width: 1px;
+            height: 1.3rem;
+            background-color: #D6D6D6;
+            position: absolute;
+            right: 0;
+        }
+    }
+    .txt:last-child{
+        &:after{
+            display: none;
+        }
+    }
+}

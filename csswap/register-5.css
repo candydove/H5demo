@@ -1,0 +1,76 @@
+
+
+.topTip{
+    margin: 0;
+    background:#f2f4ff;
+    box-shadow:0 0 0 0 #e2e2e2;
+    height: 2rem;
+    line-height: 2rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    font-size:0.45rem;
+    overflow: hidden;
+}
+span.active{
+    color:#2f2f2f;
+}
+
+.mui-input-group .mui-input-row .line{
+    right:0.75rem;
+}
+.mui-bar{
+    background-color: #fff;
+}
+.mui-bar-nav.mui-bar .mui-icon{
+    font-size: 1rem;
+}
+.mui-bar .mui-title{
+    color: #171717;
+    font-size: 0.85rem;
+}
+.mui-bar-nav.mui-bar a{
+    color: #171717;
+}
+
+.imgBox{
+    height: 8.8rem;
+    width: 100%;
+    text-align: center;
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: row;
+}
+.imgBox img{
+    display: block;
+    width: 4.05rem;
+    height: 5.1rem;
+    margin: auto;
+}
+.imgBox+p{
+    font-size: 0.7rem;
+    color: #2f2f2f;
+    height: 0.7rem;
+    line-height: 0.7rem;
+    text-align: center;
+}
+.imgBox+p+p{
+    font-size: 0.6rem;
+    color: #8c8c8c;
+    height: 1.8rem;
+    line-height: 0.9rem;
+    margin: 0.5rem auto 0 auto;
+    width: 12.5rem;
+    text-align: center;
+}
+
+.refreshBtn{
+    width: 12rem;
+    height: 1.9rem;
+    text-align: center;
+    line-height: 1.9rem;
+    color: rgba(255,255,255,0.95);
+    font-size: 0.6rem;
+    background-color: #ff9900;
+    border-radius: 3px;
+    margin: 3rem auto 0 auto;
+}

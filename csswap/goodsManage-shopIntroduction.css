@@ -1,0 +1,72 @@
+.mui-bar {
+  background-color: #fff;
+  border-bottom: 1px solid #EFF1F6;
+}
+/* 返回按钮 */
+.mui-bar-nav.mui-bar .mui-icon {
+  padding: 0;
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
+  padding-left: 0.3rem;
+  padding-right: 0.3rem;
+  font-size: 1.4rem;
+  color: #2b343b;
+}
+.mui-bar .mui-title {
+  font-family:PingFangSC-Medium;
+  font-size: 0.85rem;
+  /* line-height: 2.4rem; */
+  color:#2b343b;
+}
+.mui-bar.mui-bar-nav .rightBtn{
+  color: #2f2f2f;
+  float: right;
+  height: 2.2rem;
+  line-height: 2.2rem;
+  /* border:1px solid red; */
+  font-size: 0.7rem;
+  margin-right: 0.33rem;
+}
+.mui-content {
+  background-color: #f4f4f4;
+}
+.shopIntroduction {
+  background-color: #FFFFFF;
+}
+.shopIntroduction .top {
+  height: 1.75rem;
+  line-height: 1.75rem;
+  font-size: 0.6rem;
+  color: #262626;
+  padding-left: 0.75rem;
+  border-bottom: 1px solid #F0F0F0;
+}
+.shopIntroduction .top span {
+  display: inline-block;
+  height: 100%;
+  border-bottom: 2px solid #ff9900;
+}
+.shopIntroduction .top a {
+  color: #2f2f2f;
+  float: right;
+  padding-right: 0.75rem;
+}
+.introductionCont {
+  background-color: #ffffff;
+  padding: 0.8rem;
+  box-shadow:0 4px 6px 0 rgba(0,0,0,0.10);
+}
+.introductionCont textarea {
+  margin: 0;
+  padding: 0;
+  float: left;
+  border: 1px solid #F0F0F0;
+  font-size: 0.6rem;
+  padding: 0.5rem 0.7rem;
+  height: 6rem;
+  box-sizing: border-box;
+}
+.introductionCont textarea::-webkit-input-placeholder {
+  color: #aeaeae;
+  font-size: 0.6rem;
+}

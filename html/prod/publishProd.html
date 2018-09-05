@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>发布商品</title>
+		<link rel="stylesheet" href="../../css/common.css">
+		<link rel="stylesheet" href="../../css/index.css">
+		<link rel="stylesheet" type="text/css" href="../../components/component.css" />
+		<script type='text/javascript' src='../../js/public.js' charset='utf-8'></script>
+		<script type='text/javascript' src='../../js/include.js?ver=1' charset='utf-8'></script>
+		<script type='text/javascript' src='../../js/exif.js' charset='utf-8'></script>
+		<script src="../../components/pics3.js"></script>
+		<script type="text/javascript" src="../../components/header.js"></script>
+
+		<style>
+			.tip_alert {
+				display: inline-block;
+				vertical-align: sub;
+				margin-left: 1px;
+				width: 14px;
+				height: 14px;
+				background: url(../../images/icon_warn.svg) 50% no-repeat;
+				-moz-background-size: 14px;
+				background-size: 14px;
+			}
+			
+			.form-btn-div .unpublish {
+				width: 140px;
+				height: 40px;
+				margin-right: 2px;
+				line-height: 40px;
+				background-color: #888888;
+				border-radius: 4px;
+				border: solid 1px #888888;
+				float: left;
+				text-align: center;
+				color: #ffffff;
+				font-size: 18px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="headerDiv">
+			<header-component title="今借到信用借还商家版" quitName="退出登陆"></header-component>
+		</div>
+		<div class="main">
+			<div class="main-top">
+				<a href="../prod/wareHouse.html">首页</a><span>></span>
+				<a class="active" href="#">发布新商品</a>
+			</div>
+			<div class="main-com clearfix">
+				<div class="main-left fl">
+					<ul class="main-left-ul">
+						<li class="active">
+							<a href="../prod/publishProd.html"><i class="icon1"></i>发布新产品</a>
+						</li>
+						<li>
+							<a href="../prod/wareHouse.html"><i class="icon2"></i>商品管理</a>
+						</li>
+						<li><a href="../order/order-main.html"><i class="icon3"></i>订单管理</a></li>
+						<li><a href="../prod/chatting.html"><i class="icon4"></i>接待中心</a></li>
+					</ul>
+				</div>
+				<div class="main-rig fr" v-cloak id="publishDiv">
+					<div class="form-group-div">
+						<div class="form-group wid100">
+							<label>网页一键导入</label>
+						</div>
+						<input type="text" class="group-input1" v-model="c_url" maxlength="200" placeholder="商品网页链接">
+						<div class="form-btn-div">
+							<div class="form-btn active" @click="importGoodsData()">导入</div>
+						</div>
+					</div>
+					<div class="form-group-div">
+						<div class="form-group wid100">
+							<label><span>*</span>商品标题</label>
+							<div class="hidden" ref="c_name">
+								<i class="hint-icon"></i>必填选项不能为空
+							</div>
+						</div>
+						<input type="text" class="group-input1" v-model="c_name" maxlength="50" placeholder="标题 品类+品牌+型号" v-on:input="cnameChange">
+						<div class="form-font matb20">{{nameLen}}/{{maxcnameLen}}</div>
+					</div>
+					<div class="form-group-div">
+						<div class="form-group">
+							<label><span>*</span>商品图片<span class="col999">（最多可上传9张）</span></label>
+							<div class="hidden" ref="uploadUrls">
+								<i class="hint-icon"></i>必填选项不能为空
+							</div>
+						</div>
+						<div class="form-upload">
+							<div class="upload-img" id="upload-img">
+								<!--<div class="upload-img-li">
+                                 <div class="posb-mainimg">主图</div>
+                                 <img src="../../images/add-icon.png">
+                             </div>-->
+								<show-pic3 ref="picShow" :pic-ids="uploadUrls" :pic-url="config.qiniuUrl" @upload-pic="uploaded"></show-pic3>
+							</div>
+
+							<div class="upload-font" id="upload-font" v-bind:style="{ display: picFontShow}">
+								<p class="tit">图片要求</p>
+								<p>1、必须为白底图</p>
+								<p>2、图片尺寸：正方形，图片大小必须800x800。</p>
+								<p>3、图片格式为JPG，图片大小需大于38k且小于300k</p>
+								<p>4、最好将素材抠图、边缘处理干净。</p>
+								<p>5、图片中不可以有模特，必须是平铺或者挂拍，不可出现衣架、商品吊牌等。</p>
+								<p>6、商品需要正面展现，不可侧面或背面展现。</p>
+								<p>7、图片美观度高，品质感强，商品展现尽量平整。</p>
+								<p>8、构图明快简洁，商品主体突出，要居中放置。</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group-div">
+						<div class="form-group vermid">
+							<label><span>*</span>商品内容描述</label>
+							<div class="hidden" ref="c_discription">
+								<i class="hint-icon"></i>必填选项不能为空
+							</div>
+						</div>
+						<textarea style="resize: none;" class="group-text" rows="3" cols="20" v-model="c_discription" v-on:input="cdiscriptionChange" maxlength="1000" v-bind:placeholder="placeholder"></textarea>
+						<div class="form-font">{{discriptionLen}}/{{maxcdiscriptionLen}}</div>
+					</div>
+
+					<div class="form-group-list">
+						<div class="form-group-list-div fl wid520">
+							<div class="form-group-list-div-li">
+								<label><span>*</span>一级分类</label>
+								<!--<input type="text" class="group-input2">-->
+								<select class="group-input2" v-model="botton_fot" @change="choseShowType">
+									<option disabled value="">请选择</option>
+									<option class="serch_list_box" v-for="tp in prodTypeList" v-bind:value="tp.id">{{tp.type_name}}</option>
+								</select>
+								<div class="hidden" ref="botton_fot">
+									<i class="hint-icon"></i>必填选项不能为空
+								</div>
+							</div>
+							<div class="form-group-list-div-li" v-if="isSecondShow">
+								<label><span>*</span>二级分类</label>
+								<select class="group-input2" v-model="type_id">
+									<option disabled value="">请选择</option>
+									<option class="serch_list_box" v-for="ts in prodSecondTypeList" v-bind:value="ts.id">{{ts.type_name}}</option>
+								</select>
+								<div class="hidden" ref="type_id">
+									<i class="hint-icon"></i>必填选项不能为空
+								</div>
+							</div>
+							<div class="form-group-list-div-li">
+								<label><span>*</span>押金(参考商品市价)</label>
+								<input type="number" class="group-input2" v-model.number="depositAmt" placeholder="0.00" v-on:input="depositAmtChange" />
+								<div class="hidden" ref="depositAmt">
+									<i class="hint-icon"></i>必填选项不能为空
+								</div>
+							</div>
+							<div class="form-group-list-div-li hei25">
+								<label><span>*</span>支持配送方式</label>
+								<span class="radio-span" @click="cDeliveryType(1)"><i v-bind:class="{ active: isExpress }"></i>快递</span>
+								<span class="radio-span marl18" @click="cDeliveryType(2)" v-if="!isDepositShow"><i v-bind:class="{ active: isFaceToFace }"></i>到店自取</span>
+								<div class="hidden hei25" ref="c_delivertType">
+									<i class="hint-icon"></i>必填选项不能为空
+								</div>
+							</div>
+							<div class="form-group-list-div-li">
+								<label><span>*</span>租金（元/天)</label>
+								<input type="number" class="group-input2" v-model.number="rentAmt" placeholder="0.00" v-on:input="rentAmtChange(event)" />
+								<div class="hidden" ref="rentAmt">
+									<i class="hint-icon"></i>必填选项不能为空
+								</div>
+							</div>
+							<div class="form-group-list-div-li">
+								<label><span>*</span>库存（件)</label>
+								<input type="text" class="group-input2" style="text-align: right;" v-model="totalCnt" placeholder="1" v-on:input="totalCntChange">
+								<div class="hidden" ref="totalCnt">
+									<i class="hint-icon"></i>必填选项不能为空
+								</div>
+							</div>
+							<div class="form-group-list-div-li hei25">
+								<span class="radio-span marl170" @click="cNewState"><i v-bind:class="{ active: isNewState }"></i>全新</span>
+								<span class="radio-span marl18" @click="cSell"><i v-bind:class="{ active: isSell }"></i>可售卖<span class="tip_alert" @click="sellTip"></span></span>
+							</div>
+						</div>
+						<div class="form-group-list-div fr">
+							<div class="form-group-list-div-li">
+								<label><span>*</span>可接受最长租期</label>
+								<input type="text" class="group-input2-text" style="text-align: right;" v-model="maxLeaseDay" placeholder="1" v-on:input="maxLeaseDayChange">
+								<a style="width: 6px;height:40px;float: left;"></a>
+								<select class="group-input-unit" v-model="maxRentUnit" @change="compare">
+									<option class="serch_list_box" value="0">日</option>
+									<option class="serch_list_box" value="1">月</option>
+									<option class="serch_list_box" value="2">年</option>
+								</select>
+								<div class="hidden" ref="maxLeaseDay">
+									<i class="hint-icon"></i>必填选项不能为空
+								</div>
+							</div>
+							<div class="form-group-list-div-li">
+								<label><span>*</span>可接受最短租期</label>
+								<input type="text" class="group-input2-text" style="text-align: right;" v-model="minLeaseDay" placeholder="1" v-on:input="minLeaseDayChange">
+								<a style="width: 6px;height:40px;float: left;"></a>
+								<select class="group-input-unit" v-model="minRentUnit" @change="compare">
+									<option class="serch_list_box" value="0">日</option>
+									<option class="serch_list_box" value="1">月</option>
+									<option class="serch_list_box" value="2">年</option>
+								</select>
+								<div class="hidden" ref="minLeaseDay">
+									<i class="hint-icon"></i>必填选项不能为空
+								</div>
+							</div>
+							<div class="form-group-list-div-li" v-if="isExpress">
+								<label><span>*</span>快递运费（0元即包邮）</label>
+								<input type="number" v-model.number="expressAmt" class="group-input2" placeholder="0.00" v-on:input="expressAmtChange" />
+								<div class="hidden" ref="expressAmt">
+									<i class="hint-icon"></i>必填选项不能为空
+								</div>
+							</div>
+							<div class="form-group-list-div-li">
+								<label><span>*</span>推广</label>
+								<!--<input type="text" class="group-input2">-->
+								<select class="group-input2" v-model="topStatus">
+									<option disabled value="">请选择</option>
+									<option class="serch_list_box" value="1">置顶</option>
+									<option class="serch_list_box" value="0">不置顶</option>
+								</select>
+								<div class="hidden" ref="topStatus">
+									<i class="hint-icon"></i>必填选项不能为空
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-btn-div" v-if="!orderId">
+						<!--<div class="unpublish"  v-if="!isShowSubmitBut">发布</div>
+            		<div class="form-btn active" v-else @click="submitForm">发布</div>
+            		<div class="unpublish"  v-if="!isShowSubmitBut">保存到整理中</div>
+            		<div class="form-btn active" v-else @click="submitFormToTemp">保存到整理中</div>-->
+						<div class="form-btn active mar80" @click="submitForm(1)">发布</div>
+						<div class="form-btn active" @click="submitFormToTemp(0)">保存</div>
+					</div>
+					<div class="form-btn-div" v-else="orderId">
+						<!--<div class="unpublish"  v-if="!isShowSubmitBut">发布</div>
+            		<div class="form-btn active" v-else @click="submitForm">发布</div>
+            		<div class="unpublish"  v-if="!isShowSubmitBut">保存到整理中</div>
+            		<div class="form-btn active" v-else @click="submitFormToTemp">保存到整理中</div>-->
+						<div class="form-btn active mar80" v-if="n_status==0 || n_status==2" @click="submitForm(1)">发布</div>
+						<div class="form-btn" v-if="!productType" @click="submitFormToTemp(0)">保存到整理中</div>
+						<!--新增-->
+						<div class="form-btn" v-else-if="productType == 0" @click="submitFormToTemp(0)">保存</div>
+						<!--编辑整理中状态-->
+						<div class="form-btn" v-if="productType==1 || productType==2" @click="submitForm(productType)">保存</div>
+						<!--编辑状态-->
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<script type="text/javascript" charset="utf-8">
+			function $(id) {
+				return document.getElementById(id)
+			}
+
+			new Vue({
+				el: '#headerDiv',
+			});
+			var publishVm = new Vue({
+				el: '#publishDiv',
+				data: {
+					picFontShow: "none",
+					placeholder: "在这里详细描述一下你的宝贝，如品牌，规格，成色，购买渠道，使用感受等，越详细交易成功率越高哦",
+					c_url: '',
+					c_name: '',
+					c_discription: '',
+					maxcnameLen: 50,
+					cnameLen: 0,
+					nameLen: 0,
+					maxcdiscriptionLen: 1000,
+					cdiscriptionLen: 0,
+					discriptionLen: 0,
+					picUrls: [],
+					uploadUrls: [],
+					addrAddrA: {},
+					addrAddrB: {},
+					expressAmt: null, //运费
+					choseTag: 0,
+					localAddr: '', //本地常用位置
+					localAddr2: '', //本地常用位置拼接
+					localAddrList: [], //{c_level3_code:,n_longitude:,n_latitude:}
+					prodType: '', //商品分类
+					rentAmt: null, //租金
+					depositAmt: null, //押金
+					maxLeaseDay: '', //最长租期
+					minLeaseDay: '', //最短租期
+					totalCnt: null, //库存
+					isNewState: false, //是否全新
+					isSell: false, //是否售卖
+					isDeposit: false, //是否托管
+					isDepositShow: false, //托管地址
+					receiptProdAddr: '', //收货地址
+					receiptProdAddrId: '', //收货地址ID
+					isShowType: false, //是否显示分类
+					botton_fot: '', //分类样式标识
+					type_bind: '',
+					/*分类ID标识*/
+					type_id: '',
+					/*二级分类ID*/
+					isShowRent: false, //弹框租金押金展示
+					isShowCreditDeposit: false, //是否显示 信用免押
+					creditDepositScore: 0, //信用免押分数
+					isStage: false, //是否支持驿站
+					isExpress: false, //是否支持快递
+					isFaceToFace: false, //是否支持到店自取交易
+
+					rentAmtStr: '', //租金Str
+					depositAmtStr: '', //押金Str
+					//creditDepositScoreStr:0,//信用免押分数
+					//isStageStr:false,//是否支持驿站
+					//isExpressStr:false,//是否支持快递
+					isFaceToFaceStr: false, //是否支持到店自取交易
+					isShowCreditDepositStr: false, //是否显示 信用免押
+					expressAmtStr: '', //快递运费
+
+					isShowNumTag: false,
+
+					isShowSubmitBut: false,
+					isSecondShow: false,
+					/*二级分类*/
+
+					orderId: '',
+					prodTypeList: [], //商品类型
+					prodSecondTypeList: [], //商品二级分类
+					n_status: 0, //商品状态： 0整理中 1已发布 2已下架
+					productType: '', //编辑时类型 ：0整理中 1已发布 2已下架
+					userId: '',
+					topStatus: '',
+					/*置顶状态[0-不置顶|1-置顶]*/
+					minRentUnit: '0',
+					/*最短租期单位*/
+					maxRentUnit: '0' /*最长租期单位*/
+				},
+				created: function() {
+					if(utils.isNull(window.sessionStorage.userId)) {
+						utils.go('../index/login.html');
+						return;
+					}
+					this.userId = window.sessionStorage.userId;
+					var prodId = utils.getArg("id");
+					this.productType = utils.getArg("productType");
+					//关闭软键盘
+					document.activeElement.blur();
+					this.localAddrList = [];
+					/*获取商品一级分类*/
+					var url = config.LEASE_URL + "/prod/getAllOneLevelProdType";
+					utils.getAndDealBySelf(url, {}, {}, function(res) {
+						if(res.code === 200 && !utils.isNull(res.object) && !utils.isNull(res.object.list)) {
+							publishVm.prodTypeList = res.object.list;
+						} else {
+							Chef.alert({
+								'content': res.message,
+								'title': '提醒'
+							});
+							return;
+						}
+					});
+					if(prodId) {
+						this.orderId = prodId;
+						this.getPublishProdDetail();
+					} else {
+						this.getOrderId();
+						this.picFontShow = "block";
+					}
+				},
+				methods: {
+					getPublishProdDetail: function() {
+						//查询商品详情
+						var url = config.LEASE_URL + "/prod/getPublishProdDetail";
+						var parames = {
+							"id": this.orderId
+						};
+						utils.postAndDealBySelf(url, parames, {}, function(res) {
+							if(res.code === 200 && !utils.isNull(res.object) && !utils.isNull(res.object.data)) {
+								var jsn = res.object.data;
+								if(!utils.isNull(jsn.prod_type_total_list)) {
+									publishVm.prodTypeList = jsn.prod_type_total_list;
+								}
+								if(!utils.isNull(jsn.prodSecondTypeList)) {
+									publishVm.isSecondShow = true;
+									publishVm.prodSecondTypeList = jsn.prodSecondTypeList;
+								}
+								publishVm.prodType = jsn.c_type;
+								publishVm.botton_fot = jsn.parent_level1_id;
+								publishVm.type_id = jsn.type_id;
+								publishVm.orderId = jsn.id;
+								publishVm.userId = jsn.c_user_id;
+								publishVm.n_status = jsn.n_status;
+								publishVm.topStatus = jsn.topStatus;
+								publishVm.minRentUnit = jsn.min_rent_unit;
+								publishVm.maxRentUnit = jsn.max_rent_unit;
+								if(!utils.isNull(jsn.type_name)) {
+									publishVm.prod_type_memo = jsn.type_name;
+								}
+								if(!utils.isNull(jsn.n_express_amt)) {
+									publishVm.expressAmt = jsn.n_express_amt + '';
+								}
+
+								publishVm.isShowCreditDepositStr = jsn.b_credit_deposit;
+								publishVm.isFaceToFaceStr = jsn.b_face_to_face;
+								publishVm.isExpressStr = jsn.b_express;
+								publishVm.isSendProd = jsn.b_express;
+								publishVm.isStageStr = jsn.b_stage;
+								if(!utils.isNull(jsn.n_credit_deposit_score)) {
+									publishVm.creditDepositScoreStr = jsn.n_credit_deposit_score + '';
+								}
+								if(!utils.isNull(jsn.n_deposit_amt)) {
+									publishVm.depositAmtStr = jsn.n_deposit_amt + '';
+								}
+								if(!utils.isNull(jsn.n_rent_amt)) {
+									publishVm.rentAmtStr = jsn.n_rent_amt + '';
+								}
+								publishVm.isFaceToFace = jsn.b_face_to_face;
+								publishVm.isExpress = jsn.b_express;
+								publishVm.isStage = jsn.b_stage;
+								publishVm.creditDepositScore = jsn.n_credit_deposit_score;
+								publishVm.isShowCreditDeposit = jsn.b_credit_deposit;
+								publishVm.receiptProdAddrId = jsn.c_user_addr_id;
+								publishVm.receiptProdAddr = jsn.addr_addr;
+								publishVm.isDepositShow = jsn.b_deposit;
+								publishVm.isDeposit = jsn.b_deposit;
+								publishVm.isSell = jsn.b_sell;
+								if(!utils.isNull(jsn.n_new_state) && jsn.n_new_state == 100) {
+									publishVm.isNewState = true;
+								}
+								if(!utils.isNull(jsn.n_left_cnt)) {
+									publishVm.totalCnt = jsn.n_left_cnt + '';
+								}
+								if(!utils.isNull(jsn.n_min_lease_day)) {
+									if(jsn.min_rent_unit == '0') {
+										/*最短租期单位为日*/
+										publishVm.minLeaseDay = jsn.n_min_lease_day + '';
+									} else if(jsn.min_rent_unit == '1') {
+										/*最短租期单位为月*/
+										publishVm.minLeaseDay = (jsn.n_min_lease_day / 30) + '';
+									} else if(jsn.min_rent_unit == '2') {
+										/*最短租期单位为年*/
+										publishVm.minLeaseDay = (jsn.n_min_lease_day / 365) + '';
+									}
+								}
+								if(!utils.isNull(jsn.n_max_lease_day)) {
+									if(jsn.max_rent_unit == '0') {
+										/*最长租期单位为日*/
+										publishVm.maxLeaseDay = jsn.n_max_lease_day + '';
+									} else if(jsn.max_rent_unit == '1') {
+										/*最长租期单位为月*/
+										publishVm.maxLeaseDay = (jsn.n_max_lease_day / 30) + '';
+									} else if(jsn.max_rent_unit == '2') {
+										/*最长租期单位为年*/
+										publishVm.maxLeaseDay = (jsn.n_max_lease_day / 365) + '';
+									}
+								}
+
+								publishVm.depositAmt = utils.toYuan(jsn.n_deposit_amt);
+								publishVm.rentAmt = utils.toYuan(jsn.n_rent_amt);
+								publishVm.expressAmt = utils.toYuan(jsn.n_express_amt);
+
+								if(!utils.isNull(jsn.l_pic_list_head)) {
+									//publishVm.picUrls = [];
+									publishVm.uploadUrls = [];
+									var jsonA = string2Array(jsn.l_pic_list_head);
+									if(jsonA.length > 0 && jsonA[0] != '[]') {
+										/*jsonA.forEach(function(lend) {
+											lend = config.qiniuUrl +lend;
+											publishVm.picUrls.push(lend);
+										});*/
+										publishVm.uploadUrls = string2Array(jsn.l_pic_list_head);
+									}
+								}
+								if(publishVm.uploadUrls.length > 0) { //隐藏图片描述文字
+									publishVm.picFontShow = "none";
+								}
+								if(publishVm.uploadUrls != null && publishVm.uploadUrls.length >= 9) { //隐藏上传图片
+									publishVm.$refs.picShow.isUpload = false;
+								}
+								publishVm.c_discription = jsn.c_discription;
+								publishVm.c_name = jsn.c_name;
+								//计算可输入字数
+								if(publishVm.c_name) {
+									publishVm.nameLen = publishVm.c_name.length;
+								} else {
+									publishVm.nameLen = 0;
+								}
+								publishVm.cnameLen = publishVm.maxcnameLen - this.nameLen;
+								if(publishVm.c_discription) {
+									publishVm.discriptionLen = publishVm.c_discription.length;
+								} else {
+									publishVm.discriptionLen = 0;
+								}
+								publishVm.cdiscriptionLen = publishVm.maxcdiscriptionLen - this.discriptionLen;
+							} else {
+								Chef.alert({
+									'content': res.message,
+									'title': '提醒'
+								});
+								return;
+							}
+						});
+					},
+					depositAmtChange: function() {
+						if(parseFloat(this.depositAmt) < 1) {
+							publishVm.$refs.depositAmt.className = "hint display1";
+							publishVm.$refs.depositAmt.innerHTML = '<i class="hint-icon"></i>输入押金大于等于1';
+							return false;
+						}
+						if(utils.isNull(this.depositAmt)) {
+							return false;
+						}
+						if(!checkNum(this.depositAmt)) {
+							publishVm.$refs.depositAmt.className = "hint display1";
+							publishVm.$refs.depositAmt.innerHTML = '<i class="hint-icon"></i>请输入正确的押金';
+							return false;
+						} else if(checkNum(this.depositAmt) && parseFloat(this.depositAmt) > 999999) {
+							publishVm.$refs.depositAmt.className = "hint display1";
+							publishVm.$refs.depositAmt.innerHTML = '<i class="hint-icon"></i>请输入正确的押金';
+							var depositAmtStr = this.depositAmt.toString();
+							this.depositAmt = depositAmtStr.substring(0, (depositAmtStr.length - 1));
+							return false;
+						} else {
+							publishVm.$refs.depositAmt.className = "hidden";
+						}
+						return true;
+					},
+					rentAmtChange: function(event) {
+						if(parseFloat(this.rentAmt) < 1) {
+							publishVm.$refs.rentAmt.className = "hint display1";
+							publishVm.$refs.rentAmt.innerHTML = '<i class="hint-icon"></i>输入押金大于等于1';
+							return false;
+						}
+						if(utils.isNull(this.rentAmt)) {
+							return false;
+						}
+						if(!checkNum(this.rentAmt)) {
+							publishVm.rentAmt = null;
+							publishVm.$refs.rentAmt.className = "hint display1";
+							publishVm.$refs.rentAmt.innerHTML = '<i class="hint-icon"></i>请输入正确的租金';
+							return false;
+						} else if(checkNum(this.rentAmt) && parseFloat(this.rentAmt) > 999999) {
+							publishVm.$refs.rentAmt.className = "hint display1";
+							publishVm.$refs.rentAmt.innerHTML = '<i class="hint-icon"></i>请输入正确的租金';
+							var rentAmtStr = this.rentAmt.toString();
+							publishVm.rentAmt = rentAmtStr.substring(0, (rentAmtStr.length - 1));
+							return false;
+						} else {
+							publishVm.$refs.rentAmt.className = "hidden";
+						}
+						return true;
+					},
+					expressAmtChange: function() {
+						if(!this.isExpress) {
+							return true;
+						}
+						if(checkNum(this.expressAmt) && parseFloat(this.expressAmt) > 999999) {
+							publishVm.$refs.expressAmt.className = "hint display2";
+							publishVm.$refs.expressAmt.innerHTML = '<i class="hint-icon"></i>请输入正确的快递费';
+							var expressAmtStr = this.expressAmt.toString();
+							publishVm.expressAmt = expressAmtStr.substring(0, (expressAmtStr.length - 1));
+							return false;
+						} else {
+							publishVm.$refs.expressAmt.className = "hidden";
+						}
+						return true;
+					},
+					maxLeaseDayChange: function(event) {
+						if(utils.isNull(this.maxLeaseDay)) {
+							return true;
+						} else {
+							publishVm.$refs.maxLeaseDay.className = "hidden";
+						}
+						if(parseInt(this.maxLeaseDay) == 0) {
+							publishVm.$refs.maxLeaseDay.className = "hint display2";
+							publishVm.$refs.maxLeaseDay.innerHTML = '<i class="hint-icon"></i>请输入正确的最长租期';
+							return false;
+						}
+						if(!isPositiveInteger(this.maxLeaseDay)) { //正整数
+							publishVm.$refs.maxLeaseDay.className = "hint display2";
+							publishVm.$refs.maxLeaseDay.innerHTML = '<i class="hint-icon"></i>请输入正确的最长租期';
+							this.maxLeaseDay = this.maxLeaseDay.substring(0, (this.maxLeaseDay.length - 1));
+							if(!isPositiveInteger(this.maxLeaseDay)) {
+								this.maxLeaseDay = "";
+							}
+							return false;
+						}
+						if(this.maxLeaseDay.length > 4) {
+							publishVm.$refs.maxLeaseDay.className = "hint display2";
+							publishVm.$refs.maxLeaseDay.innerHTML = '<i class="hint-icon"></i>请输入正确的最长租期';
+							this.maxLeaseDay = this.maxLeaseDay.substring(0, 4);
+							if(!isPositiveInteger(this.maxLeaseDay)) {
+								this.maxLeaseDay = "";
+							}
+							return false;
+						}
+						if(utils.isNull(this.minLeaseDay)) {
+							this.minLeaseDay = 1;
+						}
+						var compareFlag = false;
+						if(this.maxRentUnit == '0') {
+							/*最长租期单位为日*/
+							if(this.minRentUnit == '0') {
+								/*最短租期单位为日*/
+								compareFlag = parseFloat(this.minLeaseDay) < parseFloat(this.maxLeaseDay);
+							} else if(this.minRentUnit == '1') {
+								/*最短租期单位为月*/
+								compareFlag = parseFloat(this.minLeaseDay) * 30 < parseFloat(this.maxLeaseDay);
+							} else if(this.minRentUnit == '2') {
+								/*最短租期单位为年*/
+								compareFlag = parseFloat(this.minLeaseDay) * 365 < parseFloat(this.maxLeaseDay);
+							}
+						} else if(this.maxRentUnit == '1') {
+							/*最长租期单位为月*/
+							if(this.minRentUnit == '0') {
+								/*最短租期单位为日*/
+								compareFlag = parseFloat(this.minLeaseDay) < parseFloat(this.maxLeaseDay) * 30;
+							} else if(this.minRentUnit == '1') {
+								/*最短租期单位为月*/
+								compareFlag = parseFloat(this.minLeaseDay) * 30 < parseFloat(this.maxLeaseDay) * 30;
+							} else if(this.minRentUnit == '2') {
+								/*最短租期单位为年*/
+								compareFlag = parseFloat(this.minLeaseDay) * 365 < parseFloat(this.maxLeaseDay) * 30;
+							}
+						} else if(this.maxRentUnit == '2') {
+							/*最长租期单位为年*/
+							if(this.minRentUnit == '0') {
+								/*最短租期单位为日*/
+								compareFlag = parseFloat(this.minLeaseDay) < parseFloat(this.maxLeaseDay) * 365;
+							} else if(this.minRentUnit == '1') {
+								/*最短租期单位为月*/
+								compareFlag = parseFloat(this.minLeaseDay) * 30 < parseFloat(this.maxLeaseDay) * 365;
+							} else if(this.minRentUnit == '2') {
+								/*最短租期单位为年*/
+								compareFlag = parseFloat(this.minLeaseDay) * 365 < parseFloat(this.maxLeaseDay) * 365;
+							}
+						}
+						if(!compareFlag) {
+							publishVm.$refs.maxLeaseDay.className = "hint display2";
+							publishVm.$refs.maxLeaseDay.innerHTML = '<i class="hint-icon"></i>最长租期必须大于最短租期';
+							/*this.maxLeaseDay = parseInt(parseFloat(this.minLeaseDay)/30) +1;*/
+							return;
+						} else {
+							publishVm.$refs.minLeaseDay.className = "hidden";
+						}
+						return true;
+					},
+					minLeaseDayChange: function() {
+						if(utils.isNull(this.minLeaseDay)) {
+							return true;
+						} else {
+							publishVm.$refs.minLeaseDay.className = "hidden";
+						}
+						if(parseInt(this.minLeaseDay) == 0) {
+							publishVm.$refs.minLeaseDay.className = "hint display2";
+							publishVm.$refs.minLeaseDay.innerHTML = '<i class="hint-icon"></i>请输入正确的最短租期';
+							return false;
+						}
+						if(!isPositiveInteger(this.minLeaseDay)) {
+							publishVm.$refs.minLeaseDay.className = "hint display2";
+							publishVm.$refs.minLeaseDay.innerHTML = '<i class="hint-icon"></i>请输入正确的最短租期';
+							this.minLeaseDay = this.minLeaseDay.substring(0, (this.minLeaseDay.length - 1));
+							if(!isPositiveInteger(this.minLeaseDay)) {
+								this.minLeaseDay = "";
+							}
+							return false;
+						}
+						if(this.minLeaseDay.length > 4) {
+							Chef.alert({
+								'content': '最长租期必须大于最短租期',
+								'title': '提示'
+							});
+							return;
+						}
+						if(utils.isNull(this.maxLeaseDay)) {
+							this.maxLeaseDay = 1;
+						}
+						var compareFlag = false;
+						if(this.maxRentUnit == '0') {
+							/*最长租期单位为日*/
+							if(this.minRentUnit == '0') {
+								/*最短租期单位为日*/
+								compareFlag = parseFloat(this.minLeaseDay) < parseFloat(this.maxLeaseDay);
+							} else if(this.minRentUnit == '1') {
+								/*最短租期单位为月*/
+								compareFlag = parseFloat(this.minLeaseDay) * 30 < parseFloat(this.maxLeaseDay);
+							} else if(this.minRentUnit == '2') {
+								/*最短租期单位为年*/
+								compareFlag = parseFloat(this.minLeaseDay) * 365 < parseFloat(this.maxLeaseDay);
+							}
+						} else if(this.maxRentUnit == '1') {
+							/*最长租期单位为月*/
+							if(this.minRentUnit == '0') {
+								/*最短租期单位为日*/
+								compareFlag = parseFloat(this.minLeaseDay) < parseFloat(this.maxLeaseDay) * 30;
+							} else if(this.minRentUnit == '1') {
+								/*最短租期单位为月*/
+								compareFlag = parseFloat(this.minLeaseDay) * 30 < parseFloat(this.maxLeaseDay) * 30;
+							} else if(this.minRentUnit == '2') {
+								/*最短租期单位为年*/
+								compareFlag = parseFloat(this.minLeaseDay) * 365 < parseFloat(this.maxLeaseDay) * 30;
+							}
+						} else if(this.maxRentUnit == '2') {
+							/*最长租期单位为年*/
+							if(this.minRentUnit == '0') {
+								/*最短租期单位为日*/
+								compareFlag = parseFloat(this.minLeaseDay) < parseFloat(this.maxLeaseDay) * 365;
+							} else if(this.minRentUnit == '1') {
+								/*最短租期单位为月*/
+								compareFlag = parseFloat(this.minLeaseDay) * 30 < parseFloat(this.maxLeaseDay) * 365;
+							} else if(this.minRentUnit == '2') {
+								/*最短租期单位为年*/
+								compareFlag = parseFloat(this.minLeaseDay) * 365 < parseFloat(this.maxLeaseDay) * 365;
+							}
+						}
+						if(!compareFlag) {
+							Chef.alert({
+								'content': '最长租期必须大于最短租期',
+								'title': '提示'
+							});
+							return;
+						} else {
+							publishVm.$refs.maxLeaseDay.className = "hidden";
+						}
+						return true;
+					},
+					compare: function() {
+						var compareFlag = false;
+						if(this.maxRentUnit == '0') {
+							/*最长租期单位为日*/
+							if(this.minRentUnit == '0') {
+								/*最短租期单位为日*/
+								compareFlag = parseFloat(this.minLeaseDay) < parseFloat(this.maxLeaseDay);
+							} else if(this.minRentUnit == '1') {
+								/*最短租期单位为月*/
+								compareFlag = parseFloat(this.minLeaseDay) * 30 < parseFloat(this.maxLeaseDay);
+							} else if(this.minRentUnit == '2') {
+								/*最短租期单位为年*/
+								compareFlag = parseFloat(this.minLeaseDay) * 365 < parseFloat(this.maxLeaseDay);
+							}
+						} else if(this.maxRentUnit == '1') {
+							/*最长租期单位为月*/
+							if(this.minRentUnit == '0') {
+								/*最短租期单位为日*/
+								compareFlag = parseFloat(this.minLeaseDay) < parseFloat(this.maxLeaseDay) * 30;
+							} else if(this.minRentUnit == '1') {
+								/*最短租期单位为月*/
+								compareFlag = parseFloat(this.minLeaseDay) * 30 < parseFloat(this.maxLeaseDay) * 30;
+							} else if(this.minRentUnit == '2') {
+								/*最短租期单位为年*/
+								compareFlag = parseFloat(this.minLeaseDay) * 365 < parseFloat(this.maxLeaseDay) * 30;
+							}
+						} else if(this.maxRentUnit == '2') {
+							/*最长租期单位为年*/
+							if(this.minRentUnit == '0') {
+								/*最短租期单位为日*/
+								compareFlag = parseFloat(this.minLeaseDay) < parseFloat(this.maxLeaseDay) * 365;
+							} else if(this.minRentUnit == '1') {
+								/*最短租期单位为月*/
+								compareFlag = parseFloat(this.minLeaseDay) * 30 < parseFloat(this.maxLeaseDay) * 365;
+							} else if(this.minRentUnit == '2') {
+								/*最短租期单位为年*/
+								compareFlag = parseFloat(this.minLeaseDay) * 365 < parseFloat(this.maxLeaseDay) * 365;
+							}
+						}
+						if(!compareFlag) {
+							Chef.alert({
+								'content': '最长租期必须大于最短租期',
+								'title': '提示'
+							});
+							return;
+						} else {
+							publishVm.$refs.minLeaseDay.className = "hidden";
+						}
+						return true;
+					},
+					totalCntChange: function() {
+						if(utils.isNull(this.totalCnt)) {
+							return true;
+						} else {
+							publishVm.$refs.totalCnt.className = "hidden";
+						}
+						if(parseInt(this.totalCnt) == 0) {
+							publishVm.$refs.totalCnt.className = "hint display1";
+							publishVm.$refs.totalCnt.innerHTML = '<i class="hint-icon"></i>请输入正确的库存';
+							return false;
+						}
+						if(!isPositiveInteger(this.totalCnt)) {
+							publishVm.$refs.totalCnt.className = "hint display1";
+							publishVm.$refs.totalCnt.innerHTML = '<i class="hint-icon"></i>请输入正确的库存';
+							this.totalCnt = this.totalCnt.substring(0, (this.totalCnt.length - 1));
+							if(!isPositiveInteger(this.totalCnt)) {
+								this.totalCnt = "";
+							}
+							return false;
+						}
+						if(this.totalCnt.length > 4) {
+							publishVm.$refs.totalCnt.className = "hint display1";
+							publishVm.$refs.totalCnt.innerHTML = '<i class="hint-icon"></i>请输入正确的库存';
+							this.totalCnt = this.totalCnt.substring(0, 4);
+							if(!isPositiveInteger(this.totalCnt)) {
+								this.totalCnt = "";
+							}
+							return false;
+						}
+						return true;
+					},
+					goBack: function() {
+						utils.back();
+					},
+					cnameChange: function() {
+						if(this.c_name.length >= this.maxcnameLen) {
+							publishVm.$refs.c_name.className = "hint disinble";
+							publishVm.$refs.c_name.innerHTML = '<i class="hint-icon"></i>标题最多可50个字符哦';
+						} else {
+							publishVm.$refs.c_name.className = "hidden";
+						}
+						//计算可输入剩余字数
+						if(this.c_name) {
+							this.nameLen = this.c_name.length;
+						} else {
+							this.nameLen = 0;
+						}
+						this.cnameLen = this.maxcnameLen - this.nameLen;
+						if(this.cnameLen < 0) {
+							this.cnameLen = 0;
+							this.c_name = this.c_name.substring(0, this.cnameLen);
+						}
+					},
+					cdiscriptionChange: function() {
+						if(this.c_discription.length >= 1000) {
+							publishVm.$refs.c_discription.className = "hint disinble";
+							publishVm.$refs.c_discription.innerHTML = '<i class="hint-icon"></i>最多输入1000个字符哦';
+						} else {
+							publishVm.$refs.c_discription.className = "hidden";
+						}
+						if(this.c_discription) {
+							this.discriptionLen = this.c_discription.length;
+						} else {
+							this.discriptionLen = 0;
+						}
+						this.cdiscriptionLen = this.maxcdiscriptionLen - this.discriptionLen;
+						if(this.cdiscriptionLen < 0) {
+							this.cdiscriptionLen = 0;
+							this.c_discription = this.c_discription.substring(0, this.cdiscriptionLen);
+						}
+					},
+					//是否全新
+					cNewState: function() {
+						this.isNewState = !this.isNewState;
+					},
+					//是否售卖
+					cSell: function() {
+						this.isSell = !this.isSell;
+					},
+					/*//是否托管
+					cDeposit:function(){
+						this.isDeposit = !this.isDeposit;
+						this.isDepositShow = !this.isDepositShow;
+						
+						//需要变动 到店自取
+					},*/
+					//接受售卖 提示
+					sellTip: function() {
+						var tip = '什么是接受售卖?<br>1.接受售卖指在租物过程中，借物人以押金购买商品，租金将不需借物人支付<br>2.平台收取手续费=售卖价格×5%，由出借人承担，在收益到账时平台直接扣除';
+						Chef.alert({
+							'title': '提醒',
+							'content': tip
+						});
+					},
+					//显示分类
+					cShowType: function() {
+						this.isShowType = !this.isShowType;
+					},
+					//选择商品分类
+					choseShowType: function(w) {
+						if(!utils.isNull(this.botton_fot)) {
+							publishVm.$refs.botton_fot.className = "hidden";
+						}
+						/*清空选择的二级分类*/
+						this.type_id = '';
+						var url = config.LEASE_URL + "/prod/getTypeId";
+						var parames = {
+							"parent_level1_id": this.botton_fot,
+						};
+						utils.postAndDealBySelf(url, parames, {}, function(res) {
+							if(res.code === 200 && !utils.isNull(res.object) && !utils.isNull(res.object.list)) {
+								publishVm.prodSecondTypeList = res.object.list;
+								publishVm.isSecondShow = true;
+							} else if(utils.isNull(res.object) || utils.isNull(res.object.list)) {
+								publishVm.isSecondShow = false;
+							} else {
+								Chef.alert({
+									'content': res.message,
+									'title': '提示'
+								});
+								return;
+							}
+						});
+						/*this.botton_fot = w.c_code;
+						this.prodType = w.c_value;
+						this.isShowType = false;*/
+					},
+					closeShowProdType: function() {
+						this.isShowType = false;
+					},
+					//租金押金弹框
+					cShowRent: function() {
+						this.isShowRent = !this.isShowRent;
+
+					},
+					closeShowRent: function() {
+						//校验不通过 相关数据重置数值
+						this.isShowRent = false;
+
+					},
+					//选择配送方式
+					cDeliveryType: function(e) {
+						publishVm.$refs.c_delivertType.className = "hidden";
+						if(e == 1) {
+							this.isExpress = !this.isExpress;
+						} else if(e == 2 && !this.isDepositShow) {
+							this.isFaceToFace = !this.isFaceToFace;
+						}
+					},
+					uploaded: function(json) {
+						//this.$ref.picShow
+						publishVm.$refs.uploadUrls.className = "hidden";
+						//this.picUrls.push(config.qiniuUrl+json.localId);
+						this.uploadUrls.push(json.serverId);
+						if(this.uploadUrls != null && this.uploadUrls.length >= 9) {
+							publishVm.$refs.picShow.isUpload = false;
+							/*publishVm.$refs.uploadUrls.className="hint disinble";
+							publishVm.$refs.uploadUrls.innerHTML = '<i class="hint-icon"></i>最多可上传9张';*/
+							return;
+						}
+						if(this.uploadUrls.length > 0) { //图片描述文字隐藏
+							this.picFontShow = "none";
+						}
+					},
+					getOrderId: function() {
+						utils.get(config.LEASE_MERCHANT_URL + '/pay/getOrderId', {}, {}, function(json) {
+							publishVm.orderId = json;
+							window.sessionStorage.prodOrderId = json;
+						});
+					},
+					ckeckFormBut: function() {
+						var isOk = true;
+						if(utils.isNull(this.c_name)) {
+							publishVm.$refs.c_name.className = "hint disinble";
+							publishVm.$refs.c_name.innerHTML = '<i class="hint-icon"></i>必填选项不能为空';
+							isOk = false;
+						} else if(this.c_name.length > this.maxcnameLen) {
+							publishVm.$refs.c_name.className = "hint disinble";
+							publishVm.$refs.c_name.innerHTML = '<i class="hint-icon"></i>标题最多可50个字哦';
+							isOk = false;
+						}
+						if(this.uploadUrls == null || this.uploadUrls.length == 0) {
+							publishVm.$refs.uploadUrls.className = "hint disinble";
+							publishVm.$refs.uploadUrls.innerHTML = '<i class="hint-icon"></i>必填选项不能为空';
+							isOk = false;
+						} else if(this.uploadUrls != null && this.uploadUrls.length > 9) {
+							publishVm.$refs.uploadUrls.className = "hint disinble";
+							publishVm.$refs.uploadUrls.innerHTML = '<i class="hint-icon"></i>最多可上传9张';
+							isOk = false;
+						}
+						if(utils.isNull(this.c_discription)) {
+							publishVm.$refs.c_discription.className = "hint disinble";
+							publishVm.$refs.c_discription.innerHTML = '<i class="hint-icon"></i>必填选项不能为空';
+							isOk = false;
+						} else if(this.c_discription.length > 1000) {
+							publishVm.$refs.c_discription.className = "hint disinble";
+							publishVm.$refs.c_discription.innerHTML = '<i class="hint-icon"></i>最多输入1000个字符哦';
+							isOk = false;
+						}
+						if(utils.isNull(this.botton_fot)) {
+							publishVm.$refs.botton_fot.className = "hint display1";
+							publishVm.$refs.botton_fot.innerHTML = '<i class="hint-icon"></i>必填选项不能为空';
+							isOk = false;
+						}
+
+						if(utils.isNull(this.depositAmt)) {
+							publishVm.$refs.depositAmt.className = "hint display1";
+							publishVm.$refs.depositAmt.innerHTML = '<i class="hint-icon"></i>必填选项不能为空';
+							isOk = false;
+						}
+						if(utils.isNull(this.rentAmt)) {
+							publishVm.$refs.rentAmt.className = "hint display1";
+							publishVm.$refs.rentAmt.innerHTML = '<i class="hint-icon"></i>必填选项不能为空';
+							isOk = false;
+						}
+
+						if(!this.expressAmtChange() || !this.rentAmtChange() || !this.depositAmtChange() || !this.maxLeaseDayChange() || !this.minLeaseDayChange() || !this.totalCntChange()) {
+							isOk = false;
+						}
+						/*if(this.minLeaseDay > this.maxLeaseDay*30){
+							publishVm.$refs.minLeaseDay.className="hint display2";
+							publishVm.$refs.minLeaseDay.innerHTML = '<i class="hint-icon"></i>请输入正确的最短租期';
+							isOk = false;
+						}*/
+						/*if(this.isDeposit && this.isFaceToFace){//托管&&到店自取
+						Chef.alert({
+					            'content':'托管商品不支持到店自取配送方式',
+					            'title':'提示'
+				       		});
+						return;
+					}*/
+						if(!this.isExpress && !this.isFaceToFace) { //配送方式必选
+							publishVm.$refs.c_delivertType.className = "hint display3 hei25";
+							isOk = false;
+						}
+						return isOk;
+					},
+					submitFormToTemp: function(n_status) {
+						if(utils.isNull(this.orderId)) {
+							this.getOrderId();
+							Chef.alert({
+								'content': '请尝试重新发布',
+								'title': '提示'
+							});
+							return;
+						}
+						if(utils.isNull(this.c_name)) {
+							publishVm.$refs.c_name.className = "hint disinble";
+							publishVm.$refs.c_name.innerHTML = '<i class="hint-icon"></i>必填选项不能为空';
+							return;
+						} else if(this.c_name.length > this.maxcnameLen) {
+							publishVm.$refs.c_name.className = "hint disinble";
+							publishVm.$refs.c_name.innerHTML = '<i class="hint-icon"></i>标题最多可50个字哦';
+							return;
+						}
+
+						if(utils.isNull(this.minLeaseDay)) {
+							this.minLeaseDay = 1;
+						} else {
+							this.minLeaseDay = parseInt(this.minLeaseDay);
+						}
+						if(utils.isNull(this.maxLeaseDay)) {
+							this.maxLeaseDay = 1;
+						} else {
+							this.maxLeaseDay = parseInt(this.maxLeaseDay);
+						}
+						if(utils.isNull(this.totalCnt)) {
+							this.totalCnt = 1;
+						} else {
+							this.totalCnt = parseInt(this.totalCnt);
+						}
+						if(utils.isNull(this.expressAmt)) {
+							publishVm.expressAmt = 0;
+						} else {
+							publishVm.expressAmt = parseFloat(this.expressAmt);
+						}
+						this.save(n_status);
+					},
+					/*导入商品数据*/
+					importGoodsData: function() {
+						/*将历史爬取数据清空*/
+						publishVm.c_name = "";
+						publishVm.c_discription = "";
+						publishVm.rentAmt = "";
+						publishVm.depositAmt = "";
+						publishVm.minLeaseDay = "";
+						publishVm.totalCnt = "";
+						publishVm.uploadUrls = [];
+						var url = config.LEASE_MERCHANT_URL + "/dataGrab/getGoodsData";
+						var parames = {
+							"url": this.c_url,
+						};
+						utils.postAndDealBySelf(url, parames, {}, function(res) {
+							if(res.code === 200) {
+								publishVm.c_name = res.object.goods_name;
+								publishVm.c_discription = res.object.goods_detail;
+								publishVm.rentAmt = res.object.goods_rent;
+								publishVm.depositAmt = res.object.goods_deposit;
+								publishVm.minLeaseDay = res.object.min_tenancy;
+								publishVm.totalCnt = res.object.goods_stock;
+								var imgArray = res.object.picUrls + "";
+								var imgSplit = new Array();
+								imgSplit = imgArray.split(",");
+								for(var i = 0; i < res.object.picUrls.length; i++) {
+									publishVm.uploadUrls.push(imgSplit[i]);
+								}
+							} else {
+								Chef.alert({
+									'content': res.message,
+									'title': '提示'
+								});
+								return;
+							}
+						});
+					},
+					//提交表单
+					submitForm: function(n_status) {
+						//校验选择数值
+						if(utils.isNull(this.orderId)) {
+							this.getOrderId();
+							Chef.alert({
+								'content': '请尝试重新发布',
+								'title': '提示'
+							});
+							return;
+						}
+						if(this.ckeckFormBut()) {
+							if(utils.isNull(this.minLeaseDay)) {
+								this.minLeaseDay = 1;
+							} else {
+								this.minLeaseDay = parseInt(this.minLeaseDay);
+							}
+							if(utils.isNull(this.maxLeaseDay)) {
+								this.maxLeaseDay = 1;
+							} else {
+								this.maxLeaseDay = parseInt(this.maxLeaseDay);
+							}
+							if(utils.isNull(this.totalCnt)) {
+								this.totalCnt = 1;
+							} else {
+								this.totalCnt = parseInt(this.totalCnt);
+							}
+							if(utils.isNull(this.expressAmt)) {
+								publishVm.expressAmt = 0;
+							} else {
+								publishVm.expressAmt = parseFloat(this.expressAmt);
+							}
+							this.save(n_status);
+						}
+					},
+					saveTip: function(isConfirm) { //保存后提示
+						if(isConfirm) {
+							Cpop.confirm({
+								'content': '发布成功',
+								'title': '提示',
+								firm: '再发布一单',
+								firm2: '查看商品管理',
+								firmFn: function(flag) {
+									if(flag == 1) {
+										utils.go('../prod/wareHouse.html'); //返回首页
+									} else {
+										utils.replace('publishProd.html');
+									}
+								}
+							});
+						} else {
+							Cpop.confirm({
+								'content': '保存成功',
+								'title': '提示',
+								firm: '取消',
+								firm2: '查看商品管理',
+								firmFn: function(flag) {
+									if(flag == 1) {
+										utils.go('../prod/wareHouse.html'); //返回首页
+									} else {
+										return;
+									}
+								}
+							});
+						}
+					},
+					save: function(n_status) {
+						var url = config.LEASE_URL + "/prod/publishProd";
+						var parames = {
+							"orderId": this.orderId,
+							"c_name": this.c_name,
+							"c_discription": this.c_discription,
+							"c_com_id": '',
+							"b_com": true,
+							"l_pic_list_head": this.uploadUrls,
+							"b_credit_deposit": false,
+							//"n_credit_deposit_score":parseInt(this.creditDepositScore),
+							"n_deposit_amt": utils.toFen(this.depositAmt),
+							"n_rent_amt": utils.toFen(this.rentAmt),
+							"n_express_amt": utils.toFen(this.expressAmt),
+							"b_deposit": this.isDeposit,
+							"b_stage": this.isStage,
+							"b_express": this.isExpress,
+							"b_face_to_face": this.isFaceToFace,
+							"c_type": this.botton_fot,
+							"id": this.type_id,
+							"b_sell": this.isSell,
+							"n_status": n_status,
+							"n_new_state": this.isNewState,
+							"n_min_lease_day": '',
+							"n_max_lease_day": '',
+							//"n_total_cnt":parseInt(this.totalCnt),
+							"n_left_cnt": this.totalCnt,
+							//"c_user_addr_id":this.receiptProdAddrId,
+							//"localAddrList":this.localAddrList,
+							"userId": this.userId,
+							"topStatus": this.topStatus,
+							"min_rent_unit": this.minRentUnit,
+							"max_rent_unit": this.maxRentUnit
+						};
+						if(this.minRentUnit == '0') {
+							/*最短租期单位为日*/
+							parames.n_min_lease_day = parseFloat(this.minLeaseDay);
+						} else if(this.minRentUnit == '1') {
+							/*最短租期单位为月*/
+							parames.n_min_lease_day = parseFloat(this.minLeaseDay) * 30;
+						} else if(this.minRentUnit == '2') {
+							/*最短租期单位为年*/
+							parames.n_min_lease_day = parseFloat(this.minLeaseDay) * 365;
+						}
+						if(this.maxRentUnit == '0') {
+							/*最短租期单位为日*/
+							parames.n_max_lease_day = parseFloat(this.maxLeaseDay);
+						} else if(this.maxRentUnit == '1') {
+							/*最短租期单位为月*/
+							parames.n_max_lease_day = parseFloat(this.maxLeaseDay) * 30;
+						} else if(this.maxRentUnit == '2') {
+							/*最短租期单位为年*/
+							parames.n_max_lease_day = parseFloat(this.maxLeaseDay) * 365;
+						}
+						utils.postAndDealBySelf(url, parames, {}, function(res) {
+							if(res.code === 200) {
+								if(publishVm.productType == 1) { //从已发布进入编辑页面：保存
+									publishVm.saveTip(false);
+								} else if(publishVm.productType == 0) { //从整理中进入编辑页面：保存
+									if(n_status == 1) {
+										publishVm.saveTip(true);
+									} else {
+										publishVm.saveTip(false);
+									}
+								} else if(publishVm.productType == 2) { //从下架进入编辑页面：保存
+									if(n_status == 1) {
+										publishVm.saveTip(true);
+									} else {
+										publishVm.saveTip(false);
+									}
+								} else {
+									if(n_status == 1) {
+										publishVm.saveTip(true);
+									} else {
+										publishVm.saveTip(false);
+									}
+								}
+							} else {
+								Chef.alert({
+									'content': res.message,
+									'title': '提示'
+								});
+								return;
+							}
+						});
+					}
+				}
+			})
+			//检查字符串
+			function checkNum(num) {
+				if(utils.isNull(num)) {
+					return false;
+				}
+				if(!isNaN(num) && parseFloat(num) > 0) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+
+			function isPositiveInteger(s) { //是否为正整数
+				var re = /^[0-9]+$/;
+				return re.test(s)
+			}
+
+			function string2Array(stringObj) {
+				stringObj = stringObj.replace(/([\w,]∗)/, "$1");
+				if(stringObj.indexOf("[") == 0) { // if has chinese  
+					stringObj = stringObj.substring(2, stringObj.length - 2);
+				}
+				var arr = stringObj.split('","');
+				var ss = stringObj;
+				var newArray = []; //new Array();  
+				for(var i = 0; i < arr.length; i++) {
+					var arrOne = arr[i];
+					newArray.push(arrOne);
+				}
+				return newArray;
+			};
+		</script>
+	</body>
+
+</html>

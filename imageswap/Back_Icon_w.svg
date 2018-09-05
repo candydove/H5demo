@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="12px" height="22px" viewBox="0 0 12 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48 (47235) - http://www.bohemiancoding.com/sketch -->
+    <title>Back Icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="o2o" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M11.6,0.4125 C12.1333333,0.9625 12.1333333,1.7875 11.6,2.3375 L3.2,11 L11.6,19.6625 C12.1333333,20.2125 12.1333333,21.0375 11.6,21.5875 C11.0666667,22.1375 10.2666667,22.1375 9.73333333,21.5875 L0.4,11.9625 C-0.133333333,11.4125 -0.133333333,10.5875 0.4,10.0375 L9.73333333,0.4125 C10,0.1375 10.4,0 10.6666667,0 C10.9333333,0 11.3333333,0.1375 11.6,0.4125 L11.6,0.4125 Z" id="Back-Icon" fill="#FFFFFF"></path>
+    </g>
+</svg>

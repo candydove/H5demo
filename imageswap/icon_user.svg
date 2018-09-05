@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="15px" height="16px" viewBox="0 0 15 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48 (47235) - http://www.bohemiancoding.com/sketch -->
+    <title>icon_user</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="首页" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-340.000000, -35.000000)" stroke-linecap="round">
+        <g id="user" transform="translate(338.000000, 34.000000)" stroke="#FFFFFF">
+            <g transform="translate(3.000000, 2.000000)">
+                <path d="M13,11 C13,8.791 10.08995,7 6.5,7 C2.91005,7 0,8.791 0,11" id="Shape" stroke-width="1.296"></path>
+                <circle id="Oval" stroke-width="1.296" cx="6.5" cy="3.5" r="3.5"></circle>
+                <path d="M13,11 L13,13.461875 C13,13.681625 12.935325,14 12.746825,14 L0.415675,14 C0.231075,14 0,13.679375 0,13.46225 L0,11.000375" id="Shape" stroke-width="1.296"></path>
+            </g>
+        </g>
+    </g>
+</svg>

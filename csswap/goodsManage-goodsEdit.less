@@ -1,0 +1,400 @@
+// 商品编辑、新品发布  引用
+
+
+// 顶部状态栏
+.mui-bar{
+    background-color: #4768f3;
+}
+// 顶部向左返回按钮
+.mui-bar-nav.mui-bar .mui-icon{
+    font-size: 1rem;
+    color: #fff;
+}
+// 顶部标题
+.mui-bar .mui-title{
+    color: #fff;
+    font-size: 0.85rem;
+    line-height: 2.4rem;
+}
+.mui-content{
+    background-color: #F8F8F8;
+}
+
+// mui输入表单
+.mui-input-group{
+    .mui-input-row{
+        label{
+            width: 31.25%;
+            padding-left: 0.75rem;
+            box-sizing:border-box;
+            color:#262626;
+        }
+        input{
+            width: 68%;
+            padding-right: 1rem;
+            color: #262626;
+        }
+        input::-webkit-input-placeholder{
+            color:#aeaeae;
+        }           
+    }
+
+    // 带向右按钮的input
+    .mui-input-row.inputRigthBtn{
+        position: relative;
+        input{
+            padding-right: 2rem;
+        }
+        .rightBtn{
+            position: absolute;
+            right: 0.75rem;
+            top: 50%;
+            width: 0.6rem;
+            height: 0.9rem;
+            background:url(../images/rightBtn.svg) no-repeat;
+            background-size: 100% 100%;
+            margin-top: -0.45rem;
+
+        }     
+    }
+    .none{
+        width: 100%;
+        height: 0.5rem;
+        background-color: #F8F8F8;
+    }
+}
+
+// input框里的小叉号
+.mui-input-row .mui-input-clear ~ .mui-icon-clear, .mui-input-row .mui-input-password ~ .mui-icon-eye, .mui-input-row .mui-input-speech ~ .mui-icon-speech{
+    height: 2.5rem;
+    top: 0;
+}
+.mui-input-row .mui-input-clear ~ .mui-icon-clear:before{
+    display: none;//隐藏小叉号
+    top: 46%;
+}
+
+.xyBox{
+    width: 100%;
+    height: 2.5rem;
+    line-height: 2.5rem;
+    font-size: 0.6rem;
+    color: #2f2f2f;
+    position: relative;
+    div{
+        float: left;
+        font-size: 0.6rem;
+        color: #2f2f2f;    
+    }
+    div:first-child{
+        width: 31.25%;
+        padding-left: 0.75rem;
+        box-sizing: border-box;
+        color: #262626;        
+    }
+    // div:nth-child(2){
+        // margin-right: 0.7rem;
+    // }
+    div.mui-input-row{
+        clear: none;
+        width: 3.3rem;
+        position: relative;
+        padding-left: 0.9rem;
+        input[type=checkbox], input[type=radio]{
+            position: absolute;
+            left: 0;
+            top: 46%;
+            width: 0.5rem;
+            height: 0.5rem;
+            display: block;
+            margin-top: -0.25rem;
+        }
+        input[type=checkbox]:before, input[type=radio]:before{
+            display: block;
+            width: 100%;
+            height: 100%;
+            font-size: 0.6rem; 
+        }
+        input[type=checkbox]:checked:before, input[type=radio]:checked:before{
+            color: #4768F3;
+        }
+    }
+    .line{
+        position: absolute;
+        bottom: 0;
+        height: 1px;
+        content: '';
+        -webkit-transform: scaleY(.5);
+        transform: scaleY(.5);
+        background-color: #c8c7cc;
+        width: auto;
+        left: 0.75rem;
+        right: 0.75rem;             
+    }
+}
+
+.switchBox{
+    &:before{
+        display: none;
+    }
+    &:after{
+        display: none;
+    }
+    .mui-table-view-cell{
+        padding: 0;
+        height: 2.5rem;
+        line-height: 2.5rem;
+        padding-left: 0.75rem;
+        border:none;
+        span:first-child{
+            color: #262626;
+            font-size: 0.6rem;
+        }
+        div.mui-switch{
+            left: 28%;
+            top: 21%;
+            transform: scale(0.5);
+        }
+        .mui-switch.mui-active {
+            border-color: #4768F3;
+            background-color: #4768F3;
+        }
+        .line{
+            position: absolute;
+            bottom: 0;
+            height: 1px;
+            content: '';
+            -webkit-transform: scaleY(.5);
+            transform: scaleY(.5);
+            background-color: #c8c7cc;
+            width: auto;
+            left: 0.75rem;
+            right: 0.75rem;            
+        }
+    }
+}
+
+
+
+
+#openPicker{
+    display: none;
+    &:before{
+        display: none;
+    }
+    &:after{
+        display: none;
+    }
+    li{
+        font-size: 0.6rem;
+        color: #262626;
+        height: 2.5rem;
+        padding: 0;
+        a.mui-navigate-right{
+            position: relative;
+            &:after{
+                display: none;
+            }
+            height: 2.5rem;
+            margin: 0;
+            line-height: 2.5rem;
+            padding-left: 0.75rem;
+
+            .tip111, #timeResult{
+                position: absolute;
+                height: 100%;
+                left: 31.25%;
+                font-size:12px;
+                color:#aeaeae;
+            }
+            #timeResult{
+                color: #2f2f2f;
+            }
+        }
+        .rightBtn{
+            position: absolute;
+            right: 0.75rem;
+            top: 50%;
+            width: 0.6rem;
+            height: 0.9rem;
+            background:url(../images/rightBtn.svg) no-repeat;
+            background-size: 100% 100%;
+            margin-top: -0.45rem;
+        }
+        .line{
+            position: absolute;
+            bottom: 0;
+            height: 1px;
+            content: '';
+            -webkit-transform: scaleY(.5);
+            transform: scaleY(.5);
+            background-color: #c8c7cc;
+            width: auto;
+            left: 0.75rem;
+            right: 0.75rem;            
+        }
+
+    }
+
+}
+// 点击时去掉背景色
+.mui-table-view-cell>a:not(.mui-btn).mui-active{
+    background-color: #fff;
+}
+
+
+// 底部蓝色提交按钮
+.mui-content{
+    padding-bottom: 3rem;
+}
+.bottomBtnBox{
+    width: 100%;
+    background-color: #fff;
+    height: 3rem;
+    padding:0.55rem 1rem;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    .btn1{
+        width: 100%;
+        height: 100%;
+        background-color: #AEAEAE;
+        text-align: center;
+        line-height: 1.9rem;
+        color: #fff;
+        border-radius: 0.95rem;
+    }
+    .btn1.active{
+        background-color: #4768F3;
+    }
+}
+
+
+// 黑色背景提示框
+.mui-toast-container.mui-active{
+    top: 50%;
+    width: 9.5rem;
+    .mui-toast-message{
+        font-size: 0.6rem;
+        color: #F6F6F6;
+    }
+} 
+
+// 确认提示框
+.mui-popup.mui-popup-in{
+    background: #fff;
+    .mui-popup-inner{
+        &:after{
+            display: none;
+        }
+        .mui-popup-text{
+            font-size: 0.6rem;
+            color: #393939;
+            margin: 0;
+        }
+    }
+
+    .mui-popup-buttons{
+        background: #fff;
+        padding: 0 1rem 0 1rem;
+        margin-bottom: 0.5rem;
+        display: flex;
+        justify-content: space-around;
+        .mui-popup-button{
+            width: 3.6rem;
+            height: 1rem;
+            line-height: 1rem;
+            font-size: 0.5rem;
+            border-radius: 0.5rem;
+            margin-top: 0.5rem;
+            color: #fff;
+            background-color: #AEAEAE;
+        }
+        .mui-popup-button.mui-popup-button-bold{
+            background-color: #FF6868;
+        }
+
+    }
+}
+
+// 上传图片
+.uploadImgBox{
+    // background-color: ;
+    h3{
+        height: 1.5rem;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        line-height: 1.5rem;
+        font-size:0.5rem;
+        color: #262626;
+        font-weight: normal;
+        padding-left: 0.75rem;
+    }
+    .cont{
+        padding: 0 1.25rem;
+        >div{
+            width: 6rem;
+            height: 4.5rem;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        >div:nth-child(odd){
+            float: left;
+        }
+        >div:nth-child(even){
+            float: right;
+        }
+        .noImg{
+            border:1px solid #aeaeae;
+            line-height: 4.5rem;
+            text-align: center;
+            font-size: 0.6rem;
+            color: #aeaeae;
+        }
+        .imgBox{
+            position: relative;
+            img{
+                float: left;
+                width:100%;
+                height: 100%;
+            }
+            span.del{
+                display: block;
+                width: 0.55rem;
+                height: 0.55rem;
+                line-height: 0.55rem;
+                text-align: center;
+                font-size: 0.4rem;
+                background-color: #F54F46;
+                color: #fff;
+                border-radius: 0.275rem;
+                position: absolute;
+                top: 0;
+                right: 0;
+            }
+        }
+        .uploadBox{
+            p{
+                font-size: 0.45rem;
+                color: #8c8c8c;
+                margin: 0;
+                padding: 0;
+                margin-top: 1rem;
+            }   
+            .uploadImgBtn{
+                width: 3.6rem;
+                height: 1rem;
+                background-color: #4768F3;
+                color: #fff;
+                text-align: center;
+                line-height: 1rem;
+                margin: 0 auto;
+                font-size: 0.45rem;
+                border-radius: 0.5rem;
+                margin-top: 0.5rem
+            }
+        }
+    }
+}

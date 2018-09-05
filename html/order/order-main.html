@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>首页</title>
+		<link rel="stylesheet" href="../../css/common.css">
+		<link rel="stylesheet" href="../../css/index.css">
+		<link rel="stylesheet" href="../../css/pagination.css">
+
+		<script type='text/javascript' src='../../js/include.js?ver=1' charset='utf-8'></script>
+		<script src="../../js/public.js"></script>
+		<script type="text/javascript" src="../../components/pagination.js"></script>
+		<script type="text/javascript" src="../../components/header.js"></script>
+		<script type="text/javascript" src="../../js/laydate/laydate.js"></script>
+
+		<style>
+			/*彈窗样式*/
+			
+			.alt_bg {
+				width: 100%;
+				height: 100%;
+				background-color: rgba(0, 0, 0, 0.4);
+				opacity: 0.4;
+				position: absolute;
+				left: 0px;
+				top: 0px;
+				z-index: 100;
+			}
+			
+			.alt_div {
+				width: 435px;
+				height: 320px;
+				border-radius: 10px;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				background-color: #fff;
+				margin-left: -217px;
+				margin-top: -160px;
+				z-index: 101;
+			}
+			
+			.alt_div_tit {
+				width: 100%;
+				height: 58px;
+				text-align: center;
+				line-height: 58px;
+				font-size: 20px;
+				color: #333333;
+				border-bottom: 1px solid #ececec;
+				position: relative;
+			}
+			
+			.alt_div_tit .alt_close {
+				position: absolute;
+				z-index: 5;
+				width: 60px;
+				height: 58px;
+				right: 0px;
+				top: 0
+			}
+			
+			.alt_div_tit .alt_close img {
+				width: 21px;
+				height: 21px;
+				margin: 20px auto;
+			}
+			
+			.alt_div_bot {
+				width: 100%;
+				padding-top: 5px;
+				overflow: hidden;
+			}
+			
+			.alt_div_bot .alt_div_li {
+				width: 100%;
+				margin-top: 20px;
+				height: 50px;
+			}
+			
+			.alt_div_li label {
+				display: inline-block;
+				text-align: right;
+				padding-right: 10px;
+				width: 124px;
+				height: 50px;
+				line-height: 50px;
+				font-size: 16px;
+				color: #666;
+			}
+			
+			.alt_div_li .input {
+				display: inline-block;
+				width: 270px;
+				height: 50px;
+				padding: 0 10px;
+				line-height: 50px;
+				color: #333333;
+				font-size: 16px;
+				border: solid 1px #e1e1e1;
+				border-radius: 4px;
+			}
+			
+			.alt_div_li .alt_btn {
+				width: 151px;
+				height: 42px;
+				background-color: #ff9900;
+				border-radius: 3px;
+				font-size: 16px;
+				color: #ffffff;
+				margin-left: 132px;
+				text-align: center;
+				line-height: 42px;
+				margin-top: 30px;
+			}
+			
+			.tab-con-table table tr td.prod_name {
+				width: 120px;
+				line-height: 86px;
+				display: block;
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="myOrderList">
+			<div class="alt_bg" :style="expressShow"></div>
+			<div class="alt_div" :style="expressShow">
+				<div class="alt_div_tit">
+					<p>快递信息</p>
+					<div class="alt_close"><img src="../../images/circle-fork-icon.png"></div>
+				</div>
+				<div class="alt_div_bot">
+					<div class="alt_div_li">
+						<label>快递公司:</label>
+						<select class="input" v-model="selected" @change="selectExpressCom">
+							<option v-bind:value="{c_express_name:'顺丰速运',c_express_code:'SF'}">顺丰速运</option>
+							<option v-bind:value="{c_express_name:'百世快递',c_express_code:'HTKY'}">百世快递</option>
+							<option v-bind:value="{c_express_name:'中通快递',c_express_code:'ZTO'}">中通快递</option>
+							<option v-bind:value="{c_express_name:'申通快递',c_express_code:'STO'}">申通快递</option>
+							<option v-bind:value="{c_express_name:'圆通速递',c_express_code:'YTO'}">圆通速递</option>
+							<option v-bind:value="{c_express_name:'韵达速递',c_express_code:'YD'}">韵达速递</option>
+							<option v-bind:value="{c_express_name:'EMS',c_express_code:'EMS'}">EMS</option>
+							<option v-bind:value="{c_express_name:'天天快递',c_express_code:'HHTT'}">天天快递</option>
+							<option v-bind:value="{c_express_name:'京东物流',c_express_code:'JD'}">京东物流</option>
+							<option v-bind:value="{c_express_name:'德邦',c_express_code:'DBL'}">德邦</option>
+							<option v-bind:value="{c_express_name:'宅急送',c_express_code:'ZJS'}">宅急送</option>
+						</select>
+					</div>
+					<div class="alt_div_li">
+						<label>快递单号:</label>
+						<input class="input" v-model="c_express_no" type="text" placeholder="请输入快递单号" />
+					</div>
+					<div class="alt_div_li">
+						<div class="alt_btn" @click="deliverOrder">确定发货</div>
+					</div>
+				</div>
+			</div>
+			<div id="headerDiv">
+				<header-component title="今借到信用借还商家版" quitName="退出登陆"></header-component>
+			</div>
+			<div class="main">
+				<div class="main-top">
+					<a href="#">首页</a><span>></span>
+					<a class="active" href="#">订单管理</a>
+				</div>
+				<!--整体内容开始-->
+				<div class="main-com clearfix">
+					<div class="main-left fl">
+						<ul class="main-left-ul">
+							<li>
+								<a href="../prod/publishProd.html"><i class="icon1"></i>发布新产品</a>
+							</li>
+							<li>
+								<a href="../prod/wareHouse.html"><i class="icon2"></i>商品管理</a>
+							</li>
+							<li class="active">
+								<a href="#"><i class="icon3"></i>订单管理</a>
+							</li>
+							<li>
+								<a href="../prod/chatting.html"><i class="icon4"></i>接待中心</a>
+							</li>
+						</ul>
+					</div>
+					<div class="main-rig-con fr">
+						<div class="main-rig-top">
+							<div class="search-box">
+								<div class="search-box-li wid380">
+									<label>订单号</label>
+									<input v-model="searchId" type="text" class="search-input">
+								</div>
+								<div class="search-box-li">
+									<label>成交时间</label>
+									<input v-model="startTime" type="text" class="search-input wid100" id="test1" placeholder="请选择起始日期">
+								</div>
+								<div class="search-box-li">
+									<label class="label-small">-</label>
+									<input v-model="endTime" type="text" class="search-input wid100" id="test2" placeholder="请选择结束日期">
+								</div>
+							</div>
+							<div class="search-box">
+								<div class="search-box-li wid380">
+									<label>商品名称</label>
+									<input v-model="proName" type="text" class="search-input">
+								</div>
+								<div class="search-box-li">
+									<label>商品品类</label>
+									<!--<input v-model="proType" type="text" class="search-input">-->
+									<select class="search-input select" v-model="proType">
+										<option disabled value="">请选择</option>
+										<option v-for="tp in prodTypeList" v-bind:value="tp.c_code">{{tp.c_value}}</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="search-btndiv">
+								<div class="serch-btn" @click="reset">重置</div>
+								<div class="serch-btn" @click="toSearch(allState)">搜索</div>
+							</div>
+						</div>
+
+						<div class="main-rig-bottom">
+							<div class="list-tab">
+								<div class="list-tab-li" :class="{'active': curState == allState}" @click="getCreated(allState)">全部</div>
+
+								<div class="list-tab-li" :class="{'active': curState == noPayState}" @click="getCreated(noPayState)">待付款</div>
+								<div class="list-tab-li" :class="{'active': curState == noSendSate}" @click="getCreated(noSendSate)">待发货</div>
+								<div class="list-tab-li" :class="{'active': curState == noReceiptSate}" @click="getCreated(noReceiptSate)">待收货</div>
+								<div class="list-tab-li" :class="{'active': curState == noReturnState}" @click="getCreated(noReturnState)">待还货</div>
+
+								<div class="list-tab-li" :class="{'active': curState == successSate}" @click="getCreated(successSate)">交易完成</div>
+								<div class="list-tab-li" :class="{'active': curState == cancelSate}" @click="getCreated(cancelSate)">交易关闭</div>
+								<div class="list-tab-li" :class="{'active': curState == refundSuccessSate}" @click="getCreated(refundSuccessSate)">售后完成</div>
+								<div class="list-tab-li" :class="{'active': curState == refundState}" @click="getCreated(refundState)">售后中</div>
+							</div>
+							<div class="tab-content">
+								<div class="tab-con-table">
+									<table>
+										<tr>
+											<th>序列号</th>
+											<th style="width: 120px;">商品</th>
+											<th>租金</th>
+											<th>数量</th>
+											<th>租客</th>
+											<th>交易状态</th>
+											<th>押金</th>
+											<th>租客收货日</th>
+											<th>预计还货日</th>
+											<th v-if="curState != cancelSate && curState != noPayState && curState != successSate && curState != refundSuccessSate && curState != noReceiptSate">操作</th>
+										</tr>
+										<tbody>
+											<template v-for="(order,index) in myOrderList">
+												<tr>
+													<td colspan="10" class="colspan">
+														<span>订单号：{{order.id}}</span>
+														<span>创建时间：{{order.t_crt_tm}}</span>
+													</td>
+												</tr>
+												<tr>
+													<td>{{index+1}}</td>
+													<td class="prod_name"> {{order.l_product[0].c_prod_name}}</td>
+													<td>￥{{utils.toYuan(order.l_product[0].n_rent_amt)}}</td>
+													<td>{{order.l_product[0].n_cnt}}</td>
+													<td>
+														<span>{{order.c_name}}</span>
+														<img src="../../images/chatting_logo.png" @click="toChatting(order.c_head,order.c_user_id)">
+													</td>
+													<td>
+														<p class="inline-p">{{order.c_sub_state}}</p>
+														<div @click="goToOrderDetail(order.id)">
+															<a class="detail_a">订单详情</a>
+														</div>
+													</td>
+													<td>
+														￥{{utils.toYuan(order.n_amt)}}<br />
+														<i class="col666">(含快递：￥{{utils.toYuan(order.l_product[0].n_express_amt)}})</i>
+													</td>
+													<td v-if="order.t_receipt_tm != null">
+														{{order.t_receipt_tm}}
+													</td>
+													<td v-else="order.t_receipt_tm == null">
+														- -
+													</td>
+													<td v-if="order.t_pre_return_tm != null">
+														{{order.t_pre_return_tm}}
+													</td>
+													<td v-else="order.t_pre_return_tm == null">
+														- -
+													</td>
+													<td>
+														<!--按钮备注：本人的订单包括【出借方为本人的】和【借物方为本人的】-->
+														<!------------------------------一、订单租赁流程操作------------------>
+														<!--1、发货：借物方付款后-->
+														<template v-if="!order.b_refund && order.n_sub_state == lend_to_deliver">
+															<div class="btn-operation" @click="toDeliverOrder(order)">发货</div>
+														</template>
+														<!--2、还货时，借物方发货后，出借人收到货后，如果货物损坏，可以向平台申请【租后索赔】；如果货物还货，则【确认收货】-->
+														<template v-if="!order.b_refund && order.n_sub_state == lend_to_receive">
+															<div class="btn-operation" @click="confirmRentReceipt(order.id)">确认收货</div>
+															<div class="btn-operation" @click="damageRent(order.id)">租后索赔</div>
+														</template>
+														<!------------------------------二、订单退货流程操作----------------->
+														<!--1、借物方把货退给出借人后，出借人需要【确认收货】、出借人发现货物有损坏，可以去平台申请【退后索赔】-->
+														<template v-else-if="order.b_refund && order.n_refund_state == refund_lend_to_receive">
+															<div class="btn-operation" @click="confirmRefundReceiveOrder(order.id)">确认收货</div>
+															<div class="btn-operation" @click="damageRefund(order.id)">退后索赔</div>
+														</template>
+														<template v-if="order.b_refund && order.n_refund_state == lend_to_confirm">
+															<div class="btn-operation" @click="checkRefundApply('false',order.id)">拒绝退货</div>
+															<div class="btn-operation" @click="checkRefundApply('true',order.id)">同意退货</div>
+														</template>
+													</td>
+													<td></td>
+													<td></td>
+													<td></td>
+												</tr>
+											</template>
+										</tbody>
+									</table>
+								</div>
+							</div>
+
+							<!--分页按钮-->
+							<div id="app" class="paging">
+								<navigation :pages="pagesCount" :current.sync="currPageNo" @navpage="pageTurn"></navigation>
+							</div>
+						</div>
+
+						<!--右侧结束-->
+					</div>
+
+					<!--整体内容结束-->
+				</div>
+			</div>
+		</div>
+	</body>
+	<script>
+		var vm = new Vue({
+			el: '#myOrderList',
+			data: {
+				myOrderList: [],
+				transOrderList: [], //点击搜索时，原来的订单页面会保存在这个list,当取消搜索时会在显示
+				lock: [{}, {}, {}, {}, {}, {}, {}],
+				noMoreData: false,
+
+				isAllState: false, //是否是全部状态
+				isSearchState: false, //是否点击搜索
+				keyWord: '', //搜索关键字
+
+				/********订单一级状态********/
+				allState: 10, //查询全部订单
+				noPayState: 0, //待付款
+				noSendSate: 2, //待发货
+				noReceiptSate: 3, //待收货和还货-待收
+				noReturnState: 4, //待还货
+				successSate: 6, //交易成功
+				cancelSate: 7, //交易取消
+				refundSuccessSate: 8, //售后完成（查询用）
+				refundState: 9, //退货中
+				curState: 10, //默认状态
+				transState: 0, //搜索中间过渡状态
+
+				/************订单二级状态******/
+				//订单正常流程
+				borrow_no_pay: 0, //等待借物方付款
+				lend_to_receive: 8, //8:等待出借方收货（还货中）
+				lend_to_deliver: 2, //2:等待出借方发货
+				//退货
+				lend_to_confirm: 0, //等待出借方确认
+				refund_lend_to_receive: 2, //2:等待出借方收货
+
+				moreText: '更多',
+				scrollLock: false, //分页标识
+
+				pageRowsNo: 5, //列表每页页数
+				currPageNo: 1, //当前列表页码
+				pagesCount: 0, //列表共有多少页数
+
+				expressShow: "display:none", //发货弹框
+				selected: '',
+				c_express_name: '', //快递名
+				c_express_code: '', //快递公司简称
+				c_express_no: '', //物流号
+				orderId: '',
+
+				//搜索
+				searchId: '',
+				startTime: document.getElementById("test1").value,
+				endTime: document.getElementById("test2").value,
+				proName: '',
+				proType: '',
+				isSearch: false,
+				prodTypeList: [] //商品类型
+			},
+			created: function() {
+				var curState = utils.getArg("curState");
+				if(curState) {
+					window.sessionStorage.curState = curState;
+				}
+				if(!utils.isNull(window.sessionStorage.curState)) {
+					this.curState = window.sessionStorage.curState;
+					window.sessionStorage.curState = '';
+				}
+				if(!utils.isNull(window.sessionStorage.keyWord)) {
+					this.keyWord = window.sessionStorage.keyWord;
+					window.sessionStorage.keyWord = '';
+				}
+				if(!utils.isNull(window.sessionStorage.isSearchState)) {
+					this.isSearchState = window.sessionStorage.isSearchState;
+					window.sessionStorage.isSearchState = '';
+				}
+				if(!utils.isNull(window.sessionStorage.transState)) {
+					this.transState = window.sessionStorage.transState;
+					window.sessionStorage.transState = '';
+				}
+				if(!utils.isNull(window.sessionStorage.transOrderList)) {
+					this.transOrderList = JSON.parse(window.sessionStorage.transOrderList);
+					window.sessionStorage.transOrderList = '';
+				}
+				var url = config.LEASE_URL + "/prod/getSystemType";
+				var parames = {
+					"type": "prod_"
+				};
+				utils.postAndDealBySelf(url, parames, {}, function(res) {
+					if(res.code === 200 && !utils.isNull(res.object) && !utils.isNull(res.object.list)) {
+						vm.prodTypeList = res.object.list;
+					} else {
+						Chef.alert({
+							'content': res.message,
+							'title': '提醒'
+						});
+						return;
+					}
+				});
+				this.getCreated(this.curState);
+			},
+			methods: {
+				//搜索===start====================
+				toSearch: function(state) {
+					var that = this;
+					this.myOrderList = [];
+					this.curState = state;
+					this.currPageNo = 1;
+					this.isAllState = false;
+					this.noMoreData = false;
+					this.isSearch = true;
+					this.getSearchPageData(state);
+				},
+				getSearchPageData: function(state) {
+					var that = this;
+					var curPage = this.currPageNo;
+					var startNum = (curPage - 1) * this.pageRowsNo;
+					var searchWord = '';
+					that.myOrderList = [];
+					//              var date1 = document.getElementById("test1").value;
+					//              var date2 = document.getElementById("test2").value;
+					//              console.log(date1)
+					var params = {
+						start: startNum,
+						limit: that.pageRowsNo,
+						n_state: state,
+						//搜索关键字
+						searchId: that.searchId,
+						startTime: that.startTime,
+						endTime: that.endTime,
+						proName: that.proName,
+						proType: that.proType
+					};
+					utils.postAndDealBySelf(config.LEASE_MERCHANT_URL + "/order/getSubOrderList", params, {}, function(result) {
+						if(!utils.isNull(result)) {
+							console.log(result);
+							var totalCount = result.object.pageTotalCount;
+							var dataList = result.object.ordermap;
+							var pagesize = that.pageRowsNo;
+							that.pagesCount = Math.ceil(totalCount / pagesize);
+							for(var i = 0; i < dataList.length; i++) {
+								if(!(dataList[i].n_sub_state == that.borrow_no_pay && !dataList[i].b_pro_valid)) {
+									that.myOrderList.push(dataList[i]);
+									//	                    		console.log(dataList[i]);
+								}
+							}
+						} else {
+							that.noMoreData = true;
+						}
+					});
+				},
+				reset: function() {
+					//搜索关键字
+					this.searchId = '',
+						this.startTime = '',
+						this.endTime = '',
+						this.proName = '',
+						this.proType = ''
+				},
+				//搜索===end===========================
+				//退货审核
+				checkRefundApply: function(flag, id) {
+					if(utils.isNull(flag) || utils.isNull(id)) {
+						//					mui.alert("请刷新后操作！");
+						Chef.alert({
+							'content': "请刷新后操作！",
+							'title': '提醒'
+						});
+						return;
+					}
+					var tip = "";
+					var checkResult = "";
+					if(flag == 'false') {
+						tip = "您确认拒绝退货申请吗？";
+						checkResult = "false";
+					} else {
+						tip = "您确认同意退货申请吗？";
+						checkResult = "true";
+					}
+					Cpop.confirm({
+						'content': tip,
+						'title': '操作提示',
+						firm: '再想想',
+						firm2: '确认',
+						firmFn: function(flag) {
+							if(flag == 1) {
+								var data = {
+									id: id,
+									checkResult: checkResult
+								};
+								utils.post(config.LEASE_MERCHANT_URL + '/orderRefund/checkRefundApply', data, vm.lock[0], function(json) {
+									Chef.show("审批完成");
+									that.getCreated(that.refundState);                
+								});
+							} else {
+								return;
+							}
+						}
+					});
+				},
+
+				//确认收货--正常收货和还货
+				confirmRentReceipt: function(id) {
+					var that = this;
+					if(utils.isNull(id)) {
+						return;
+					}
+					Cpop.confirm({
+						'content': '是否确定收货？',
+						'title': '操作提示',
+						firm: '取消',
+						firm2: '确认',
+						firmFn: function(flag) {
+							if(flag == 1) {
+								utils.get(config.LEASE_MERCHANT_URL + '/order/confirmRentReceipt', {
+									id: id
+								}, that.lock[0], function(json) {
+									Chef.show("收货成功！");
+									that.getCreated(that.noReturnState);
+								});
+							}
+						}
+					});
+				},
+				//租后索赔
+				damageRent: function(id) {
+					var that = this;
+					if(utils.isNull(id)) {
+						return;
+					}
+					Cpop.confirm({
+						'content': '确定申请理赔吗？',
+						'title': '操作提示',
+						firm: '取消',
+						firm2: '确认',
+						firmFn: function(flag) {
+							if(flag == 1) {
+								utils.post(config.LEASE_MERCHANT_URL + '/orderRefund/updateDamageOrderRent', {
+									id: id
+								}, that.lock[0], function(json) {
+									Chef.show("索赔申请提交成功！");
+									that.getCreated(that.noReceiptSate);
+								});
+							}
+						}
+					});
+				},
+				//退后索赔
+				damageRefund: function(id) {
+					var that = this;
+					if(utils.isNull(id)) {
+						return;
+					}
+					Cpop.confirm({
+						'content': '确定申请理赔吗？',
+						'title': '操作提示',
+						firm: '取消',
+						firm2: '确认',
+						firmFn: function(flag) {
+							if(flag == 1) {
+								utils.post(config.LEASE_MERCHANT_URL + '/orderRefund/updateDamageOrderRefund', {
+									id: id
+								}, that.lock[0], function(json) {
+									Chef.show("索赔申请提交成功！");
+									that.getCreated(that.refundState);
+								});
+							}
+						}
+					});
+				},
+
+				//确认收货--退货
+				confirmRefundReceiveOrder: function(id) {
+					var that = this;
+					if(utils.isNull(id)) {
+						return;
+					}
+					Cpop.confirm({
+						'content': '是否确认收货？',
+						'title': '操作提示',
+						firm: '取消',
+						firm2: '确认',
+						firmFn: function(flag) {
+							if(flag == 1) {
+								utils.get(config.LEASE_MERCHANT_URL + '/orderRefund/confirmRefundReceiveOrder', {
+									id: id
+								}, that.lock[0], function(json) {
+									Chef.show("收货成功！");
+									that.getCreated(that.refundState);
+								});
+							}
+						}
+					});
+				},
+				showAllOrder: function() {
+					this.isAllState = true;
+				},
+				//订单详情页
+				goToOrderDetail: function(id) {
+					if(!utils.isNull(id)) {
+						window.sessionStorage.curState = this.curState;
+						window.sessionStorage.transState = this.transState;
+						window.sessionStorage.keyWord = this.keyWord;
+						window.sessionStorage.isSearchState = this.isSearchState;
+						window.sessionStorage.transOrderList = JSON.stringify(this.transOrderList);
+						window.sessionStorage.orderId = id;
+						utils.go('order-detail.html?id=' + id);
+					}
+				},
+				//保存搜索记录
+				//			saveSearchRecording:function(){
+				//				utils.post(config.LEASE_MERCHANT_URL + '/order/addSearchRecording', {keyWord:this.keyWord}, this.lock[1], function (result) {});
+				//			},
+				getPageData: function(state) {
+					var that = this;
+					var curPage = this.currPageNo;
+					var startNum = (curPage - 1) * this.pageRowsNo;
+					var searchWord = '';
+					that.myOrderList = [];
+					if(this.isSearchState = true && state == this.allState && !utils.isNull(this.keyWord)) {
+						searchWord = this.keyWord;
+						/*搜索记录暂时去掉*/
+						//              	this.saveSearchRecording();
+					}
+					var params = {
+						start: startNum,
+						limit: that.pageRowsNo,
+						n_state: state,
+						proName: searchWord,
+					};
+					utils.postAndDealBySelf(config.LEASE_MERCHANT_URL + "/order/getSubOrderList", params, {}, function(result) {
+						if(!utils.isNull(result)) {
+							//	                	console.log(result);
+							var totalCount = result.object.pageTotalCount;
+							var dataList = result.object.ordermap;
+							var pagesize = that.pageRowsNo;
+							that.pagesCount = Math.ceil(totalCount / pagesize);
+							for(var i = 0; i < dataList.length; i++) {
+								if(!(dataList[i].n_sub_state == that.borrow_no_pay && !dataList[i].b_pro_valid)) {
+									that.myOrderList.push(dataList[i]);
+									//	                    		console.log(dataList[i]);
+								}
+							}
+						} else {
+							that.noMoreData = true;
+						}
+					});
+				},
+				/*初始化页面数据*/
+				getCreated: function(state) {
+					var that = this;
+					this.myOrderList = [];
+					this.curState = state;
+					this.currPageNo = 1;
+					this.isAllState = false;
+					this.noMoreData = false;
+					this.isSearch = false;
+					this.getPageData(state);
+				},
+
+				pageTurn: function(curPage) { //翻页
+					//根据当前页获取数据
+					if(this.isSearch = false) {
+						this.currPageNo = curPage;
+						this.getPageData(this.curState);
+						console.log("当前页：" + this.currPageNo);
+					} else {
+						this.currPageNo = curPage;
+						this.getSearchPageData(this.curState);
+						console.log("当前页：" + this.currPageNo);
+					}
+				},
+				//发货
+				toDeliverOrder: function(order) {
+					var that = this;
+					that.orderId = order.id;
+					Cpop.confirm({
+						'content': '是否确定发货？',
+						'title': '操作提示',
+						firm: '取消',
+						firm2: '确认',
+						firmFn: function(flag) {
+							if(flag == 1) {
+								if(order.n_get_method == 2) { //通过快递发货
+									window.sessionStorage.curState = that.curState;
+									window.sessionStorage.orderId = order.id;
+									window.sessionStorage.expressText = "";
+									window.sessionStorage.expressValue = "";
+									that.expressShow = '';
+								} else { //到店自取
+									var url = config.LEASE_MERCHANT_URL + "/order/updateSendOrder";
+									var data = {
+										id: order.id
+									};
+									utils.post(url, data, that.lock[0], function(res) {
+										Chef.show('发货成功');
+										that.getCreated(that.noSendSate);
+									});
+								}
+							}
+						}
+					});
+				},
+				/*发货信息框*/
+				deliverOrder: function() {
+					if(utils.isNull(this.c_express_name) || utils.isNull(this.c_express_code)) {
+						//					Chef.alert("请选择快递公司");
+						Chef.alert({
+							'content': "请选择快递公司",
+							'title': '提醒'
+						});
+						return;
+					}
+					if(utils.isNull(this.c_express_no)) {
+						//					Chef.alert("请填写快递单号");
+						Chef.alert({
+							'content': "请填写快递单号",
+							'title': '提醒'
+						});
+						return;
+					}
+					var url = config.LEASE_MERCHANT_URL + "/order/updateDeliverOrder";
+					var data = {
+						id: this.orderId,
+						c_express_name: this.c_express_name,
+						c_express_no: this.c_express_no,
+						c_express_code: this.c_express_code
+					};
+					utils.post(url, data, this.lock, function(res) {
+						vm.expressShow = 'display:none';
+					});
+					Chef.show('发货成功');
+					//保存物流消息
+					window.sessionStorage.c_express_code = this.c_express_code;
+					window.sessionStorage.c_express_no = this.c_express_no;
+					window.sessionStorage.orderId = this.orderId;
+
+					this.c_express_name = '';
+					this.c_express_no = '';
+					this.c_express_code = '';
+					this.getPageData(this.curState);
+				},
+				//物流公司选择
+				selectExpressCom: function(expressText, expressValue) {
+					vm.c_express_name = vm.selected.c_express_name;
+					vm.c_express_code = vm.selected.c_express_code;
+				},
+				toChatting: function(userChead, userId) {
+					//				console.log(userChead+"--"+userId)
+					utils.go("../prod/chatting.html?userId=" + userId + "&&userChead=" + userChead)
+
+				}
+			}
+		});
+	</script>
+	<script>
+		lay('#version').html('-v' + laydate.v);
+		//执行一个laydate实例
+		laydate.render({
+			elem: '#test1', //指定元素
+			done: function(value, date, endDate) {
+				vm.startTime = value;
+				//  console.log(value); //得到日期生成的值，如：2017-08-18
+				//  console.log(date); //得到日期时间对象：{year: 2017, month: 8, date: 18, hours: 0, minutes: 0, seconds: 0}
+				//  console.log(endDate); //得结束的日期时间对象，开启范围选择（range: true）才会返回。对象成员同上。
+			}
+		});
+	</script>
+	<script>
+		lay('#version').html('-v' + laydate.v);
+		//执行一个laydate实例
+		laydate.render({
+			elem: '#test2', //指定元素
+			done: function(value, date, endDate) {
+				vm.endTime = value;
+			}
+		});
+	</script>
+
+</html>

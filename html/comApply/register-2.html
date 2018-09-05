@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册第二步</title>
+
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/index.css">
+
+    <link rel="stylesheet" href="../../css/common-header.css" />
+    <link rel="stylesheet" href="../../css/common1.css" />
+    <link rel="stylesheet" href="../../components/component.css" />
+
+    <script src="../../js/include.js"></script>
+    <script src="../../js/common1.js"></script>
+    <script src="../../js/webim.config.js"></script>
+    <script src="../../js/strophe-1.2.8.min.js"></script>
+    <script src="../../js/websdk-1.4.13.js"></script>
+    <script src="../../js/websdk.shim.js"></script>
+    <script src="../../components/md5.min.js"></script>
+    <script src="../../components/setPayPass.js"></script>
+    <script src="../../js/exif.js"></script>
+    <style>
+        html,body{
+            width:100%;
+            background-color: #eeeeee;
+        }
+    </style>
+</head>
+<body>
+<div v-cloak id="regist">
+<div class="pub-header">
+    <div class="pub-header-com">
+        <p>今借到 信用借还商家版</p>
+        <p class="pub-header-rig" @click="toLogin()">登录</p>
+    </div>
+</div>
+<div class="regs-head">
+    <div class="regs-head-com">
+        <div class="regs-head-line"></div>
+        <ul>
+            <li class="pass">
+                <span><i></i></span>
+                <p>账户信息</p>
+            </li>
+            <li class="active">
+                <span><i></i></span>
+                <p>证照信息</p>
+            </li>
+            <li>
+                <span><i></i></span>
+                <p>商铺信息</p>
+            </li>
+            <li>
+                <span><i></i></span>
+                <p>信息确认</p>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="login-com regs_login">
+    <div class="login-toptit">
+        <i></i><span>注册第二步</span>
+    </div>
+    <div class="login-botcom mat60">
+        <div class="login-group">
+            <label><i>*</i>法定姓名/代理人姓名</label>
+            <input v-model="name" type="text" class="group-input3" v-on:blur="inputBlur(0)">
+            <div class="tick" v-show="rightShow[0]"></div>
+            <div class="hint disinble" v-show="errorShow[0]">
+                <!--* 请输入合法手机号-->
+            </div>
+        </div>
+        <div class="login-group">
+            <label><i>*</i>身份证号</label>
+            <input v-model="idNum" type="text" class="group-input3" v-on:blur="inputBlur(1)">
+            <div class="tick" v-show="rightShow[1]"></div>
+            <div class="hint disinble" v-show="errorShow[1]">
+                * 请输入身份证号
+            </div>
+        </div>
+        <div class="login-group heiauto" >
+
+            <label><i>*</i>法人身份证正反面</label>
+            <div class="ident-div"  >
+                <div class="ident mal35" v-show="showAdd" @click="upload('uploadLogo')"><img src="../../images/ident-add.png"></div>
+                <div class="ident-img" v-show="showPic" @click="upload('uploadLogo')"><img v-if="iIdCardFrontShow" v-bind:src="iIdCardFront" /></div>
+                <span></span>
+                <input id="uploadLogo" type="file" @change="choosePic($event,1)" accept="image/*" style="display:none"/>
+
+                <div class="ident" v-show="showAdd2" @click="upload2('uploadLogo2')"><img src="../../images/ident-add.png"></div>
+                <div class="ident-img" v-show="showPic2" @click="upload2('uploadLogo2')"><img v-if="iIdCardBackShow" v-bind:src="iIdCardBack" /></div>
+                <span></span>
+                <input id="uploadLogo2" type="file" @change="choosePic($event,2)" accept="image/*" style="display:none"/>
+            </div>
+            <div class="hint disblock" v-show="showAdd2 || showAdd">
+                * 请上传法人身份证正反面
+            </div>
+
+        </div>
+
+
+        <!--<div class="login-group heiauto">-->
+
+            <!--<label><i>*</i>法人身份证正反面</label>-->
+            <!--<div class="ident-div">-->
+                <!--<div class="ident mal35"><img src="../../images/ident-add.png"></div>-->
+                <!--<div class="ident"><img src="../../images/ident-add.png"></div>-->
+            <!--</div>-->
+            <!--<div class="hint disblock">-->
+                <!--* 请上传法人身份证正反面-->
+            <!--</div>-->
+
+            <!--<label><i>*</i>法人身份证反面</label>-->
+            <!--<div class="ident-div">-->
+                <!--<div class="ident-img"><img v-if="iIdCardBackShow" v-bind:src="iIdCardBack" /></div>-->
+                <!--<span></span>-->
+                <!--<input type="file" @change="choosePic($event,2)" accept="image/*" />-->
+            <!--</div>-->
+        <!--</div>-->
+
+        <div class="login-group heiauto">
+            <label><i>*</i>营业执照</label>
+            <div class="ident-div">
+                <div class="ident mal35" v-show="showAdd3" @click="upload3('uploadLogo3')"><img src="../../images/ident-add.png"></div>
+                <!--<div class="ident-edit"><i></i><span>编辑</span></div>-->
+                <div class="ident-img" v-show="showPic3" @click="upload3('uploadLogo3')"><img v-if="businessPicShow" v-bind:src="businessPic" /></div>
+                <span></span>
+                <input id="uploadLogo3" type="file" @change="choosePic($event,6)" class="uploadIpt" accept="image/*" style="display:none"/>
+            </div>
+            <div class="hint disblock" v-show="showAdd3">
+                * 请上传法人身份证正反面
+            </div>
+        </div>
+
+        <div class="form-btn-div mabt120">
+            <!--<div class="form-btn mar80" @click="up">上一步</div>-->
+            <div class="form-btn active" @click="next">下一步</div>
+            <!--<div class="form-btn mal80" @click="skip">跳过</div>-->
+        </div>
+    </div>
+</div>
+</div>
+</body>
+<script>
+    var vm = new Vue({
+        el: "#regist",
+        data: {
+            showAdd:true,
+            showPic:false,
+            showAdd2:true,
+            showPic2:false,
+            showAdd3:true,
+            showPic3:false,
+            name: "",
+            idNum: "",
+            xieyi: "Y",
+            dailiren: "N",
+            agentshow: false,
+            iIdCardFrontShow: false,
+            iIdCardFront: "",
+            iIdCardBackShow: false,
+            iIdCardBack: "",
+            inputClearBtnStatus: [false, false],
+            agentIdCardFrontShow: false,
+            agentIdCardFront: "",
+            agentIdCardBackShow: false,
+            agentIdCardBack: "",
+            proxPicShow: false,
+            proxPic: "",
+            businessPicShow: false,
+            businessPic: "",
+            waitApplyData: {},
+            bsending: [{}, {}, {}, {}],
+            lock: {},
+            ifNext: false,
+            errorShow: [false, false, false, false],
+            rightShow: [false, false, false, false],
+        },
+        computed: {
+            //判断是否是代理人
+            isOrNotAgent: function () {
+                if (this.dailiren === 'N') {
+                    return false;
+                } else if (this.dailiren === 'Y') {
+                    return true;
+                }
+            }
+        },
+        methods: {
+            toLogin:function () {
+                utils.go("../index/login.html")
+            },
+            upload:function (uploadId) {
+                document.getElementById(uploadId).click();
+                vm.showAdd = false;
+                vm.showPic = true;
+            },
+            upload2:function (uploadId) {
+                document.getElementById(uploadId).click();
+                vm.showAdd2 = false;
+                vm.showPic2 = true;
+            },
+            upload3:function (uploadId) {
+                document.getElementById(uploadId).click();
+                vm.showAdd3 = false;
+                vm.showPic3 = true;
+            },
+            skip: function () {
+                Cpop.confirm({
+                    'content':'跳过',
+                    'title':'提示',
+                    firm:'取消',
+                    firm2:'确认',
+                    firmFn:function(flag) {
+                        if(flag == 0) {
+                            window.location.reload();
+                        }else{
+                            utils.go('../prod/wareHouse.html');//
+                        }
+                    }
+                })
+
+            },
+            againApply: function () {
+                var waitApplyData = {};
+                if (window.sessionStorage.waitApplyData) {
+                    waitApplyData = JSON.parse(window.sessionStorage.waitApplyData);
+                }
+                var cTelephone = window.localStorage.storageTel;
+                var url = config.LEASE_MERCHANT_URL + "/com/againApply";
+                var params = {
+                    c_telephone: cTelephone
+                };
+                utils.post(url, params, {}, function (json) {
+                    var comApply = json.model;
+                    for (var key in comApply) {
+                        if (key != 'cGeohash') {
+                            waitApplyData[key] = comApply[key];
+                        }
+                    }
+                    waitApplyData.iIdCardFront = json.iIdCardFront;
+                    waitApplyData.iIdCardBack = json.iIdCardBack;
+                    if(json.iIdCardBack!=null){
+                        vm.showAdd=false,
+                            vm.showPic=true,
+                            vm.showAdd2=false,
+                            vm.showPic2=true,
+                            vm.showAdd3=false,
+                            vm.showPic3=true
+                    }
+                    waitApplyData.agentIdCardFront = json.agentIdCardFront;
+                    waitApplyData.agentIdCardBack = json.agentIdCardBack;
+                    if (json.agentIdCardFront || json.agentIdCardBack) {
+                        waitApplyData.bProx = true;
+                    }
+                    waitApplyData.cProxyPic = json.cProxyPic;
+                    waitApplyData.cLogo = json.cLogo;
+                    waitApplyData.cBusinessLicenseImg = json.cBusinessLicenseImg;
+                    waitApplyData.externalPic = json.externalPic;
+                    waitApplyData.insidePic = json.insidePic;
+                    waitApplyData.comArea = json.comArea;
+                    window.sessionStorage.waitApplyData = JSON.stringify(waitApplyData);
+                    vm.waitApplyData = JSON.parse(window.sessionStorage.waitApplyData);
+                    waitApplyData = JSON.parse(window.sessionStorage.waitApplyData);
+                    //初始化赋值
+                    if (waitApplyData.cLegalPerson) {
+                        vm.name = waitApplyData.cLegalPerson;
+                    }
+                    if (waitApplyData.cLegalIdCardNo) {
+                        vm.idNum = waitApplyData.cLegalIdCardNo;
+                    }
+
+                    if (waitApplyData.bLocal === true) {
+                        vm.xieyi = "N"
+                    }
+                    if (waitApplyData.iIdCardFront) {
+                        vm.iIdCardFrontShow = true;
+                        vm.iIdCardFront = waitApplyData.iIdCardFront;
+                    }
+                    if (waitApplyData.iIdCardBack) {
+                        vm.iIdCardBackShow = true;
+                        vm.iIdCardBack = waitApplyData.iIdCardBack;
+                    }
+
+                    if (waitApplyData.bProx === true) {
+//							vm.agentshow = true;
+                        vm.dailiren = 'Y';
+                        if (waitApplyData.agentIdCardFront) {
+                            vm.agentIdCardFrontShow = true;
+                            vm.agentIdCardFront = waitApplyData.agentIdCardFront;
+                        }
+                        if (waitApplyData.agentIdCardBack) {
+                            vm.agentIdCardBackShow = true;
+                            vm.agentIdCardBack = waitApplyData.agentIdCardBack;
+                        }
+                        if (waitApplyData.cProxyPic) {
+                            vm.proxPicShow = true;
+                            vm.proxPic = waitApplyData.cProxyPic;
+                        }
+                    }
+                    if (waitApplyData.cBusinessLicenseImg) {
+                        vm.businessPicShow = true;
+                        vm.businessPic = waitApplyData.cBusinessLicenseImg;
+                    }
+                });
+            },
+            up:function () {
+                utils.go("register.html");
+            },
+            next: function () {
+                if (vm.name == '') {
+                    Chef.alert({
+                        'title': '提醒',
+                        'content': '请输入法人/代理人姓名'
+                    });
+                    return
+                }
+                if (!vm.idNum) {
+                   Chef.alert({
+                        'title': '提醒',
+                        'content': '请输入身份证号'
+                    });
+                    return
+                }
+
+                if (!utils.checkIdCardNo(vm.idNum)) {
+                    Chef.alert({
+                        'title': '提醒',
+                        'content': '请输入正确的身份证号'
+                    });
+                    return
+                }
+
+
+                if (!vm.iIdCardFront) {
+                    Chef.alert({
+                        'title': '提醒',
+                        'content': '请上传法人身份证前面'
+                    });
+                    return
+                }
+                if (!vm.iIdCardBack) {
+                    Chef.alert({
+                        'title': '提醒',
+                        'content': '请上传法人身份证后面'
+                    });
+                    return
+                }
+//                if (vm.isOrNotAgent === true) {
+//                    if (!vm.agentIdCardFront) {
+//                        mui.alert("请上传代理人身份信息", '提醒', '知道了');
+//                        return;
+//                    }
+//                    if (!vm.agentIdCardBack) {
+//                        mui.alert("请上传代理人身份信息", '提醒', '知道了');
+//                        return;
+//                    }
+//                    if (!vm.proxPic) {
+//                        mui.alert("请上传委托代理书扫描件", '提醒', '知道了');
+//                        return;
+//                    }
+//                }
+                if (!vm.businessPic) {
+                    Chef.alert({
+                        'title': '提醒',
+                        'content': '请上传营业执照'
+                    });
+                    return
+                }
+                vm.waitApplyData.cLegalPerson = vm.name;
+                vm.waitApplyData.cLegalIdCardNo = vm.idNum;
+                vm.waitApplyData.iIdCardFront = vm.iIdCardFront;
+                vm.waitApplyData.iIdCardBack = vm.iIdCardBack;
+                vm.waitApplyData.bProx = false;
+                if (vm.isOrNotAgent === true) {
+                    vm.waitApplyData.bProx = vm.isOrNotAgent;
+                    vm.waitApplyData.agentIdCardFront = vm.agentIdCardFront;
+                    vm.waitApplyData.agentIdCardBack = vm.agentIdCardBack;
+                    vm.waitApplyData.cProxyPic = vm.proxPic;
+                }
+
+                vm.waitApplyData.cBusinessLicenseImg = vm.businessPic;
+                window.sessionStorage.waitApplyData = JSON.stringify(vm.waitApplyData);
+                vm.ifNext = true;
+
+//                var o1 = document.getElementById("hbg");
+//                o1.style.width = document.getElementById("content").scrollWidth + "px";
+//                o1.style.height = document.getElementById("content").scrollHeight + "px";
+//                o1.style.display = "block";
+
+                var saveUrl = config.LEASE_MERCHANT_URL + "/com/apply";
+                /*
+                 utils.post(saveUrl, vm.waitApplyData, vm.bsending[0], function (res) {
+                 utils.go("register-3.html");
+                 vm.ifNext = false;
+                 });
+                 */
+
+                utils.postAndDealBySelf(saveUrl, vm.waitApplyData, {}, function (jsn) {
+                   if (jsn.code === 200) {
+                        utils.go("register-3.html");
+                        vm.ifNext = false;
+                        if (window.sessionStorage.cookieData) {
+                            window.sessionStorage.cookieData = null;
+                        }
+                    } else {
+                        if (!utils.isNull(jsn.message)) {
+                            Chef.alert({
+                                'title': '提醒',
+                                'content': '空消息'
+                            });
+                            return
+                        } else {
+                            Chef.alert({
+                                'title': '提醒',
+                                'content': '异常'
+                            });
+                            return
+                        }
+                        vm.ifNext = false;
+ //                       o1.style.display = "none";
+                   }
+                });
+            },
+            choosePic: function (event, type) {
+                var files = event.currentTarget.files;
+
+                var selector = document.createElement('img');
+
+                vm.compress1(selector, files[0], 0, type)
+            },
+            compress1: function (selector, file, n, type) {
+                var that = this
+                var Orientation = 1;
+                EXIF.getData(file, function () {
+                    Orientation = EXIF.getTag(this, 'Orientation');
+                });
+                if (!n) {
+                    var n = 1;
+                }
+                ;
+
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    var image = selector;
+                    image.onload = function () {
+                        var data = that.compress_rectangle(Orientation, this, 1280);
+                        var data_s = that.compress_rectangle(Orientation, this, 430);
+
+                        switch (type) {
+                            case 1:
+                                vm.iIdCardFront = data;
+                                vm.iIdCardFrontShow = true;
+                                break;
+                            case 2:
+                                vm.iIdCardBack = data;
+                                vm.iIdCardBackShow = true;
+                                break;
+                            case 3:
+                                vm.agentIdCardFront = data;
+                                vm.agentIdCardFrontShow = true;
+                                break;
+                            case 4:
+                                vm.agentIdCardBack = data;
+                                vm.agentIdCardBackShow = true;
+                                break;
+                            case 5:
+                                vm.proxPic = data;
+                                vm.proxPicShow = true;
+                                break;
+                            case 6:
+                                vm.businessPic = data;
+                                vm.businessPicShow = true;
+                                break;
+                            default:
+                                break;
+                        }
+                    };
+                    image.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            },
+            compress_rectangle: function (Orientation, img, max) {
+                var canvas = document.createElement('canvas');
+                // if (checkAppleBrowser() && Orientation && Orientation != 1) {
+                if (utils.browser().ios && Orientation && Orientation != 1) {
+                    switch (Orientation) {
+                        case 6: //需要顺时针（向左）90度旋转
+                            var expectWidth = img.height;
+                            var expectHeight = img.width;
+                            if (expectWidth > expectHeight) {
+                                if (expectWidth > max) {
+                                    expectWidth = max;
+                                    expectHeight = max * img.width / img.height;
+                                }
+                            } else {
+                                if (expectHeight > max) {
+                                    expectHeight = max;
+                                    expectWidth = max * img.height / img.width;
+                                }
+                            }
+                            canvas.width = expectWidth;
+                            canvas.height = expectHeight;
+                            var context = canvas.getContext('2d');
+                            context.clearRect(0, 0, expectWidth, expectHeight);
+                            context.rotate(1 * 90 * Math.PI / 180);
+                            context.drawImage(img, 0, -expectWidth, expectHeight, expectWidth);
+                            break;
+                        case 8: //需要逆时针（向右）90度旋转
+                            var expectWidth = img.height;
+                            var expectHeight = img.width;
+                            if (expectWidth > expectHeight) {
+                                if (expectWidth > max) {
+                                    expectWidth = max;
+                                    expectHeight = max * img.width / img.height;
+                                }
+                            } else {
+                                if (expectHeight > max) {
+                                    expectHeight = max;
+                                    expectWidth = max * img.height / img.width;
+                                }
+                            }
+                            canvas.width = expectWidth;
+                            canvas.height = expectHeight;
+                            var context = canvas.getContext('2d');
+                            context.clearRect(0, 0, expectWidth, expectHeight);
+                            context.rotate(3 * 90 * Math.PI / 180);
+                            context.drawImage(img, -expectWidth, 0, expectHeight, expectWidth);
+                            break;
+                        case 3: //需要180度旋转
+                            var expectWidth = img.height;
+                            var expectHeight = img.width;
+                            if (expectWidth > expectHeight) {
+                                if (expectWidth > max) {
+                                    expectWidth = max;
+                                    expectHeight = max * img.height / img.width;
+                                }
+                            } else {
+                                if (expectHeight > max) {
+                                    expectHeight = max;
+                                    expectWidth = max * img.width / img.height;
+                                }
+                            }
+                            canvas.width = expectWidth;
+                            canvas.height = expectHeight;
+                            var context = canvas.getContext('2d');
+                            context.clearRect(0, 0, expectWidth, expectHeight);
+                            context.rotate(2 * 90 * Math.PI / 180);
+                            context.drawImage(img, -expectWidth, -expectHeight, expectWidth, expectHeight);
+                            break;
+                        default:
+                            break;
+                    }
+                } else {
+                    var expectWidth = img.naturalWidth;
+                    var expectHeight = img.naturalHeight;
+                    if (expectWidth > expectHeight) {
+                        if (expectWidth > max) {
+                            expectWidth = max;
+                            expectHeight = max * img.naturalHeight / img.naturalWidth;
+                        }
+                    } else {
+                        if (expectHeight > max) {
+                            expectHeight = max;
+                            expectWidth = max * img.naturalWidth / img.naturalHeight;
+                        }
+                    }
+                    canvas.width = expectWidth;
+                    canvas.height = expectHeight;
+                    var context = canvas.getContext('2d');
+                    context.clearRect(0, 0, canvas.width, canvas.height);
+                    context.drawImage(img, 0, 0, expectWidth, expectHeight);
+                }
+                return canvas.toDataURL('image/jpeg');
+            },
+            inputBlur: function (n) {
+                switch (n) {
+                    case 0:
+                        //姓名不为空
+                        if (vm.name == '') {
+                                this.$set(this.rightShow, n, false)
+                                this.$set(this.errorShow, n, true)
+                            }
+                            else{
+                                this.$set(this.rightShow, n, true)
+                                this.$set(this.errorShow, n, false)
+                        }
+                        break
+                    case 1:
+                        if (!utils.checkIdCardNo(vm.idNum)) {
+                                this.$set(this.rightShow, n, false)
+                                this.$set(this.errorShow, n, true)
+                            }
+                            else{
+                                this.$set(this.rightShow, n, true)
+                                this.$set(this.errorShow, n, false)
+                            }
+                }
+            },//method
+        },
+
+        created:function () {
+            var ss = window.sessionStorage.waitApplyData;//字符串
+            var token = window.sessionStorage.token;
+            if(utils.isNull(token)){
+                utils.replace('../comApply/register.html');
+            }else{
+                this.againApply();
+            }
+        }
+    })
+</script>
+</html>

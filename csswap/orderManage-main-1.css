@@ -1,0 +1,332 @@
+.mui-bar {
+  background-color: #ffffff;
+  border-bottom: 1px solid #D5D5D5;
+}
+.mui-bar-nav.mui-bar .mui-icon {
+  font-size: 1rem;
+  color: #2f2f2f;
+}
+.mui-bar .mui-title {
+  color: #2f2f2f;
+  font-size: 0.85rem;
+  line-height: 2.4rem;
+}
+.mui-bar .sideTxt {
+  font-size: 0.55rem;
+  height: 2.2rem;
+  float: right;
+  line-height: 2.2rem;
+}
+.mui-content {
+  background-color: #f4f4f4;
+}
+.mui-popup.mui-popup-in {
+  background: #fff;
+}
+.mui-popup.mui-popup-in .mui-popup-inner:after {
+  display: none;
+}
+.mui-popup.mui-popup-in .mui-popup-inner .mui-popup-text {
+  font-size: 0.6rem;
+  color: #393939;
+  margin: 0;
+}
+.mui-popup.mui-popup-in .mui-popup-buttons {
+  background: #fff;
+  padding: 0 1rem 0 1rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-around;
+}
+.mui-popup.mui-popup-in .mui-popup-buttons .mui-popup-button {
+  width: 3.6rem;
+  height: 1rem;
+  line-height: 1rem;
+  font-size: 0.5rem;
+  border-radius: 0.5rem;
+  margin-top: 0.5rem;
+  color: #fff;
+  background-color: #AEAEAE;
+}
+.mui-popup.mui-popup-in .mui-popup-buttons .mui-popup-button.mui-popup-button-bold {
+  background-color: #FF9900;
+}
+li {
+  list-style-type: none;
+}
+.tabBox {
+  background-color: #F8F8F8;
+}
+.tabBox .tabBtns {
+  margin: 0;
+  padding: 0;
+  font-size: 0.45rem;
+  border-bottom: 1px solid #EDEDED;
+  color: #262626;
+  background-color: #ffffff;
+  height: 1.75rem;
+  line-height: 1.75rem;
+  z-index: 10;
+  display: flex;
+  position: sticky;
+  top: 2.2rem;
+}
+.tabBox .tabBtns a {
+  width: 50%;
+  float: left;
+  text-align: center;
+  position: relative;
+  color: #262626;
+}
+.tabBox .tabBtns a span {
+  display: none;
+  background-color: #F54F46;
+  height: 0.7rem;
+  line-height: 0.6rem;
+  font-size: 0.3rem;
+  color: #fff;
+  padding: 0.1rem 0.2rem;
+  border-radius: 0.375rem;
+}
+.tabBox .tabBtns a.active {
+  position: relative;
+}
+.tabBox .tabBtns a.active:after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: #ff9900;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+.tabBox .tabConts {
+  margin-top: 0.25rem;
+  background-color: #fff;
+}
+.tabBox .tabConts .content ul.list {
+  margin: 0;
+  padding: 0;
+  background-color: #F8F8F8;
+}
+.tabBox .tabConts .content ul.list li {
+  position: relative;
+  margin-bottom: 0.25rem;
+  background-color: #fff;
+  padding: 0.75rem;
+}
+.tabBox .tabConts .content ul.list li:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.tabBox .tabConts .content ul.list li .logo {
+  width: 4.5rem;
+  height: 3.4rem;
+  border: 1px solid #F0F0F0;
+  border-radius: 3px;
+  position: absolute;
+  text-align: center;
+}
+.tabBox .tabConts .content ul.list li .logo img {
+  display: block;
+  margin: 0 auto;
+}
+.tabBox .tabConts .content ul.list li .logo span {
+  line-height: 3.4rem;
+  font-size: 0.6rem;
+  color: #aeaeae;
+}
+.tabBox .tabConts .content ul.list li .txt {
+  width: auto;
+  padding-left: 5rem;
+  padding-right: 2.4rem;
+}
+.tabBox .tabConts .content ul.list li .txt p {
+  margin: 0;
+  padding: 0;
+  font-size: 0.45rem;
+  height: 0.8rem;
+  line-height: 0.8rem;
+}
+.tabBox .tabConts .content ul.list li .txt p:nth-child(2) {
+  margin-top: 0.75rem;
+}
+.tabBox .tabConts .content ul.list li .txt .desc {
+  height: 1.2rem;
+  line-height: 0.6rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.tabBox .tabConts .content ul.list li .btns {
+  width: 1.9rem;
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+}
+.tabBox .tabConts .content ul.list li .btns > div {
+  width: 100%;
+  height: 1rem;
+  background-color: #ff9900;
+  border-radius: 0.5rem;
+  font-size: 0.5rem;
+  text-align: center;
+  color: #fff;
+  line-height: 1rem;
+}
+.tabBox .tabConts .content ul.list li .btns .xjBtn {
+  margin-top: 0.75rem;
+}
+.tabBox .tabConts .content.content3 ul.list li {
+  position: relative;
+}
+.tabBox .tabConts .content.content3 ul.list li .btns {
+  height: 1rem;
+  position: absolute;
+  right: 0.75rem;
+  margin-top: -1rem;
+  top: 90%;
+}
+.tabBox .tabBtns a .list_more {
+  width: 0.6rem;
+  height: 0.4rem;
+  margin-top: 0.5rem;
+}
+.tabBox .tabConts .content.content3 ul.list li .btns_order {
+  top: 0.75rem;
+  margin-top: 0;
+}
+.searchBox_div .searchBox {
+  height: 2.5rem;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid #D5D5D5;
+}
+.searchBox_div .searchBox .cont {
+  border: 1px solid #F0F0F0;
+  border-radius: 1rem;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+.searchBox_div .searchBox .cont input {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 0.5rem;
+  border: none;
+  padding-left: 1.4rem;
+  background: url(../images/icon_search.svg) no-repeat;
+  background-size: 0.6rem 0.55rem;
+  background-position: 0.5rem 0.37rem;
+}
+.searchBox_div .searchBox .cont input::-webkit-input-placeholder {
+  color: #aeaeae;
+}
+.searchBox_div {
+  background: #fff;
+}
+.rig_satat {
+  position: relative;
+}
+.stat_div {
+  position: absolute;
+  top: 1.2rem;
+  right: 1rem;
+  width: 3.5rem;
+  height: 1.3rem;
+  line-height: 1.3rem;
+  background: #000;
+  opacity: 0.65;
+}
+.tabBox .tabBtns .stat_div span {
+  font-size: 0.4rem;
+  color: #fff;
+}
+.content .numAndTime {
+  width: 100%;
+  padding: 0.75rem 0.75rem;
+  background: #fff;
+  font-size: 0.45rem;
+  color: #2f2f2f;
+  border-bottom: 1px solid #F0F0F0;
+}
+.content .numAndTime div {
+  height: 0.5rem;
+  line-height: 0.5rem;
+  margin-top: 0.4rem;
+}
+.content .numAndTime div span {
+  color: #262626;
+}
+.content .numAndTime div:nth-child(1) {
+  margin-top: 0;
+}
+.content1 .numAndTime div:nth-child(1) span {
+  color: #3399FF;
+}
+.content1 .numAndTime div:nth-child(6) span {
+  color: #FF0000;
+}
+.content3 .numAndTime {
+  position: relative;
+}
+.content3 .numAndTime div:nth-child(6) span {
+  color: #ff0000;
+}
+.content3 .numAndTime div.btn {
+  padding: 0;
+  width: 3.3rem;
+  height: 1rem;
+  line-height: 1rem;
+  text-align: center;
+  background-color: #CCCCCC;
+  color: #fff;
+  border-radius: 3px;
+  position: absolute;
+  right: 0.75rem;
+  bottom: 0.75rem;
+}
+.content3 .numAndTime div.btn.active {
+  background-color: #169BD5;
+}
+.content4 .numAndTime {
+  position: relative;
+}
+.content4 .numAndTime div:nth-child(1),
+.content4 .numAndTime div:nth-child(2) {
+  color: #ff0000;
+}
+.content4 .numAndTime div:nth-child(1) span,
+.content4 .numAndTime div:nth-child(2) span {
+  color: #ff0000;
+}
+.content4 .numAndTime div:nth-child(3) span,
+.content4 .numAndTime div:nth-child(4) span {
+  color: #3399FF;
+}
+.content4 .numAndTime div:nth-child(6) span {
+  color: #ff0000;
+}
+.content4 .numAndTime div.btn {
+  padding: 0;
+  padding: 0 0.5rem;
+  height: 1rem;
+  line-height: 1rem;
+  text-align: center;
+  background-color: #CCCCCC;
+  color: #fff;
+  border-radius: 3px;
+  position: absolute;
+  right: 0.75rem;
+  bottom: 0.75rem;
+}
+.content4 .numAndTime div.btn.active {
+  background-color: #169BD5;
+}

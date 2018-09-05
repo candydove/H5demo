@@ -1,0 +1,188 @@
+.mui-bar {
+  background-color: #fff;
+}
+.mui-bar-nav.mui-bar .mui-icon {
+  font-size: 1rem;
+  color: #171717;
+}
+.mui-bar .mui-title {
+  color: #171717;
+  font-size: 0.85rem;
+  /* line-height: 2.4rem; */
+}
+.mui-content {
+  background-color: #f4f4f4;
+}
+.userInfo {
+  padding-top: 0.5rem;
+  padding-left: 1rem;
+  margin-top: 0.3rem;
+  margin-bottom: 0.5rem;
+  padding-bottom: 1rem;
+  background-color: #FFFFFF;
+  border-bottom: 1px solid #EDEDED;
+}
+.userInfo .logo {
+  float: left;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 0.45rem;
+}
+.userInfo .logo img {
+  float: left;
+  width: 100%;
+  height: 100%;
+}
+.userInfo .txt {
+  float: left;
+  width: 10rem;
+}
+.userInfo .txt .main {
+  height: 2rem;
+  border-bottom: 1px solid #F0F0F0;
+  position: relative;
+}
+.userInfo .txt .main p {
+  margin: 0;
+  padding: 0;
+}
+.userInfo .txt .main .name {
+  font-size: 0.7rem;
+  color: #2f2f2f;
+  height: 0.7rem;
+  line-height: 0.7rem;
+  margin-top: 0.6rem;
+  margin-bottom: 0.4rem;
+}
+.userInfo .txt .main .phone {
+  font-size: 0.6rem;
+  color: #262626;
+  height: 0.6rem;
+  line-height: 0.6rem;
+}
+.userInfo .txt .main span {
+  display: inline-block;
+  right: 0;
+  position: absolute;
+  width: 3.6rem;
+  height: 1rem;
+  background-color: #33D594;
+  font-size: 0.5rem;
+  color: #fff;
+  line-height: 1.1rem;
+  text-align: center;
+  border-radius: 0.5rem;
+  margin-top: -0.5rem;
+  top: 40%;
+}
+.userInfo .txt .debtLimit {
+  font-size: 0.5rem;
+  color: #8c8c8c;
+}
+.userInfo .txt .debtLimit span {
+  font-size: 0.45rem;
+  color: #ff6868;
+}
+.goodsInfo {
+  background-color: #FFFFFF;
+  padding-bottom: 2.9rem;
+}
+.goodsInfo .top {
+  height: 1.75rem;
+  line-height: 1.75rem;
+  font-size: 0.6rem;
+  color: #262626;
+  padding-left: 0.75rem;
+  border-bottom: 1px solid #F0F0F0;
+}
+.goodsInfo .top span {
+  display: inline-block;
+  height: 100%;
+  border-bottom: 2px solid #ff9900;
+}
+.goodsInfo .center {
+  border-bottom: 1px solid #F0F0F0;
+  margin-left: 0.75rem;
+  margin-right: 0.75rem;
+  padding-top: 0.9rem;
+  padding-bottom: 0.8rem;
+}
+.goodsInfo .center .logo {
+  width: 4.5rem;
+  height: 3.4rem;
+  overflow: hidden;
+  border: 1px solid #F0F0F0;
+  border-radius: 3px;
+  display: flex;
+  float: left;
+}
+.goodsInfo .center .logo img {
+  display: block;
+  /* max-width: 4.5rem;
+  max-height: 3.4rem; */
+  width: 100%;
+  height: 100%;
+}
+.goodsInfo .center .txt {
+  float: right;
+  width: 8.8rem;
+  font-size: 0.45rem;
+  color: #2f2f2f;
+}
+.goodsInfo .center .txt .name {
+  height: 1.2rem;
+  line-height: 0.6rem;
+  margin-bottom: 0.75rem;
+}
+.goodsInfo .center .txt .stock,
+.goodsInfo .center .txt .price,
+.goodsInfo .center .txt .index,
+.goodsInfo .center .txt .num {
+  line-height: 0.8rem;
+}
+.goodsInfo .center .txt .index span,
+.goodsInfo .center .txt .num span {
+  color: #7A92F6;
+}
+.goodsInfo .bottom {
+  text-align: right;
+  height: 1.8rem;
+  line-height: 1.8rem;
+  padding-right: 0.75rem;
+  font-size: 0.45rem;
+  color: #2f2f2f;
+}
+.goodsInfo .bottom span {
+  color: #ff6868;
+}
+.bottomBtn {
+  background-color: #ffffff;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 0.5rem 0;
+}
+
+.bottomBtn div {
+  height: 1.9rem;
+  line-height: 1.9rem;
+  text-align: center;
+  width: 6.5rem;
+  display: inline-block;
+  color: #fff;
+  border-radius: 0.95rem;
+  float: left;
+  margin-left: calc(6.21428571%);
+}
+.bottomBtn .no {
+  font-size: 0.7rem;
+  background-color: #AEAEAE;
+}
+.bottomBtn .ok {
+  font-size: 0.7rem;
+  background-color: #ff9900;
+}

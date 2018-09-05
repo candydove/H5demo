@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	    <meta charset="UTF-8">
+	    <title>商品管理</title>
+	    <link rel="stylesheet" href="../../css/common.css">
+	    <link rel="stylesheet" href="../../css/index.css">
+	    <link rel="stylesheet" href="../../css/pagination.css">
+	    <script src="../../js/public.js"></script>
+	    <script type='text/javascript' src='../../js/include.js?ver=1' charset='utf-8'></script>
+	    <script type="text/javascript" src="../../components/pagination.js"></script>
+		<script type="text/javascript" src="../../components/header.js"></script>
+		<script type="text/javascript" src="../../js/laydate/laydate.js"></script>
+	    <style>
+	        .store-information {
+	            margin-top:0.2rem;
+	            margin-bottom:0;
+	        }
+	        .hide_content {
+	            display: none!important;
+	        }
+	        td {
+	        	overflow: hidden;
+			    white-space: nowrap;
+			    text-overflow: ellipsis;
+	        }
+	        .top-off {
+	        	width: 54px;
+	        }
+	    </style>
+	</head>
+	<body>
+	    <div id="headerDiv">
+	    	<header-component title="今借到信用借还商家版" quitName="退出登陆"></header-component>
+	    </div>
+	    <div class="main">
+	        <div class="main-top">
+	            <a href="#">首页</a><span>></span><a class="active" href="#">商品管理</a>
+	        </div>
+	        <div class="main-com clearfix">
+	            <div class="main-left fl">
+	                <ul class="main-left-ul">
+	                	<li><a href="../prod/publishProd.html"><i class="icon1"></i>发布新产品</a></li>
+	                    <li class="active"><a href="../prod/wareHouse.html"><i class="icon2"></i>商品管理</a></li>
+	                    <li><a href="../order/order-main.html"><i class="icon3"></i>订单管理</a></li>
+	                	<li><a href="../prod/chatting.html"><i class="icon4"></i>接待中心</a></li>
+	                </ul>
+	            </div>
+	            <div class="main-rig-con fr">
+		            <div class="main-rig-top" v-cloak id="searchDiv">
+		                <div class="search-box">
+		                    <div class="search-box-li wid380">
+		                        <label>商品名称</label>
+		                        <input v-model="goodsName" type="text" class="search-input" placeholder="请输入商品名称">
+		                    </div>
+		                    <div class="search-box-li">
+		                        <label>上架时间</label>
+		                        <input v-model="startTime" type="text" class="search-input wid100" id="test1" placeholder="请选择起始日期">
+		                    </div>
+		                     <div class="search-box-li">
+		                        <label class="label-small">-</label>
+		                        <input v-model="endTime" type="text" class="search-input wid100"  id="test2" placeholder="请选择结束日期">
+		                    </div>
+		                </div>
+		                <div class="search-box">
+		                    <div class="search-box-li wid380">
+		                        <label>一级分类</label>
+		                        <select class="search-input select" v-model="level1_code" @change="choseShowType">
+		                        	<option disabled value="">请选择</option>
+		        	                <option v-for="tp in prodTypeList" v-bind:value="tp.id">{{tp.type_name}}</option>
+		                        </select>
+		                    </div>
+		                    <div class="search-box-li" v-if="isSecondShow">
+		                        <label>二级分类</label>
+		                        <select class="search-input select" v-model="type_id">
+		                        	<option disabled value="">请选择</option>
+		        	                <option class="serch_list_box" v-for="ts in prodSecondTypeList" v-bind:value="ts.id">{{ts.type_name}}</option>
+		                        </select>
+		                    </div>
+		                </div>
+		                <div class="search-box">
+		                    <div class="search-box-li wid380">
+		                        <label>是否置顶</label>
+		                        <select class="search-input select" v-model="topStatus">
+		                        	<option disabled value="">请选择</option>
+			                        <option value="1">是</option>
+									<option value="0">否</option>
+								</select>
+		                    </div>
+		                </div>
+		                <div class="search-btndiv">
+		                    <div class="serch-btn" @click="reset">重置</div>
+		                    <div class="serch-btn" @click="toSearch()">搜索</div>
+		                </div>
+		            </div>
+		            <div class="main-rig-bottom">
+		                <div class="list-tab" id="tabDiv" v-cloak>
+		                    <div class="list-tab-li" :class="{'active': botton_fot == 1}" @click="showDivContent(1)">已发布</div>
+		                    <div class="list-tab-li" :class="{'active': botton_fot == 0}" @click="showDivContent(0)">整理中</div>
+		                    <div class="list-tab-li" :class="{'active': botton_fot == 2}" @click="showDivContent(2)">已下架</div>
+		                </div>
+		                <!-- 已发布 -->
+		                <div class="tab-content show_content hide_content" v-cloak id="publishDiv">
+		                    <div class="tab-con-top">
+		                        <span class="radio-span" @click="chooseAll"><i :class="{'active': isAllChose}"></i>全选</span>
+		                        <span class="tabCon-btn" @click="offBatchLineProd()">下架</span>
+		                    </div>
+		                    <div class="tab-con-table"> 
+		                        <table>
+		                            <tr>
+		                                <th colspan="3">标题</th>
+		                                <th>租金（元/天）</th>
+		                                <th>押金（元）</th>
+		                                 <th @click="choseOrderType(4)">库存（件）
+		                                	<span class="tab-con-th">
+					                            <i class="arrow-down" :class="{'active': orderType == 4}"></i>
+					                            <i class="arrow-up" :class="{'active': orderType == 5}"></i>
+				                        	</span>
+		                                </th>
+		                                <th @click="choseOrderType(0)">出租数量（件）
+			                                <span class="tab-con-th">
+					                            <i class="arrow-down" :class="{'active': orderType == 0}"></i>
+					                            <i class="arrow-up" :class="{'active': orderType == 1}"></i>
+				                        	</span>
+		                                </th>
+		                                <th @click="choseOrderType(2)">成交额（元）
+		                                	<span class="tab-con-th">
+					                            <i class="arrow-down" :class="{'active': orderType == 2}"></i>
+					                            <i class="arrow-up" :class="{'active': orderType == 3}"></i>
+				                        	</span>
+		                                </th>
+		                                <th>操作</th>
+		                            </tr>
+		                            <tr v-for="data in dataList" v-if="dataList.length>0">
+		                                <td>
+		                                    <span class="radio-span" @click.stop="choseProd(data.id)"><i :class="{'active': choseList != '' && choseList.indexOf(data.id) !== -1}"></i></span>
+		                                </td>
+		                                <td>
+		                                	<img class="list-tab-img" :src="config.qiniuUrl+data.c_logo" alt="">
+		                                </td>
+		                                <td>
+		                                    <span class="list-tab-tit">{{data.c_name}}</span>
+		                                </td>
+		                                <td>{{utils.toYuan(data.n_rent_amt)}}</td>
+		                                <td>{{utils.toYuan(data.n_deposit_amt)}}</td>
+		                                <td>{{data.n_left_cnt}}</td>
+		                                <td>{{data.n_lease_cnt}}</td>
+		                                <td>{{utils.toYuan(data.n_deal_amt)}}</td>
+		                                <td>
+		                                	<!--<span class="listtd-btn" @click="downProd(data.id)">下架</span>-->
+		                                	<span class="listtd-btn" @click="editProduct(data.id)">编辑</span>
+		                                	<span class="listtd-btn" @click="prodTop(data.id)">置顶</span>
+		                                	<span class="listtd-btn top-off" @click="removeTop(data.id)" v-if="data.top_tm != null">取消置顶</span>
+		                                </td>
+		                            </tr>
+		                            <tr v-if="dataList.length==0"><td colspan="9">你还没有发布任何宝贝哦~</br>马上发布赚赚零花钱</td></tr>
+		                        </table>
+		                    </div>
+		                    <!--分页按钮-->
+			                <div id="app" class="paging" >
+								<navigation :pages="pagesCount" :current.sync="currPageNo" @navpage="pageTurn"></navigation>
+							</div>
+		                </div>
+		                <!-- 整理中 -->
+		                <div class="tab-content show_content hide_content" v-cloak id="treatDiv">
+		                    <div class="tab-con-top">
+		                        <span class="radio-span" @click="chooseAll"><i :class="{'active': isAllChose}"></i>全选</span>
+		                         <span class="tabCon-btn" @click="batchDelete">删除</span>
+		                    </div>
+		                    
+		                    <div class="tab-con-table">
+		                        <table>
+		                            <tr>
+		                                <th colspan="3">标题</th>
+		                                <th>租金（元/天）</th>
+		                                <th>押金（元）</th>
+		                                <th @click="choseOrderType(4)">库存（件）
+		                                	<span class="tab-con-th">
+					                            <i class="arrow-down" :class="{'active': orderType == 4}"></i>
+					                            <i class="arrow-up" :class="{'active': orderType == 5}"></i>
+				                        	</span>
+		                                </th>
+		                                <th @click="choseOrderType(0)">出租数量（件）
+			                                <span class="tab-con-th">
+					                            <i class="arrow-down" :class="{'active': orderType == 0}"></i>
+					                            <i class="arrow-up" :class="{'active': orderType == 1}"></i>
+				                        	</span>
+		                                </th>
+		                                <th @click="choseOrderType(2)">成交额（元）
+		                                	<span class="tab-con-th">
+					                            <i class="arrow-down" :class="{'active': orderType == 2}"></i>
+					                            <i class="arrow-up" :class="{'active': orderType == 3}"></i>
+				                        	</span>
+		                                </th>
+		                                <th>操作</th>
+		                            </tr>
+		                            <tr v-for="data in dataList">
+		                                <td>
+		                                    <span class="radio-span" @click.stop="choseProd(data.id)"><i :class="{'active': choseList != '' && choseList.indexOf(data.id) !== -1}"></i></span>
+		                                </td>
+		                                <td>
+		                                	<img class="list-tab-img" v-if="!utils.isNull(data.c_logo)" :src="config.qiniuUrl+data.c_logo" alt="">
+		                                    <img class="list-tab-img" v-else src="../../images/bor-add-img.png" alt="">
+		                                </td>
+		                                <td>
+		                                    <span class="list-tab-tit">{{data.c_name}}</span>
+		                                </td>
+		                                <td>{{utils.toYuan(data.n_rent_amt)}}</td>
+		                                <td>{{utils.toYuan(data.n_deposit_amt)}}</td>
+		                                <td>{{data.n_left_cnt}}</td>
+		                                <td>{{data.n_lease_cnt}}</td>
+		                                <td>{{parseFloat(data.n_deal_amt)}}</td>
+		                                <td>
+		                                	<!--<span class="listtd-btn" @click="deleteProd(data.id)">删除</span>-->
+		                                    <span class="listtd-btn" @click="editProduct(data.id)">编辑</span>
+		                                </td>
+		                            </tr>
+		                            <tr v-if="dataList.length==0"><td colspan="9">你还没有发布任何宝贝哦~</br>马上发布赚赚零花钱</td></tr>
+		                        </table>
+		                    </div>
+		                    <!--分页按钮-->
+			                <div id="app" class="paging" >
+								<navigation :pages="pagesCount" :current.sync="currPageNo" @navpage="pageTurn"></navigation>
+							</div>
+		                </div>
+		                <!-- 已下架 -->
+		                <div class="tab-content show_content hide_content" v-cloak id="offLineDiv">
+		                    <div class="tab-con-top">
+		                        <span class="radio-span" @click="chooseAll"><i :class="{'active': isAllChose}"></i>全选</span>
+		                        <span class="tabCon-btn" @click="upBatchLineProd()">上架</span>
+		                        <span class="tabCon-btn" @click="batchDelete">删除</span>
+		                    </div>
+		                    <!-- 已发布 -->
+		                    <div class="tab-con-table">
+		                        <table>
+		                            <tr>
+		                                <th colspan="3">标题</th>
+		                                <th>租金（元/天）</th>
+		                                <th>押金（元）</th>
+		                                <th @click="choseOrderType(4)">库存（件）
+		                                	<span class="tab-con-th">
+					                            <i class="arrow-down" :class="{'active': orderType == 4}"></i>
+					                            <i class="arrow-up" :class="{'active': orderType == 5}"></i>
+				                        	</span>
+		                                </th>
+		                               <th @click="choseOrderType(0)">出租数量（件）
+			                                <span class="tab-con-th">
+					                            <i class="arrow-down" :class="{'active': orderType == 0}"></i>
+					                            <i class="arrow-up" :class="{'active': orderType == 1}"></i>
+				                        	</span>
+		                                </th>
+		                                <th @click="choseOrderType(2)">成交额（元）
+		                                	<span class="tab-con-th">
+					                            <i class="arrow-down" :class="{'active': orderType == 2}"></i>
+					                            <i class="arrow-up" :class="{'active': orderType == 3}"></i>
+				                        	</span>
+		                                </th>
+		                                <th>操作</th>
+		                            </tr>
+		                            <tr v-for="data in dataList">
+		                                <td>
+		                                    <span class="radio-span" @click.stop="choseProd(data.id)"><i :class="{'active': choseList != '' && choseList.indexOf(data.id) !== -1}"></i></span>
+		                                </td>
+		                                <td>
+		                                	<img class="list-tab-img" :src="config.qiniuUrl+data.c_logo" alt="">
+		                                </td>
+		                                <td>
+		                                    <span class="list-tab-tit">{{data.c_name}}</span>
+		                                </td>
+		                                <td>{{utils.toYuan(data.n_rent_amt)}}</td>
+		                                <td>{{utils.toYuan(data.n_deposit_amt)}}</td>
+		                                <td>{{data.n_left_cnt}}</td>
+		                                <td>{{data.n_lease_cnt}}</td>
+		                                <td>{{parseFloat(data.n_deal_amt)}}</td>
+		                                <td>
+		                                	<!--<span class="listtd-btn" @click="deleteProd(data.id)">删除</span>-->
+		                                    <span class="listtd-btn" @click="editProduct(data.id)">编辑</span>
+		                                    <!--<span class="listtd-btn" @click="upProd(data.id)">上架</span>-->
+		                                </td>
+		                            </tr>
+		                            <tr v-if="dataList.length==0"><td colspan="9">你还没有发布任何宝贝哦~</br>马上发布赚赚零花钱</td></tr>
+		                        </table>
+		                    </div>
+		                    <!--分页按钮-->
+			                <div id="app" class="paging" >
+								<navigation :pages="pagesCount" :current.sync="currPageNo" @navpage="pageTurn"></navigation>
+							</div>
+		                </div>
+		            </div>
+		        </div>
+	        </div>
+	    </div>
+		<script type="text/javascript" charset="utf-8">
+			/*创建根实例*/
+			new Vue({
+			  	el: '#headerDiv'
+			})
+			var comId='';
+			var headVm = new Vue({
+				el: '#tabDiv',
+				data: {
+					botton_fot:1,
+					isTipShow:'',
+					isShowTip:false,
+					isAllowEdit:false,//是否有编辑权限
+					userId:'',
+					tipMsg:'你还没有发布任何宝贝哦~',
+				},
+				created: function() {
+					if(utils.isNull(window.sessionStorage.userId)){
+						utils.go('../index/login.html');
+						return;
+					}
+					this.userId = window.sessionStorage.userId;
+					
+					var url = config.LEASE_URL + "/prod/checkComPermission";
+					var parames = {c_staff_id:this.userId,c_code:'pdedit'};
+					utils.postAndDealBySelf(url,parames,{}, function(res){
+						if(res.code === 200) {
+							headVm.isAllowEdit = true;
+						}
+					});
+				},
+				methods: {
+					//跳转
+					showDivContent:function(item){
+			            changeTab(item);
+					},
+					//显示session中保存的其他页面的提示
+					showSessionTip: function() {
+						this.tipText = window.sessionStorage.tempTipText;
+						if(!utils.isNull(this.tipText)) {
+							this.isTipShow = true;
+							window.sessionStorage.tempTipText = '';
+							var self = this;
+							setTimeout(function() {
+								self.isTipShow = false;
+							}, 2000)
+						}
+					},
+					//发布商品
+					publishProd:function(){
+						window.sessionStorage.productType = this.botton_fot;
+						utils.go('publishProd.html');
+					}
+				}
+			})
+			
+			/*条件检索vue实例*/
+			var searchVm = new Vue({
+				el: '#searchDiv',
+				data: {
+					level1_code:'',										/*一级分类标识*/
+					type_id:'',											/*二级分类标识*/
+					prodTypeList:[],									/*商品一级类型*/
+	            	prodSecondTypeList:[],  							/*商品二级分类*/
+	            	isSecondShow:false,									/*二级分类显示标识*/
+					goodsName:'',										/*商品名称*/
+					topStatus:'',										/*置顶状态*/
+					startTime:document.getElementById("test1").value,	/*起始日期*/
+					endTime:document.getElementById("test2").value,		/*结束日期*/
+					n_status:'',										/*发布状态*/
+					pageNo:'',											/*所选页码*/
+					pageRowsNo:5,										/*每页显示的商品条数*/
+					orderType:-1										/*排序类型*/
+				},
+				created: function() {
+					var url = config.LEASE_URL + "/prod/getAllOneLevelProdType";
+					utils.getAndDealBySelf(url, {}, {}, function(res){
+						if (res.code === 200 && !utils.isNull(res.object) && !utils.isNull(res.object.list)) {
+							searchVm.prodTypeList = res.object.list;
+						} else {
+							Chef.alert({
+					            'content':res.message,
+					            'title':'提醒'
+				       		});
+							return;
+						}
+					});
+					/*获取商户ID*/
+					var com = window.localStorage.com;
+					if(utils.isNull(com)){
+						utils.back();
+						return;
+					}
+					var dat = JSON.parse(com);
+					if(utils.isNull(dat) || utils.isNull(dat.id)){
+						/*商户ID为空*/
+						utils.back();
+						return;
+					}
+					comId = dat.id;
+				},
+				methods: {
+					/*重置清空搜索选项*/
+					reset: function() {
+						this.level1_code = '',
+						this.type_id = '',
+	            		this.prodSecondTypeList = [],
+	            		this.isSecondShow = false,
+						this.goodsName = '',
+						this.startTime = '',
+						this.endTime = '',
+						this.topStatus = '',
+						this.n_status = '',
+						this.pageNo = ''
+					},
+					/*条件检索*/
+		            toSearch: function() {
+		                var url = config.LEASE_URL + "/prod/getComProdList";
+						var parames = {
+							"comId":comId,
+							"goodsName":this.goodsName,
+							"startTime":this.startTime,
+							"endTime":this.endTime,
+							"level1_code":this.level1_code,
+							"type_id":this.type_id,
+							"topStatus":this.topStatus,
+							"status":headVm.botton_fot,
+							"pageNo":'',
+							"page":'',
+							"count":this.pageRowsNo,
+							"orderType":this.orderType
+						};
+						
+						var prod_status = parames.status;
+						if (prod_status == '0') {
+							/*当前查询的发布状态为[整理中]*/
+							parames.pageNo = treatVm.currPageNo;
+							parames.orderType = treatVm.orderType;
+						} else if (prod_status == '1') {
+							/*当前查询的发布状态为[已发布]*/
+							parames.pageNo = publishVm.currPageNo;
+							parames.orderType = publishVm.orderType;
+						} else if (prod_status == '2') {
+							/*当前查询的发布状态为[已下架]*/
+							parames.pageNo = offLineVm.currPageNo;
+							parames.orderType = offLineVm.orderType;
+						} else {
+							/*默认查询的发布状态为[已发布]*/
+							parames.pageNo = publishVm.currPageNo;
+							parames.orderType = publishVm.orderType;
+						}
+						/*根据当前页码与每页显示的商品条数计算查询的商品列表开始条数*/
+						parames.page = (parames.pageNo - 1) * this.pageRowsNo;
+						/*校验起始日期&结束日期有效性*/
+						var d1 = new Date(parames.startTime.replace(/\-/g, "\/"));
+					 	var d2 = new Date(parames.endTime.replace(/\-/g, "\/"));
+						if (parames.startTime != "" && parames.endTime != "" && d1 >= d2) {
+					   		Chef.alert({
+					            'content':"起始日期不能大于结束日期",
+					            'title':'提示'
+				       		});
+				       		return;
+						}
+						/*post请求到lease_api*/
+						utils.postAndDealBySelf(url, parames, {}, function(result){
+							treatVm.dataList = [];
+							publishVm.dataList = [];
+							offLineVm.dataList = [];
+							if (prod_status == '0') {
+								/*当前查询的发布状态为[整理中]*/
+								if(!utils.isNull(result) && !utils.isNull(result.object) && !utils.isNull(result.object.list) ){
+									treatVm.dataList = result.object.list;
+								}
+								if(treatVm.dataList.length == 0){
+									headVm.tipMsg = "你还没有发布任何宝贝哦~";
+									headVm.isShowTip = true;
+								}else{
+									treatVm.pagesCount = Math.ceil(result.object.pageTotalCount/treatVm.pageRowsNo);
+									headVm.isShowTip = false;
+								}
+							} else if (prod_status == '1') {
+								/*当前查询的发布状态为[已发布]*/
+								if(!utils.isNull(result) && !utils.isNull(result.object) && !utils.isNull(result.object.list) ){
+									publishVm.dataList = [];
+									publishVm.dataList = result.object.list;
+								}
+								if(publishVm.dataList.length == 0){
+									headVm.tipMsg = "你还没有发布任何宝贝哦~";
+									headVm.isShowTip = true;
+								}else{
+									publishVm.pagesCount = Math.ceil(result.object.pageTotalCount/publishVm.pageRowsNo);
+									headVm.isShowTip = false;
+								}
+							} else if (prod_status == '2') {
+								/*当前查询的发布状态为[已下架]*/
+								if(!utils.isNull(result) && !utils.isNull(result.object) && !utils.isNull(result.object.list) ){
+									offLineVm.dataList = result.object.list;
+								}
+								if(offLineVm.dataList.length == 0){
+									headVm.tipMsg = "你还没有发布任何宝贝哦~";
+									headVm.isShowTip = true;
+								}else{
+									offLineVm.pagesCount = Math.ceil(result.object.pageTotalCount/offLineVm.pageRowsNo);
+									headVm.isShowTip = false;
+								}
+							} else {
+								/*默认查询的发布状态为[已发布]*/
+								if(!utils.isNull(result) && !utils.isNull(result.object) && !utils.isNull(result.object.list) ){
+									publishVm.dataList = result.object.list;
+								}
+								if(publishVm.dataList.length == 0){
+									headVm.tipMsg = "你还没有发布任何宝贝哦~";
+									headVm.isShowTip = true;
+								}else{
+									publishVm.pagesCount = Math.ceil(result.object.pageTotalCount/publishVm.pageRowsNo);
+									headVm.isShowTip = false;
+								}
+							}
+						});
+		            },
+		            /*选择商品分类[一级分类&二级分类级联]*/
+					choseShowType:function(w){
+						/*清空选择的二级分类*/
+						this.type_id = '';
+						var url = config.LEASE_URL + "/prod/getTypeId";
+						var parames = {
+								"parent_level1_id":this.level1_code,
+							};
+						utils.postAndDealBySelf(url, parames, {}, function(res){
+							if (res.code === 200 && !utils.isNull(res.object) && !utils.isNull(res.object.list)) {
+								searchVm.prodSecondTypeList = res.object.list;
+								searchVm.isSecondShow = true;
+							} else if (utils.isNull(res.object) || utils.isNull(res.object.list)) {
+								searchVm.isSecondShow = false;
+							} else {
+								Chef.alert({
+						            'content':res.message,
+						            'title':'提示'
+					       		});
+								return;
+							}
+						});
+					}
+				}
+			})
+			
+			//切换标签
+			function changeTab(item) {
+				if(!utils.isNull(window.sessionStorage.productType)){
+					item = parseInt(window.sessionStorage.productType);
+					window.sessionStorage.productType = '';
+				}
+			    var contents = document.getElementsByClassName('show_content');
+			    if (contents != null) {
+			        for (var i = 0; i < contents.length; i++) {
+			            contents[i].classList.add("hide_content");
+			        }
+			    }
+			    headVm.isShowTip = false;
+			    //切换div显示
+			    if (item == 1) { //已发布
+			    	publishVm.getCreated();
+			    	//切换底部标签
+		            if (!utils.isNull(item)) {
+		                publishVm.botton_fot = item;
+		            }
+			    	document.getElementById('treatDiv').classList.add("hide_content");
+			    	document.getElementById('offLineDiv').classList.add("hide_content");
+			        document.getElementById('publishDiv').classList.remove("hide_content");
+			    } else if (item == 0) { //整理中
+			    	treatVm.getCreated();
+			    	//切换底部标签
+		            if (!utils.isNull(item)) {
+		                treatVm.botton_fot = item;
+		            }
+			    	document.getElementById('offLineDiv').classList.add("hide_content");
+			        document.getElementById('publishDiv').classList.add("hide_content");
+			        document.getElementById('treatDiv').classList.remove("hide_content");
+			    } else if (item == 2) { //已下架
+			    	offLineVm.getCreated();
+			    	//切换底部标签
+		            if (!utils.isNull(item)) {
+		                offLineVm.botton_fot = item;
+		            }
+			    	document.getElementById('publishDiv').classList.add("hide_content");
+			        document.getElementById('treatDiv').classList.add("hide_content");
+			        document.getElementById('offLineDiv').classList.remove("hide_content");
+			    }
+			    headVm.botton_fot = item;
+			}
+			
+			/* 已发布  */
+			var publishVm = new Vue({
+				el: '#publishDiv',
+				data: {
+					dataList:[],
+					choseList:[],
+					isAllChose:false,
+					orderType:-1,
+					pageRowsNo: 5,  //列表每页页数
+					currPageNo: 1,  //当前列表页码
+					pagesCount: 0, //列表共有多少页数
+				},
+				created: function() {
+					if(utils.isNull(window.sessionStorage.userId)){
+						utils.go('../index/login.html');
+						return;
+					}
+					var com = window.localStorage.com;
+					if(utils.isNull(com)){
+						utils.back();
+						return;
+					}
+					var dat = JSON.parse(com);
+					//商户ID为空
+					if(utils.isNull(dat) || utils.isNull(dat.id)){
+						utils.back();
+						return;
+					}
+					comId = dat.id;
+				},
+				methods: {
+					//选择排序
+					choseOrderType:function(e){
+						if(this.orderType == e){
+							if(e == 0){
+								this.orderType = 1;
+							}else if(e == 2){
+								this.orderType = 3;
+							}else if(e == 4){
+								this.orderType = 5;
+							}
+						}else{
+							this.orderType = e;
+						}
+						
+						publishVm.getCreated();
+					},
+					pageTurn:function(curPage){//翻页
+						//根据当前页获取数据
+						this.currPageNo = curPage;
+						this.pulldownRefresh();
+						console.log("当前页：" + this.currPageNo);
+					},
+					chooseAll:function(){
+						if(!this.isAllChose){//如果是未选中状态
+							this.isAllChose = true;//置为选中
+							this.choseList = [];
+							
+							this.dataList.forEach(function(tem) {
+			                	if(!utils.isNull(tem.id)){
+			                		publishVm.choseList.push(tem.id);
+			                	}
+			                })
+						}else{//如果是选中状态
+							this.isAllChose = false;//置为未选中
+							this.choseList = [];
+						}
+					},
+					//选择商品
+					choseProd:function(id){
+						if(utils.isNull(id)){
+							return;
+						}
+						if (!utils.isNull(this.choseList) && this.choseList.length != 0 && this.choseList.indexOf(id) !== -1) {
+							var index = this.choseList.indexOf(id);
+		                    this.choseList.splice(index, 1);
+						}else{
+							this.choseList.push(id);
+						}
+						//判断是否全部选中
+						if(this.dataList.length == this.choseList.length){
+							this.isAllChose = true;//置为选中
+						}else{
+							this.isAllChose = false;//置为选中
+						}
+					},
+					//批量下架
+					offBatchLineProd:function(e){
+						if(publishVm.choseList.length <1){
+							Chef.alert({
+					            'content':'请选择商品',
+					            'title':'提醒'
+				       		});
+							return;
+						}
+						if(utils.isNull(headVm.userId)){
+							return;
+						}
+						var url = config.LEASE_URL+"/prod/offLineBatchProd";
+						Cpop.confirm({
+							'content':'是否下架选中的商品？',
+				            'title':'提醒',
+				            firm:'否',
+				            firm2:'是',
+				            firmFn:function(flag) {
+								if(flag == 1) {
+									var parames = {"ids":publishVm.choseList,userId:headVm.userId};
+									utils.postAndDealBySelf(url,parames,{}, function(res){
+										if(res.code === 200) {
+											Chef.show('下架成功');
+											//刷新页面内容
+											publishVm.getCreated();
+										} else {
+											Chef.alert({
+									            'content':res.message,
+									            'title':'提醒'
+								       		});
+											return;
+										}
+									});
+								}else{
+									return;
+								}
+							}
+						});
+					},
+					goToScan:function(id){
+						if(!utils.isNull(id)){
+							utils.go('prodDetailScan.html?id='+id);
+						}
+					},
+					getCreated:function(){
+						this.dataList = [];
+						treatVm.dataList=[];
+						offLineVm.dataList=[];
+						this.pulldownRefresh();
+					},
+					pulldownRefresh:function(){
+						if(utils.isNull(comId)){
+							return;
+						}
+						var that = this;
+						var url = config.LEASE_URL + "/prod/getComProdList";
+						var startNum = (this.currPageNo-1)*this.pageRowsNo;
+						var parames = {
+							"page":startNum,
+							"count":that.pageRowsNo,
+							"status":1,
+							"comId":comId,
+							"orderType":this.orderType,
+							"goodsName":searchVm.goodsName,
+							"startTime":searchVm.startTime,
+							"endTime":searchVm.endTime,
+							"level1_code":searchVm.level1_code,
+							"type_id":searchVm.type_id,
+							"topStatus":searchVm.topStatus
+						};
+						utils.postAndDealBySelf(url,parames,{}, function(result){
+							if(!utils.isNull(result) && !utils.isNull(result.object) && !utils.isNull(result.object.list) ){
+								publishVm.dataList = result.object.list;
+								//拼接列表
+								/*jsn.forEach(function(lend) {
+									publishVm.dataList.push(lend);
+								});*/
+							}
+							if(publishVm.dataList.length == 0){
+								headVm.tipMsg = "你还没有发布任何宝贝哦~";
+								headVm.isShowTip = true;
+							}else{
+								that.pagesCount = Math.ceil(result.object.pageTotalCount/that.pageRowsNo);
+								headVm.isShowTip = false;
+							}
+						});
+					},
+					getMoreData:function(){
+						this.pulldownRefresh();
+					},
+					//编辑
+					editProduct:function(id){
+						if(!headVm.isAllowEdit){
+							Chef.alert({
+					            'content':'没有编辑权限',
+					            'title':'提醒'
+				       		});
+							return;
+						}
+						//发布页面
+						if(!utils.isNull(id)){
+							window.sessionStorage.productType = 1;
+							utils.go('publishProd.html?id=' + id + "&productType=1");
+						}
+					},
+					/*置顶*/
+					prodTop:function(id) {
+						if(utils.isNull(id)){
+							return;
+						}
+						var url = config.LEASE_URL + "/prod/updateProdTopStatus";
+						Cpop.confirm({
+							'content':'是否置顶？',
+				            'title':'提醒',
+				            firm:'否',
+				            firm2:'是',
+				            firmFn:function(flag) {
+								if(flag == 1) {
+									var parames = {
+										"id":id,
+										"top_status":'1'
+									};
+									utils.postAndDealBySelf(url,parames,{}, function(res){
+										if(res.code === 200) {
+											Chef.show('置顶成功');
+											/*刷新页面内容*/
+											publishVm.getCreated();
+										} else {
+											Chef.alert({
+									            'content':res.message,
+									            'title':'提醒'
+								       		});
+											return;
+										}
+									});
+								}else{
+									return;
+								}
+							}
+						});
+					},
+					/*取消置顶*/
+					removeTop:function(id) {
+						if(utils.isNull(id)){
+							return;
+						}
+						var url = config.LEASE_URL + "/prod/updateProdTopStatus";
+						Cpop.confirm({
+							'content':'是否取消置顶？',
+				            'title':'提醒',
+				            firm:'否',
+				            firm2:'是',
+				            firmFn:function(flag) {
+								if(flag == 1) {
+									var parames = {
+										"id":id,
+										"top_status":'0'
+									};
+									utils.postAndDealBySelf(url,parames,{}, function(res){
+										if(res.code === 200) {
+											Chef.show('取消置顶成功');
+											/*刷新页面内容*/
+											publishVm.getCreated();
+										} else {
+											Chef.alert({
+									            'content':res.message,
+									            'title':'提醒'
+								       		});
+											return;
+										}
+									});
+								}else{
+									return;
+								}
+							}
+						});
+					},
+					//下架
+					downProd:function(id){
+						if(utils.isNull(id)){
+							return;
+						}
+						var url = config.LEASE_URL + "/prod/offLineProd";
+						Cpop.confirm({
+							'content':'是否下架？',
+				            'title':'提醒',
+				            firm:'否',
+				            firm2:'是',
+				            firmFn:function(flag) {
+								if(flag == 1) {
+									var parames = {"id":id,userId:headVm.userId};
+									utils.postAndDealBySelf(url,parames,{}, function(res){
+										if(res.code === 200) {
+											Chef.show('下架成功');
+											//刷新页面内容
+											publishVm.getCreated();
+										} else {
+											Chef.alert({
+									            'content':res.message,
+									            'title':'提醒'
+								       		});
+											return;
+										}
+									});
+								}else{
+									return;
+								}
+							}
+						});
+					}
+				}
+			})
+			
+			/* 整理中  */
+			var treatVm = new Vue({
+				el: '#treatDiv',
+				data: {
+					dataList:[],
+					isAllChose:false,
+					choseList:[],
+					orderType:-1,
+					pageRowsNo: 5,  //列表每页页数
+					currPageNo: 1,  //当前列表页码
+					pagesCount: 0 //列表共有多少页数
+				},
+				created: function() {
+					if(utils.isNull(window.sessionStorage.userId)){
+						utils.go('../index/login.html');
+						return;
+					}
+				},
+				methods: {
+					//选择排序
+					choseOrderType:function(e){
+						if(this.orderType == e){
+							if(e == 0){
+								this.orderType = 1;
+							}else if(e == 2){
+								this.orderType = 3;
+							}else if(e == 4){
+								this.orderType = 5;
+							}
+						}else{
+							this.orderType = e;
+						}
+						
+						treatVm.getCreated();
+					},
+					pageTurn:function(curPage){//翻页
+						//根据当前页获取数据
+						this.currPageNo = curPage;
+						this.pulldownRefresh();
+						console.log("当前页：" + this.currPageNo);
+					},
+					chooseAll:function(){
+						if(!this.isAllChose){//如果是未选中状态
+							this.isAllChose = true;//置为选中
+							this.choseList = [];
+							
+							this.dataList.forEach(function(tem) {
+			                	if(!utils.isNull(tem.id)){
+			                		treatVm.choseList.push(tem.id);
+			                	}
+			                })
+						} else {//如果是选中状态
+							this.isAllChose = false;//置为未选中
+							this.choseList = [];
+						}
+					},
+					//选择商品
+					choseProd:function(id){
+						if(utils.isNull(id)){
+							return;
+						}
+						if (!utils.isNull(this.choseList) && this.choseList.length != 0 && this.choseList.indexOf(id) !== -1) {
+							var index = this.choseList.indexOf(id);
+		                    this.choseList.splice(index, 1);
+						}else{
+							this.choseList.push(id);
+						}
+						//判断是否全部选中
+						if(this.dataList.length == this.choseList.length){
+							this.isAllChose = true;//置为选中
+						}else{
+							this.isAllChose = false;//置为选中
+						}
+					},
+					getCreated:function(){
+						this.dataList = [];
+						publishVm.dataList=[];
+						offLineVm.dataList=[];
+						this.pulldownRefresh();
+					},
+					pulldownRefresh:function(){
+						if(utils.isNull(comId)){
+							return;
+						}
+						var that = this;
+						var url = config.LEASE_URL + "/prod/getComProdList";
+						var startNum = (this.currPageNo-1)*this.pageRowsNo;
+						var parames = {
+							"page":startNum,
+							"count":this.pageRowsNo,
+							"status":0,
+							"comId":comId,
+							"orderType":this.orderType,
+							"goodsName":searchVm.goodsName,
+							"startTime":searchVm.startTime,
+							"endTime":searchVm.endTime,
+							"level1_code":searchVm.level1_code,
+							"type_id":searchVm.type_id,
+							"topStatus":searchVm.topStatus
+						};
+						utils.postAndDealBySelf(url,parames,{}, function(result){
+							if(!utils.isNull(result) && !utils.isNull(result.object) && !utils.isNull(result.object.list)){
+								treatVm.dataList = result.object.list;
+								/*//拼接列表
+								jsn.forEach(function(lend) {
+									treatVm.dataList.push(lend);
+								});*/
+							}
+							if(treatVm.dataList.length == 0){
+								headVm.tipMsg = "你还没有整理中的宝贝哦~";
+								headVm.isShowTip = true;
+							}else{
+								that.pagesCount = Math.ceil(result.object.pageTotalCount/that.pageRowsNo);
+								headVm.isShowTip = false;
+							}
+						});
+					},
+					getMoreData:function(){
+						this.pulldownRefresh();
+					},
+					//编辑
+					editProduct:function(id){
+						if(!headVm.isAllowEdit){
+							Chef.alert({
+					            'content':'没有编辑权限',
+					            'title':'提醒'
+				       		});
+							return;
+						}
+						//发布页面
+						if(!utils.isNull(id)){
+							window.sessionStorage.productType = 0;
+							utils.go('publishProd.html?id=' + id + "&productType=0");
+						}
+					},
+					//删除商品
+					deleteProd:function(id){
+						if(utils.isNull(id)){
+							return;
+						}
+						var url = config.LEASE_URL + "/prod/deleteProd";
+						Cpop.confirm({
+							'content':'是否删除？',
+				            'title':'提醒',
+				            firm:'否',
+				            firm2:'是',
+				            firmFn:function(flag) {
+								if (flag == 1) {
+									var parames = {"id":id,userId:headVm.userId};
+									utils.postAndDealBySelf(url,parames,{}, function(res){
+										if (res.code === 200) {
+											Chef.show('删除成功');
+											//刷新页面内容
+											treatVm.getCreated();
+										} else {
+											Chef.alert({
+									            'content':res.message,
+									            'title':'提醒'
+								       		});
+											return;
+										}
+									});
+								} else {
+									return;
+								}
+							}
+						});
+					},
+					//批量删除
+					batchDelete:function(){
+						if(this.choseList.length <1){
+							Chef.alert({
+					            'content':'请选择商品',
+					            'title':'提醒'
+				       		});
+							return;
+						}
+						if(utils.isNull(headVm.userId)){
+							return;
+						}
+						var url = config.LEASE_URL + "/prod/batchDeleteProd";
+						Cpop.confirm({
+							'content':'是否删除选中的商品？',
+				            'title':'提醒',
+				            firm:'否',
+				            firm2:'是',
+				            firmFn:function(flag) {
+								if (flag == 1) {
+									var parames = {"ids":treatVm.choseList,userId:headVm.userId};
+									utils.postAndDealBySelf(url,parames,{}, function(res){
+									if (res.code === 200) {
+										Chef.show('删除成功');
+										//刷新页面内容
+										treatVm.getCreated();
+									} else {
+										Chef.alert({
+								            'content':res.message,
+								            'title':'提醒'
+							       		});
+										return;
+									}
+									});
+								} else {
+									return;
+								}
+							}
+						});
+					}
+				}
+			})
+			
+			/* 已下架  */
+			var offLineVm = new Vue({
+				el: '#offLineDiv',
+				data: {
+					dataList:[],
+					isAllChose:false,
+					choseList:[],
+					userId:'',
+					orderType:-1,
+					pageRowsNo: 5,  //列表每页页数
+					currPageNo: 1,  //当前列表页码
+					pagesCount: 0 //列表共有多少页数
+				},
+				created: function() {
+					if(utils.isNull(window.sessionStorage.userId)){
+						utils.go('../index/login.html');
+						return;
+					}
+					this.userId = window.sessionStorage.userId;
+				},
+				methods: {
+					//选择排序
+					choseOrderType:function(e){
+						if(this.orderType == e){
+							if(e == 0){
+								this.orderType = 1;
+							}else if(e == 2){
+								this.orderType = 3;
+							}else if(e == 4){
+								this.orderType = 5;
+							}
+						}else{
+							this.orderType = e;
+						}
+						offLineVm.getCreated();
+					},
+					pageTurn:function(curPage){//翻页
+						//根据当前页获取数据
+						this.currPageNo = curPage;
+						this.pulldownRefresh();
+						console.log("当前页：" + this.currPageNo);
+					},
+					chooseAll:function(){
+						if(!this.isAllChose){//如果是未选中状态
+							this.isAllChose = true;//置为选中
+							this.choseList = [];
+							
+							this.dataList.forEach(function(tem) {
+			                	if(!utils.isNull(tem.id)){
+			                		offLineVm.choseList.push(tem.id);
+			                	}
+			                })
+						}else{//如果是选中状态
+							this.isAllChose = false;//置为未选中
+							this.choseList = [];
+						}
+					},
+					//选择商品
+					choseProd:function(id){
+						if(utils.isNull(id)){
+							return;
+						}
+						if (!utils.isNull(this.choseList) && this.choseList.length != 0 && this.choseList.indexOf(id) !== -1) {
+							var index = this.choseList.indexOf(id);
+		                    this.choseList.splice(index, 1);
+						}else{
+							this.choseList.push(id);
+						}
+						//判断是否全部选中
+						if(this.dataList.length == this.choseList.length){
+							this.isAllChose = true;//置为选中
+						}else{
+							this.isAllChose = false;//置为选中
+						}
+					},
+					getCreated:function(){
+						this.dataList = [];
+						publishVm.dataList=[];
+						treatVm.dataList=[];
+						this.pulldownRefresh();
+					},
+					//批量上架
+					upBatchLineProd:function(e){
+						if(offLineVm.choseList.length <1){
+							Chef.alert({
+					            'content':'请选择商品',
+					            'title':'提醒'
+				       		});
+							return;
+						}
+						if(utils.isNull(headVm.userId)){
+							return;
+						}
+						var url = config.LEASE_URL + "/prod/upBatchLineProd";
+						Cpop.confirm({
+							'content':'是否上架选中的商品？',
+				            'title':'提醒',
+				            firm:'否',
+				            firm2:'是',
+				            firmFn:function(flag) {
+								if (flag == 1) {
+									var parames = {"ids":offLineVm.choseList,userId:headVm.userId};
+									utils.postAndDealBySelf(url,parames,{}, function(res){
+										if (res.code === 200) {
+											Chef.show('上架成功');
+											//刷新页面内容
+											offLineVm.getCreated();
+										} else {
+											Chef.alert({
+									            'content':res.message,
+									            'title':'提醒'
+								       		});
+											return;
+										}
+									});
+								} else {
+									return;
+								}
+							}
+						});
+					},
+					pulldownRefresh:function(){
+						if(utils.isNull(comId)){
+							return;
+						}
+						var that = this;
+						var url = config.LEASE_URL + "/prod/getComProdList";
+						var startNum = (this.currPageNo-1)*this.pageRowsNo;
+						var parames = {
+							"page":startNum,
+							"count":that.pageRowsNo,
+							"status":2,
+							"comId":comId,
+							"orderType":this.orderType,
+							"goodsName":searchVm.goodsName,
+							"startTime":searchVm.startTime,
+							"endTime":searchVm.endTime,
+							"level1_code":searchVm.level1_code,
+							"type_id":searchVm.type_id,
+							"topStatus":searchVm.topStatus
+						};
+						utils.postAndDealBySelf(url,parames,{}, function(result){
+							if (!utils.isNull(result) && !utils.isNull(result.object) && !utils.isNull(result.object.list)) {
+								offLineVm.dataList = result.object.list;
+								//拼接列表
+								/*jsn.forEach(function(lend) {
+									offLineVm.dataList.push(lend);
+								});*/
+							}
+							if (offLineVm.dataList.length == 0) {
+								headVm.tipMsg = "你还没有下架的宝贝哦~";
+								headVm.isShowTip = true;
+							} else {
+								that.pagesCount = Math.ceil(result.object.pageTotalCount/that.pageRowsNo);
+								headVm.isShowTip = false;
+							}
+						});
+					},
+					//编辑
+					editProduct:function(id){
+						if(!headVm.isAllowEdit){
+							Chef.alert({
+					            'content':'没有编辑权限',
+					            'title':'提醒'
+				       		});
+							return;
+						}
+						//发布页面
+						if(!utils.isNull(id)){
+							window.sessionStorage.productType = 2;
+							utils.go('publishProd.html?id=' + id + "&productType=2");
+						}
+					},
+					//删除商品
+					deleteProd:function(id){
+						if(utils.isNull(id)){
+							return;
+						}
+						var url = config.LEASE_URL + "/prod/deleteProd";
+						Cpop.confirm({
+							'content':'是否删除？',
+				            'title':'提醒',
+				            firm:'否',
+				            firm2:'是',
+				            firmFn:function(flag) {
+								if (flag == 1) {
+									var parames = {"id":id,userId:headVm.userId};
+									utils.postAndDealBySelf(url,parames,{}, function(res){
+									if (res.code === 200) {
+										Chef.show('删除成功');
+										//刷新页面内容
+										offLineVm.getCreated();
+									} else {
+										Chef.alert({
+								            'content':res.message,
+								            'title':'提醒'
+							       		});
+										return;
+									}
+									});
+								} else {
+									return;
+								}
+							}
+						});
+					},
+					//批量删除
+					batchDelete:function(){
+						if(this.choseList.length <1){
+							Chef.alert({
+					            'content':'请选择商品',
+					            'title':'提醒'
+				       		});
+							return;
+						}
+						if(utils.isNull(headVm.userId)){
+							return;
+						}
+						var url = config.LEASE_URL + "/prod/batchDeleteProd";
+						Cpop.confirm({
+							'content':'是否删除选中的商品？',
+				            'title':'提醒',
+				            firm:'否',
+				            firm2:'是',
+				            firmFn:function(flag) {
+								if (flag == 1) {
+									var parames = {"ids":offLineVm.choseList,userId:headVm.userId};
+									utils.postAndDealBySelf(url,parames,{}, function(res){
+									if (res.code === 200) {
+										Chef.show('删除成功');
+										//刷新页面内容
+										offLineVm.getCreated();
+									} else {
+										Chef.alert({
+								            'content':res.message,
+								            'title':'提醒'
+							       		});
+										return;
+									}
+									});
+								} else {
+									return;
+								}
+							}
+						});
+					},
+					//商品上架
+					upProd:function(id){
+						if (utils.isNull(id)) {
+							return;
+						}
+						var url = config.LEASE_URL + "/prod/upLineProd";
+						Cpop.confirm({
+							'content':'是否上架？',
+				            'title':'提醒',
+				            firm:'否',
+				            firm2:'是',
+				            firmFn:function(flag) {
+								if(flag == 1) {
+									var parames = {"id":id,userId:headVm.userId};
+									utils.postAndDealBySelf(url,parames,{}, function(res){
+									if (res.code === 200) {
+										Chef.show('上架成功');
+										//刷新页面内容
+										offLineVm.getCreated();
+										headVm.showSessionTip();
+										} else {
+											Chef.alert({
+									            'content':res.message,
+									            'title':'提醒'
+								       		});
+											return;
+										}
+									});
+								} else {
+									return;
+								}
+							}
+						});
+					}
+				}
+			})
+			//获取滚动条当前的位置
+			function getScrollTop() {
+				var scrollTop = 0;
+				if(document.documentElement && document.documentElement.scrollTop) {
+					scrollTop = document.documentElement.scrollTop;
+				} else if(document.body) {
+					scrollTop = document.body.scrollTop;
+				}
+				return scrollTop;
+			}
+			//获取当前可视范围的高度
+			function getClientHeight() {
+				var clientHeight = 0;
+				if(document.body.clientHeight && document.documentElement.clientHeight) {
+					clientHeight = Math.min(document.body.clientHeight, document.documentElement.clientHeight);
+				} else {
+					clientHeight = Math.max(document.body.clientHeight, document.documentElement.clientHeight);
+				}
+				return clientHeight;
+			}
+			//获取文档完整的高度
+			function getScrollHeight() {
+				return Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+			}
+			//页面初始化
+			var hashId = window.sessionStorage.wareHouse;
+			if(!utils.isNull(hashId)) {
+				changeTab(hashId);
+			}else{
+				window.sessionStorage.wareHouse = 1;
+				changeTab(1);
+			}
+		</script>
+		<script>
+			lay('#version').html('-v'+ laydate.v);
+			//执行一个laydate实例
+			laydate.render({
+			  	elem: '#test1', //指定元素
+			  	done:function(value, date, endDate){
+			  		searchVm.startTime = value;
+			  	}	
+			});
+		</script>
+		<script>
+			lay('#version').html('-v'+ laydate.v);
+			//执行一个laydate实例
+			laydate.render({
+			  	elem: '#test2', //指定元素
+			  	done:function(value, date, endDate){
+			  		searchVm.endTime = value;
+			  	}
+			});
+		</script>
+	</body>
+</html>
